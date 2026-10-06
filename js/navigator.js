@@ -18,6 +18,7 @@
       desc: "Front desk, clinical EMR, wards, diagnostics, pharmacy, and billing",
       icon: "bi-hospital",
       items: [
+        { file: "index.html", title: "Executive Admin Dashboard", badge: "Home", desc: "Primary administrative workspace: 500-bed metrics, live admissions, revenue", status: "completed" },
         { file: "dashboard.html", title: "Executive Dashboard", badge: "Admin", desc: "500-bed campus metrics, live admissions, revenue analytics", status: "completed" },
         { file: "reception.html", title: "Reception & Registration", badge: "Admin", desc: "Patient intake, UHID issuance, doctor token queue", status: "completed" },
         { file: "emergency.html", title: "Emergency & Trauma Triage", badge: "Clinical", desc: "24x7 Manchester Triage (Red/Yellow/Green), resuscitation bays", status: "completed" },
@@ -37,7 +38,7 @@
       icon: "bi-easel",
       items: [
         { file: "requirements.html", title: "Requirements & Timeline UI", badge: "Explorer", desc: "Interactive hardware specs, roles RBAC, and 8-step patient timeline", status: "completed" },
-        { file: "index.html", title: "Interactive Figma Flow", badge: "Overview", desc: "End-to-end architecture map, operational flows, database schemas", status: "completed" },
+        { file: "figma_flow.html", title: "Interactive Figma Flow", badge: "Architecture", desc: "Figma-style visual canvas mapping hospital operational flow", status: "completed" },
         { file: "slides.html", title: "Team Slide Deck", badge: "Slides", desc: "Fullscreen presentation slides for team and stakeholder meetings", status: "completed" },
         { file: "hms_app.html", title: "All-in-One Prototype", badge: "Prototype", desc: "Single-page application prototype uniting core departments", status: "completed" }
       ]

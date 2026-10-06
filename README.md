@@ -133,7 +133,7 @@ The repository contains 15 functional HTML5/CSS3/JavaScript interfaces configure
 - `patient_portal.html`: Alternative lightweight patient self-service dashboard for fast appointment booking and historical consultation summaries.
 
 ### Clinical and Administrative Interfaces
-- `dashboard.html`: Executive hospital dashboard monitoring 500-bed campus occupancy, daily revenue collections (UPI, Cash, Insurance), active admissions, and departmental turnaround times.
+- `index.html` (also `dashboard.html`): Primary Executive Hospital Admin Dashboard (Default Entry Screen) monitoring 500-bed campus occupancy, daily revenue collections (UPI, Cash, Insurance), active admissions, and departmental turnaround times.
 - `reception.html`: OPD front desk intake counter for patient demographic entry, UHID issuance, and doctor token queue generation.
 - `emergency.html`: 24x7 Emergency and Trauma Triage module implementing the Manchester Triage Protocol with color-coded priority assignments (Red, Yellow, Green).
 - `doctor_emr.html`: Doctor clinical consultation desk featuring patient history, vitals monitoring, ICD-10 disease search, and digital E-Prescription (E-Rx) generator.
@@ -147,7 +147,7 @@ The repository contains 15 functional HTML5/CSS3/JavaScript interfaces configure
 
 ### Architecture and Presentation Interfaces
 - `requirements.html`: Interactive technical requirements and operational timeline explorer detailing database transactions, Redis locks, Kafka events, and RBAC rules.
-- `index.html`: Interactive Figma-style visual architecture flow canvas mapping the complete hospital data flow.
+- `figma_flow.html`: Interactive Figma-style visual architecture flow canvas mapping the complete hospital data flow.
 - `slides.html`: Fullscreen slide deck configured for engineering and executive presentations.
 - `hms_app.html`: Single-page application prototype uniting core hospital operations.
 
@@ -228,8 +228,9 @@ hospital_managment_system/
 |-- discharge.html            # Multi-department discharge clearance and gate pass
 |-- doctor_emr.html           # Doctor clinical consultation desk and E-Prescription
 |-- emergency.html            # 24x7 Emergency and Trauma triage (Manchester Protocol)
+|-- figma_flow.html           # Interactive Figma-style visual architecture canvas
 |-- hms_app.html              # Integrated single-page application prototype
-|-- index.html                # Interactive Figma-style visual architecture canvas
+|-- index.html                # Default Entry Point: Executive Admin Dashboard
 |-- ipd_beds.html             # Inpatient bed management and ward matrix
 |-- laboratory.html           # Laboratory Information System (LIS) and test verification
 |-- landing.html              # Public-facing hospital portal and appointment widget
