@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - Technical Architecture & System Requirements</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .tech-hero {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.2);
+    }
+
+    .tech-badge-primary {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .tech-card {
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 24px;
+      height: 100%;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .tech-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .tech-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .code-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 1px solid #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .kafka-badge {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fee2e2;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .redis-badge {
+      background: #fff7ed;
+      color: #ea580c;
+      border: 1px solid #ffedd5;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .postgres-badge {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #dbeafe;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .s3-badge {
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #dcfce7;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .step-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-pills-tech .nav-link {
+      color: #64748b;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      background: #ffffff;
+      font-size: 13.5px;
+    }
+
+    .nav-pills-tech .nav-link.active {
+      color: var(--primary);
+      background: var(--primary-light);
+      border-color: rgba(2, 132, 199, 0.25);
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <div class="brand-logo-icon"><i class="bi bi-hospital"></i></div>
+      <div>
+        <div class="brand-title">CarePulse HMS</div>
+        <div class="brand-subtitle">System Architecture</div>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">Architecture & Docs</div>
+      <a href="requirements.html" class="nav-link-item active">
+        <i class="bi bi-cpu-fill"></i>
+        <span>Tech Requirements & Architecture</span>
+      </a>
+      <a href="index.html" class="nav-link-item">
+        <i class="bi bi-diagram-3"></i>
+        <span>Figma Flow Architecture</span>
+      </a>
+      <a href="slides.html" class="nav-link-item">
+        <i class="bi bi-easel"></i>
+        <span>Slide Deck Pitch</span>
+      </a>
+
+      <div class="menu-header">Patient & Public</div>
+      <a href="landing.html" class="nav-link-item">
+        <i class="bi bi-globe"></i>
+        <span>Customer Landing Page</span>
+      </a>
+      <a href="user_portal.html" class="nav-link-item">
+        <i class="bi bi-person-heart"></i>
+        <span>Patient Health Portal</span>
+      </a>
+
+      <div class="menu-header">Clinical & Operations</div>
+      <a href="dashboard.html" class="nav-link-item">
+        <i class="bi bi-speedometer2"></i>
+        <span>Executive Dashboard</span>
+      </a>
+      <a href="reception.html" class="nav-link-item">
+        <i class="bi bi-person-badge"></i>
+        <span>OPD Reception Desk</span>
+      </a>
+      <a href="emergency.html" class="nav-link-item">
+        <i class="bi bi-lightning-charge"></i>
+        <span>Emergency Triage 24x7</span>
+      </a>
+      <a href="doctor_emr.html" class="nav-link-item">
+        <i class="bi bi-clipboard2-pulse"></i>
+        <span>Doctor Clinical EMR</span>
+      </a>
+      <a href="ipd_beds.html" class="nav-link-item">
+        <i class="bi bi-hospital-fill"></i>
+        <span>Inpatient Bed Matrix</span>
+      </a>
+      <a href="operation_theatre.html" class="nav-link-item">
+        <i class="bi bi-heart-pulse"></i>
+        <span>Operation Theatre (OT)</span>
+      </a>
+      <a href="laboratory.html" class="nav-link-item">
+        <i class="bi bi-eyedropper"></i>
+        <span>Diagnostics Lab (LIS)</span>
+      </a>
+      <a href="blood_bank.html" class="nav-link-item">
+        <i class="bi bi-droplet"></i>
+        <span>Blood Bank Management</span>
+      </a>
+      <a href="pharmacy.html" class="nav-link-item">
+        <i class="bi bi-capsule"></i>
+        <span>Pharmacy POS & Inventory</span>
+      </a>
+      <a href="billing.html" class="nav-link-item">
+        <i class="bi bi-receipt"></i>
+        <span>Central Billing & TPA</span>
+      </a>
+      <a href="discharge.html" class="nav-link-item">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Discharge Gate Pass</span>
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">AS</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Lead Software Architect</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">CarePulse Infrastructure</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="m-0 fw-bold text-dark">Technical Architecture & Infrastructure Requirements</h5>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size: 11px;">
+          Production Engineering Blueprint
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <a href="PRESENTATION_GUIDE.md" target="_blank" class="btn btn-outline-secondary btn-sm fw-semibold d-none d-md-inline-flex align-items-center gap-1">
+          <i class="bi bi-file-text"></i> Architecture Notes
+        </a>
+      </div>
+    </header>
+
+    <div class="page-body">
+
+      <!-- Hero Header Banner -->
+      <div class="tech-hero mb-4">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-8">
+            <div class="d-flex flex-wrap gap-2 mb-2">
+              <span class="tech-badge-primary"><i class="bi bi-database me-1"></i>PostgreSQL</span>
+              <span class="tech-badge-primary"><i class="bi bi-lightning-charge me-1"></i>Redis Cache</span>
+              <span class="tech-badge-primary"><i class="bi bi-broadcast me-1"></i>Apache Kafka</span>
+              <span class="tech-badge-primary"><i class="bi bi-hdd-network me-1"></i>WebSockets</span>
+              <span class="tech-badge-primary"><i class="bi bi-cloud-arrow-up me-1"></i>AWS S3 / MinIO</span>
+            </div>
+            <h2 class="fw-bold mb-1">System Infrastructure & Data Architecture</h2>
+            <p class="mb-0 text-white-50" style="font-size: 13.5px;">
+              A comprehensive technical blueprint defining <strong>which databases, event brokers, in-memory caches, and storage engines are used</strong>, exactly <strong>when and where Kafka, Redis, PostgreSQL, and WebSockets execute</strong> across each clinical phase.
+            </p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <div class="bg-white text-dark p-3 rounded-3 shadow-sm d-inline-block text-start w-100 w-lg-auto">
+              <span class="text-muted small fw-bold text-uppercase d-block mb-1">Architecture Standard</span>
+              <div class="fw-bold text-primary fs-6">Event-Driven Microservices</div>
+              <div class="small text-muted">ACID Compliance + Sub-ms Latency</div>
+              <span class="badge bg-success-subtle text-success mt-1">NABH & ABDM Standard</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <ul class="nav nav-pills nav-pills-tech gap-2 mb-4" id="techTabs" role="tablist">
+        <li class="nav-item">
+          <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tabTechStack">
+            <i class="bi bi-stack me-1"></i> 1. Core Tech Stack (PostgreSQL, Redis, Kafka, S3)
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabWhenUsed">
+            <i class="bi bi-arrow-repeat me-1"></i> 2. Operational Lifecycle: When is Each Technology Used?
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabRbacSecurity">
+            <i class="bi bi-shield-lock me-1"></i> 3. Security, Auth (OAuth2 / JWT) & RBAC Matrix
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabDataPipeline">
+            <i class="bi bi-diagram-3 me-1"></i> 4. Microservices & Event Stream Topology
+          </button>
+        </li>
+      </ul>
+
+      <!-- Tabs Content -->
+      <div class="tab-content" id="techTabsContent">
+
+        <!-- ==============================================
+             TAB 1: CORE TECH STACK (DATABASE, REDIS, KAFKA, S3)
+             ============================================== -->
+        <div class="tab-pane fade show active" id="tabTechStack" role="tabpanel">
+          <div class="row g-4">
+
+            <!-- 1. PostgreSQL -->
+            <div class="col-lg-6">
+              <div class="tech-card">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <div class="tech-icon-box bg-primary-subtle text-primary">
+                    <i class="bi bi-database-fill-check"></i>
+                  </div>
+                  <div>
+                    <h5 class="fw-bold text-dark m-0">PostgreSQL (Primary Relational Database)</h5>
+                    <span class="badge postgres-badge">ACID Compliant Relational Engine</span>
+                  </div>
+                </div>
+                <p class="text-muted small mb-3">
+                  PostgreSQL serves as the primary system of record. Every financial transaction, medical ledger entry, patient demographic, and clinical audit trail requires strict ACID guarantees to prevent data loss or duplicate records.
+                </p>
+                <div class="p-3 bg-light rounded-3 border mb-3">
+                  <div class="small fw-bold text-dark mb-1">What PostgreSQL Stores:</div>
+                  <ul class="list-unstyled small mb-0 text-muted">
+                    <li>&bull; <strong class="text-dark">Patient Demographics & Identifiers:</strong> UHID, ABHA ID, Aadhaar Hash, Phone, Emergency Contacts.</li>
+                    <li>&bull; <strong class="text-dark">Doctor Clinical Records (EMR):</strong> Consultation encounters, ICD-10 diagnoses, medical history.</li>
+                    <li>&bull; <strong class="text-dark">Consolidated Financial Ledger:</strong> Billing line items, insurance claims, receipts, GST tax calculations.</li>
+                    <li>&bull; <strong class="text-dark">Pharmacy & Inventory Tables:</strong> Drug master, batch tracking, unit costs, vendor invoices.</li>
+                  </ul>
+                </div>
+                <div class="d-flex align-items-center justify-content-between text-muted small">
+                  <span><strong>Isolation Level:</strong> Read Committed / Serializable</span>
+                  <span class="code-badge">PostgreSQL 16 Enterprise</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Redis Cache -->
+            <div class="col-lg-6">
+              <div class="tech-card">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <div class="tech-icon-box bg-warning-subtle text-warning">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                  </div>
+                  <div>
+                    <h5 class="fw-bold text-dark m-0">Redis (In-Memory Data Store & Cache)</h5>
+                    <span class="badge redis-badge">Sub-Millisecond Cache & Locks</span>
+                  </div>
+                </div>
+                <p class="text-muted small mb-3">
+                  Redis handles high-frequency volatile states that change multiple times per second, ensuring zero latency on front desk queues and ward occupancy displays without hitting the disk database.
+                </p>
+                <div class="p-3 bg-light rounded-3 border mb-3">
+                  <div class="small fw-bold text-dark mb-1">Where Redis is Used:</div>
+                  <ul class="list-unstyled small mb-0 text-muted">
+                    <li>&bull; <strong class="text-dark">Live OPD Token Queue:</strong> Redis sorted sets (<code class="code-badge">ZADD / ZPOPMIN</code>) for ordering patient queue tokens.</li>
+                    <li>&bull; <strong class="text-dark">Distributed Concurrency Locks (Redlock):</strong> Prevents simultaneous double-booking of the same ICU bed or OT room.</li>
+                    <li>&bull; <strong class="text-dark">Session Storage:</strong> User authentication sessions, doctor active consultation states.</li>
+                    <li>&bull; <strong class="text-dark">API Rate Limiting:</strong> Protects authentication endpoints and OTP generation against abuse.</li>
+                  </ul>
+                </div>
+                <div class="d-flex align-items-center justify-content-between text-muted small">
+                  <span><strong>Latency Target:</strong> &lt; 2 milliseconds</span>
+                  <span class="code-badge">Redis Cluster 7.x</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Apache Kafka -->
+            <div class="col-lg-6">
+              <div class="tech-card">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <div class="tech-icon-box bg-danger-subtle text-danger">
+                    <i class="bi bi-broadcast-pin"></i>
+                  </div>
+                  <div>
+                    <h5 class="fw-bold text-dark m-0">Apache Kafka (Event Streaming & Message Broker)</h5>
+                    <span class="badge kafka-badge">Decoupled Asynchronous Event Bus</span>
+                  </div>
+                </div>
+                <p class="text-muted small mb-3">
+                  Kafka enables event-driven architecture across decoupled hospital microservices. When a doctor writes a prescription or a patient arrives, downstream departments react in real time without blocking the primary user interface.
+                </p>
+                <div class="p-3 bg-light rounded-3 border mb-3">
+                  <div class="small fw-bold text-dark mb-1">When Apache Kafka is Used:</div>
+                  <ul class="list-unstyled small mb-0 text-muted">
+                    <li>&bull; <strong class="text-dark">Prescription Finalized:</strong> Topic <code class="code-badge">prescription.finalized</code> notifies Pharmacy (dispensing queue), Lab (sample collection), and Billing (charge accumulator) simultaneously.</li>
+                    <li>&bull; <strong class="text-dark">Emergency Triage Alerts:</strong> Topic <code class="code-badge">triage.code-red</code> triggers instant alarms across resuscitation bays and pager alerts to on-duty specialists.</li>
+                    <li>&bull; <strong class="text-dark">Notification Pipeline:</strong> Decoupled workers consume events to dispatch SMS, WhatsApp confirmation links, and email invoices.</li>
+                    <li>&bull; <strong class="text-dark">Immutable Audit Log:</strong> Logs every clinical modification for legal and regulatory compliance.</li>
+                  </ul>
+                </div>
+                <div class="d-flex align-items-center justify-content-between text-muted small">
+                  <span><strong>Partitioning Key:</strong> <code class="code-badge">patient_uhid</code></span>
+                  <span class="code-badge">Kafka 3.7 / Strimzi</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. AWS S3 / MinIO -->
+            <div class="col-lg-6">
+              <div class="tech-card">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <div class="tech-icon-box bg-success-subtle text-success">
+                    <i class="bi bi-cloud-arrow-up-fill"></i>
+                  </div>
+                  <div>
+                    <h5 class="fw-bold text-dark m-0">AWS S3 / MinIO (Object Storage)</h5>
+                    <span class="badge s3-badge">High-Durability Medical Storage</span>
+                  </div>
+                </div>
+                <p class="text-muted small mb-3">
+                  Relational databases degrade if gigabytes of binary scan files are stored in tables. High-resolution DICOM radiology scans, laboratory reports, and digital bills are stored in scalable, encrypted object storage buckets.
+                </p>
+                <div class="p-3 bg-light rounded-3 border mb-3">
+                  <div class="small fw-bold text-dark mb-1">What Object Storage Holds:</div>
+                  <ul class="list-unstyled small mb-0 text-muted">
+                    <li>&bull; <strong class="text-dark">Radiology Imaging (PACS / DICOM):</strong> High-resolution Chest X-Rays, 128-slice CT scans, and MRI scans.</li>
+                    <li>&bull; <strong class="text-dark">Signed Laboratory PDF Reports:</strong> NABL accredited laboratory test result certificates.</li>
+                    <li>&bull; <strong class="text-dark">Official Discharge Papers & Tax Invoices:</strong> Signed PDF discharge summaries and gate passes.</li>
+                    <li>&bull; <strong class="text-dark">ABHA Digital QR Cards:</strong> Cached digital identification cards for offline patient access.</li>
+                  </ul>
+                </div>
+                <div class="d-flex align-items-center justify-content-between text-muted small">
+                  <span><strong>Encryption:</strong> Server-Side AES-256</span>
+                  <span class="code-badge">S3 Standard / MinIO Cluster</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==============================================
+             TAB 2: OPERATIONAL LIFECYCLE (WHEN IS EACH TECH USED?)
+             ============================================== -->
+        <div class="tab-pane fade" id="tabWhenUsed" role="tabpanel">
+          <div class="mb-3">
+            <h5 class="fw-bold text-dark m-0">End-to-End Operational Lifecycle & Technology Execution</h5>
+            <span class="text-muted small">Detailed execution sequence showing which database, cache, broker, or socket runs at every stage</span>
+          </div>
+
+          <div class="row g-3">
+
+            <!-- STAGE 1 -->
+            <div class="col-12">
+              <div class="tech-card p-3">
+                <div class="row align-items-center g-3">
+                  <div class="col-auto">
+                    <div class="step-number">01</div>
+                  </div>
+                  <div class="col-md-3">
+                    <span class="badge bg-primary-subtle text-primary mb-1">Pre-Hospital Phase</span>
+                    <h6 class="fw-bold text-dark mb-0">Public Booking & Portals</h6>
+                    <small class="text-muted">Screens: <code>landing.html</code> & <code>user_portal.html</code></small>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="small fw-bold text-dark mb-1">Technologies Executed:</div>
+                    <div class="d-flex flex-wrap gap-1 mb-2">
+                      <span class="badge redis-badge">Redis: Slot Lock</span>
+                      <span class="badge postgres-badge">Postgres: Appointment Table</span>
+                      <span class="badge kafka-badge">Kafka: appointment.booked</span>
+                    </div>
+                    <p class="text-muted small mb-0">
+                      When a patient selects a 10:30 AM slot, <strong>Redis</strong> acquires a temporary 5-minute reservation lock to prevent slot collision. On form submission, <strong>PostgreSQL</strong> writes the booking record, and <strong>Kafka</strong> triggers the SMS gateway worker.
+                    </p>
+                  </div>
+                  <div class="col-md-4 text-md-end">
+                    <a href="landing.html" class="btn btn-sm btn-outline-primary fw-semibold me-1">Landing Page ➔</a>
+                    <a href="user_portal.html" class="btn btn-sm btn-primary fw-semibold">Patient Portal ➔</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 2 -->
+            <div class="col-12">
+              <div class="tech-card p-3">
+                <div class="row align-items-center g-3">
+                  <div class="col-auto">
+                    <div class="step-number">02</div>
+                  </div>
+                  <div class="col-md-3">
+                    <span class="badge bg-danger-subtle text-danger mb-1">Intake & Triage</span>
+                    <h6 class="fw-bold text-dark mb-0">Patient Arrival & Triage</h6>
+                    <small class="text-muted">Screens: <code>reception.html</code> & <code>emergency.html</code></small>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="small fw-bold text-dark mb-1">Technologies Executed:</div>
+                    <div class="d-flex flex-wrap gap-1 mb-2">
+                      <span class="badge postgres-badge">Postgres: UHID Generator</span>
+                      <span class="badge redis-badge">Redis: ZADD Token Queue</span>
+                      <span class="badge s3-badge">WebSockets: Waiting TV Sync</span>
+                      <span class="badge kafka-badge">Kafka: patient.arrived</span>
+                    </div>
+                    <p class="text-muted small mb-0">
+                      <strong>PostgreSQL</strong> executes a sequence to generate UHID <code class="code-badge">#HMS-2026-9041</code>. <strong>Redis</strong> updates the doctor's queue counter, and <strong>WebSockets</strong> push the token to the waiting room monitor TV screen without page reloads.
+                    </p>
+                  </div>
+                  <div class="col-md-4 text-md-end">
+                    <a href="emergency.html" class="btn btn-sm btn-outline-danger fw-semibold me-1">Emergency ➔</a>
+                    <a href="reception.html" class="btn btn-sm btn-primary fw-semibold">Reception ➔</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 3 -->
+            <div class="col-12">
+              <div class="tech-card p-3">
+                <div class="row align-items-center g-3">
+                  <div class="col-auto">
+                    <div class="step-number">03</div>
+                  </div>
+                  <div class="col-md-3">
+                    <span class="badge bg-info-subtle text-info mb-1">Clinical Encounters</span>
+                    <h6 class="fw-bold text-dark mb-0">Doctor EMR & E-Prescription</h6>
+                    <small class="text-muted">Screen: <code>doctor_emr.html</code></small>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="small fw-bold text-dark mb-1">Technologies Executed:</div>
+                    <div class="d-flex flex-wrap gap-1 mb-2">
+                      <span class="badge postgres-badge">Postgres: Encounter & E-Rx</span>
+                      <span class="badge redis-badge">Elasticsearch: ICD-10 Search</span>
+                      <span class="badge kafka-badge">Kafka: prescription.finalized</span>
+                    </div>
+                    <p class="text-muted small mb-0">
+                      <strong>Elasticsearch</strong> provides instant 15ms autocomplete for ICD-10 diagnostic codes. When the doctor signs the E-Prescription, <strong>PostgreSQL</strong> stores the clinical encounter, and <strong>Kafka</strong> publishes <code class="code-badge">prescription.finalized</code> to notify Pharmacy and Lab asynchronously.
+                    </p>
+                  </div>
+                  <div class="col-md-4 text-md-end">
+                    <a href="doctor_emr.html" class="btn btn-sm btn-primary fw-semibold">Open Doctor EMR ➔</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 4 -->
+            <div class="col-12">
+              <div class="tech-card p-3">
+                <div class="row align-items-center g-3">
+                  <div class="col-auto">
+                    <div class="step-number">04</div>
+                  </div>
+                  <div class="col-md-3">
+                    <span class="badge bg-warning-subtle text-warning mb-1">Diagnostic Services</span>
+                    <h6 class="fw-bold text-dark mb-0">Laboratory & Blood Bank</h6>
+                    <small class="text-muted">Screens: <code>laboratory.html</code> & <code>blood_bank.html</code></small>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="small fw-bold text-dark mb-1">Technologies Executed:</div>
+                    <div class="d-flex flex-wrap gap-1 mb-2">
+                      <span class="badge kafka-badge">Kafka: Consumer (Lab Order)</span>
+                      <span class="badge s3-badge">AWS S3 / MinIO: PDF Storage</span>
+                      <span class="badge s3-badge">WebSockets: Result to Doctor</span>
+                      <span class="badge postgres-badge">Postgres: Test Results</span>
+                    </div>
+                    <p class="text-muted small mb-0">
+                      The Lab microservice consumes the Kafka order event. Once blood tests are verified, the generated PDF report is uploaded to <strong>AWS S3 / MinIO</strong>. <strong>WebSockets</strong> push the normal/abnormal result alert directly onto the doctor's active screen.
+                    </p>
+                  </div>
+                  <div class="col-md-4 text-md-end">
+                    <a href="laboratory.html" class="btn btn-sm btn-outline-primary fw-semibold me-1">Laboratory ➔</a>
+                    <a href="blood_bank.html" class="btn btn-sm btn-outline-danger fw-semibold">Blood Bank ➔</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 5 -->
+            <div class="col-12">
+              <div class="tech-card p-3">
+                <div class="row align-items-center g-3">
+                  <div class="col-auto">
+                    <div class="step-number">05</div>
+                  </div>
+                  <div class="col-md-3">
+                    <span class="badge bg-purple-subtle text-primary mb-1">Inpatient & Surgery</span>
+                    <h6 class="fw-bold text-dark mb-0">Bed Allocation & OT Matrix</h6>
+                    <small class="text-muted">Screens: <code>ipd_beds.html</code> & <code>operation_theatre.html</code></small>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="small fw-bold text-dark mb-1">Technologies Executed:</div>
+                    <div class="d-flex flex-wrap gap-1 mb-2">
+                      <span class="badge redis-badge">Redis: Distributed Redlock</span>
+                      <span class="badge s3-badge">WebSockets: Live Ward Matrix</span>
+                      <span class="badge postgres-badge">Postgres: Inpatient Admission</span>
+                    </div>
+                    <p class="text-muted small mb-0">
+                      <strong>Redis Redlock</strong> guarantees that two floor nurses cannot allocate the same ICU bed simultaneously during high casualty admissions. <strong>WebSockets</strong> instantly flip bed colors (Vacant &#8594; Occupied) across all campus monitors.
+                    </p>
+                  </div>
+                  <div class="col-md-4 text-md-end">
+                    <a href="ipd_beds.html" class="btn btn-sm btn-outline-primary fw-semibold me-1">Bed Matrix ➔</a>
+                    <a href="operation_theatre.html" class="btn btn-sm btn-primary fw-semibold">OT Roster ➔</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 6 -->
+            <div class="col-12">
+              <div class="tech-card p-3">
+                <div class="row align-items-center g-3">
+                  <div class="col-auto">
+                    <div class="step-number">06</div>
+                  </div>
+                  <div class="col-md-3">
+                    <span class="badge bg-success-subtle text-success mb-1">Pharmacy Dispensing</span>
+                    <h6 class="fw-bold text-dark mb-0">Pharmacy Inventory & POS</h6>
+                    <small class="text-muted">Screen: <code>pharmacy.html</code></small>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="small fw-bold text-dark mb-1">Technologies Executed:</div>
+                    <div class="d-flex flex-wrap gap-1 mb-2">
+                      <span class="badge postgres-badge">Postgres: SELECT FOR UPDATE</span>
+                      <span class="badge kafka-badge">Kafka: inventory.deducted</span>
+                      <span class="badge redis-badge">Redis: Low Stock Alert</span>
+                    </div>
+                    <p class="text-muted small mb-0">
+                      <strong>PostgreSQL</strong> executes a transaction with row-level pessimistic locking (<code class="code-badge">SELECT ... FOR UPDATE</code>) on drug batches to ensure stock never goes negative. <strong>Kafka</strong> triggers an automated re-order event if stock dips below threshold.
+                    </p>
+                  </div>
+                  <div class="col-md-4 text-md-end">
+                    <a href="pharmacy.html" class="btn btn-sm btn-primary fw-semibold">Open Pharmacy POS ➔</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 7 -->
+            <div class="col-12">
+              <div class="tech-card p-3">
+                <div class="row align-items-center g-3">
+                  <div class="col-auto">
+                    <div class="step-number">07</div>
+                  </div>
+                  <div class="col-md-3">
+                    <span class="badge bg-success-subtle text-success mb-1">Discharge & Clearance</span>
+                    <h6 class="fw-bold text-dark mb-0">Central Billing & Discharge</h6>
+                    <small class="text-muted">Screens: <code>billing.html</code> & <code>discharge.html</code></small>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="small fw-bold text-dark mb-1">Technologies Executed:</div>
+                    <div class="d-flex flex-wrap gap-1 mb-2">
+                      <span class="badge postgres-badge">Postgres: Master Ledger</span>
+                      <span class="badge s3-badge">AWS S3: PDF Invoice & Pass</span>
+                      <span class="badge kafka-badge">Kafka: patient.discharged</span>
+                    </div>
+                    <p class="text-muted small mb-0">
+                      <strong>PostgreSQL</strong> merges consultation, bed occupancy hours, laboratory investigations, and pharmacy charges into a single immutable invoice. When the gate pass is signed, <strong>Kafka</strong> releases the bed back to cleaning status.
+                    </p>
+                  </div>
+                  <div class="col-md-4 text-md-end">
+                    <a href="billing.html" class="btn btn-sm btn-outline-primary fw-semibold me-1">Billing Desk ➔</a>
+                    <a href="discharge.html" class="btn btn-sm btn-success fw-semibold">Discharge Gate Pass ➔</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==============================================
+             TAB 3: SECURITY, AUTH & RBAC MATRIX
+             ============================================== -->
+        <div class="tab-pane fade" id="tabRbacSecurity" role="tabpanel">
+          <div class="card-white p-0">
+            <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="fw-bold text-dark m-0">Role-Based Access Control (RBAC) & Security Architecture</h5>
+                <span class="text-muted small">Enforced via OAuth2.0 / JWT and database row-level security</span>
+              </div>
+              <span class="badge bg-success-subtle text-success">HIPAA & ABDM Compliant</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table-clean">
+                <thead>
+                  <tr>
+                    <th>Role</th>
+                    <th>Authentication Token</th>
+                    <th>Permissions</th>
+                    <th>Security Boundary (Strictly Prohibited)</th>
+                    <th>Primary Interface</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Patient</strong></td>
+                    <td><span class="code-badge">JWT (Patient Claim)</span></td>
+                    <td><span class="badge bg-primary">Read</span> Own Prescriptions, Reports, Invoices</td>
+                    <td>Zero access to internal clinical notes or other patient records</td>
+                    <td><code>user_portal.html</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Receptionist</strong></td>
+                    <td><span class="code-badge">JWT (FrontDesk Claim)</span></td>
+                    <td><span class="badge bg-success">Write</span> Patient Intake, Demographics, Token Issue</td>
+                    <td>Cannot view clinical medical history, diagnosis, or lab results</td>
+                    <td><code>reception.html</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Emergency Triage</strong></td>
+                    <td><span class="code-badge">JWT (Triage Nurse Claim)</span></td>
+                    <td><span class="badge bg-danger">Critical Triage</span> Vitals, Priority Level, Bay Allotment</td>
+                    <td>Cannot edit cashier billing discounts or modify doctor diagnoses</td>
+                    <td><code>emergency.html</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Doctor / Specialist</strong></td>
+                    <td><span class="code-badge">JWT (Doctor Claim + E-Sign)</span></td>
+                    <td><span class="badge bg-info text-dark">Clinical Master</span> EMR, ICD-10, Lab Orders, E-Rx</td>
+                    <td>Cannot edit cashier financial settlements or waive hospital bills</td>
+                    <td><code>doctor_emr.html</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Floor Nurse</strong></td>
+                    <td><span class="code-badge">JWT (Inpatient Nurse Claim)</span></td>
+                    <td><span class="badge bg-primary">Operational</span> Bed Allocation, Vitals Entry, Rounds</td>
+                    <td>Cannot discharge patient without doctor medical clearance & cashier no-dues</td>
+                    <td><code>ipd_beds.html</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Lab Technician</strong></td>
+                    <td><span class="code-badge">JWT (LIS Tech Claim)</span></td>
+                    <td><span class="badge bg-warning text-dark">Diagnostic</span> Barcode Scan, Upload Lab Results</td>
+                    <td>Cannot alter physician prescriptions or dispense pharmaceutical drugs</td>
+                    <td><code>laboratory.html</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Pharmacist</strong></td>
+                    <td><span class="code-badge">JWT (Pharmacy Claim)</span></td>
+                    <td><span class="badge bg-success">Dispensing</span> Scan Drug Barcode, Deduct Inventory</td>
+                    <td>Cannot modify prescribed drug chemical formula or dosage</td>
+                    <td><code>pharmacy.html</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Billing Executive</strong></td>
+                    <td><span class="code-badge">JWT (Finance Claim)</span></td>
+                    <td><span class="badge bg-success">Financial</span> Ledger Merge, Cashless TPA Settlement</td>
+                    <td>Cannot alter patient medical diagnoses, doctor notes, or clinical data</td>
+                    <td><code>billing.html</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Hospital Director</strong></td>
+                    <td><span class="code-badge">JWT (SuperAdmin Claim + MFA)</span></td>
+                    <td><span class="badge bg-dark">Super Admin</span> Analytics, Revenue Ledgers, System Audit</td>
+                    <td>Full access with immutable audit trail logged to Kafka</td>
+                    <td><code>dashboard.html</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+             TAB 4: MICROSERVICES & EVENT TOPOLOGY
+             ============================================== -->
+        <div class="tab-pane fade" id="tabDataPipeline" role="tabpanel">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="card-white p-4 h-100">
+                <h5 class="fw-bold text-dark mb-3"><i class="bi bi-diagram-3-fill text-primary me-2"></i>Microservices Architecture</h5>
+                <ul class="list-unstyled small mb-0">
+                  <li class="mb-3">
+                    <strong class="d-block text-dark">1. Patient & Identity Service:</strong>
+                    <span class="text-muted">Handles UHID generation, ABHA M1 registration, and demographic data. Backed by PostgreSQL.</span>
+                  </li>
+                  <li class="mb-3">
+                    <strong class="d-block text-dark">2. Clinical EMR & Consultation Service:</strong>
+                    <span class="text-muted">Manages doctor encounter notes, ICD-10 searches, and E-Prescription signing. Emits Kafka events on finalize.</span>
+                  </li>
+                  <li class="mb-3">
+                    <strong class="d-block text-dark">3. Bed & OT Resource Service:</strong>
+                    <span class="text-muted">Maintains live bed state and OT availability. Employs Redis Redlock and WebSockets.</span>
+                  </li>
+                  <li class="mb-3">
+                    <strong class="d-block text-dark">4. Laboratory (LIS) & Diagnostics Service:</strong>
+                    <span class="text-muted">Manages test queues, machine analyzer inputs via HL7/FHIR, and stores PDF reports in S3/MinIO.</span>
+                  </li>
+                  <li class="mb-0">
+                    <strong class="d-block text-dark">5. Central Invoicing & Ledger Engine:</strong>
+                    <span class="text-muted">Consolidates departmental charges asynchronously via Kafka consumers into an ACID billing ledger.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card-white p-4 h-100">
+                <h5 class="fw-bold text-dark mb-3"><i class="bi bi-broadcast text-danger me-2"></i>Kafka Topics & Event Contracts</h5>
+                <ul class="list-unstyled small mb-0">
+                  <li class="mb-2">
+                    <span class="kafka-badge">appointment.booked</span>
+                    <p class="text-muted small mt-1 mb-0">Fired when a patient schedules a visit. Consumed by SMS worker and OPD queue pre-loader.</p>
+                  </li>
+                  <li class="mb-2">
+                    <span class="kafka-badge">prescription.finalized</span>
+                    <p class="text-muted small mt-1 mb-0">Fired when the doctor signs an E-Rx. Consumed concurrently by Pharmacy, Lab, and Billing.</p>
+                  </li>
+                  <li class="mb-2">
+                    <span class="kafka-badge">triage.code-red</span>
+                    <p class="text-muted small mt-1 mb-0">High-priority emergency event. Triggers instant pager alerts to resuscitation teams.</p>
+                  </li>
+                  <li class="mb-2">
+                    <span class="kafka-badge">lab.report-verified</span>
+                    <p class="text-muted small mt-1 mb-0">Fired when pathologist signs a test. Pushes PDF link to patient portal and doctor EMR.</p>
+                  </li>
+                  <li class="mb-0">
+                    <span class="kafka-badge">patient.discharged</span>
+                    <p class="text-muted small mt-1 mb-0">Fired on cashier no-dues clearance. Releases IPD bed status back to cleaning mode.</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Bootstrap 5.3 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/mobile.js"></script>
+<script src="js/navigator.js"></script>
+
+</body>
+</html>

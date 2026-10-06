@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - Doctor EMR & Clinical Desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <div class="brand-logo-icon"><i class="bi bi-hospital"></i></div>
+      <div>
+        <div class="brand-title">CarePulse</div>
+        <div class="brand-subtitle">Hospital ERP Suite</div>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">1. CORE & OPD</div>
+      <a href="dashboard.html" class="nav-link-item">
+        <i class="bi bi-speedometer2"></i> Executive Dashboard
+      </a>
+      <a href="reception.html" class="nav-link-item">
+        <i class="bi bi-person-badge"></i> Reception & Registration
+      </a>
+      <a href="emergency.html" class="nav-link-item">
+        <i class="bi bi-lightning-charge-fill text-danger"></i> Emergency & Triage
+      </a>
+      <a href="doctor_emr.html" class="nav-link-item active">
+        <i class="bi bi-clipboard2-pulse"></i> Doctor EMR Desk
+      </a>
+
+      <div class="menu-header">2. INPATIENT & SURGERY</div>
+      <a href="ipd_beds.html" class="nav-link-item">
+        <i class="bi bi-hospital-fill"></i> IPD Beds & Ward Matrix
+      </a>
+      <a href="operation_theatre.html" class="nav-link-item">
+        <i class="bi bi-heart-pulse"></i> Operation Theatre (OT)
+      </a>
+
+      <div class="menu-header">3. ANCILLARY & LAB</div>
+      <a href="laboratory.html" class="nav-link-item">
+        <i class="bi bi-droplet-half"></i> Pathology & Lab (LIS)
+      </a>
+      <a href="blood_bank.html" class="nav-link-item">
+        <i class="bi bi-virus"></i> Blood Bank Management
+      </a>
+      <a href="pharmacy.html" class="nav-link-item">
+        <i class="bi bi-capsule"></i> Pharmacy POS & Inventory
+      </a>
+
+      <div class="menu-header">4. FINANCE & CLEARANCE</div>
+      <a href="billing.html" class="nav-link-item">
+        <i class="bi bi-receipt-cutoff"></i> Central Billing & Invoicing
+      </a>
+      <a href="discharge.html" class="nav-link-item">
+        <i class="bi bi-door-open"></i> Discharge & Gate Pass
+      </a>
+
+      <div class="menu-header">5. PATIENT PORTAL</div>
+      <a href="patient_portal.html" class="nav-link-item">
+        <i class="bi bi-person-circle"></i> Patient Health Portal
+      </a>
+
+      <div class="menu-header">SYSTEM LINKS</div>
+      <a href="index.html" class="nav-link-item"><i class="bi bi-diagram-3"></i> Figma Flow Canvas ↗</a>
+      <a href="slides.html" class="nav-link-item"><i class="bi bi-projector"></i> Slide Deck Pitch ↗</a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">AS</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Dr. Arvind Sharma</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">Chief Medical Officer</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="m-0 fw-bold text-dark">Doctor Clinical Desk & E-Prescription (EMR)</h5>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size: 11px;">
+          OPD Room #102 &bull; Cardiology
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <a href="pharmacy.html" class="btn btn-outline-primary btn-sm fw-semibold">
+          Check Pharmacy Stock ➔
+        </a>
+      </div>
+    </header>
+
+    <div class="page-body">
+      <div class="card-white p-4 mb-4">
+        <!-- Patient Banner -->
+        <div class="d-flex justify-content-between align-items-center pb-3 border-bottom mb-3">
+          <div class="d-flex align-items-center gap-3">
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fs-5 fw-bold" style="width:48px; height:48px;">
+              RK
+            </div>
+            <div>
+              <h5 class="fw-bold text-dark m-0">
+                Rajesh Kumar
+                <span class="badge bg-danger-subtle text-danger border border-danger-subtle ms-2" style="font-size:11px;">
+                  ⚠ ALLERGIC: Penicillin
+                </span>
+              </h5>
+              <span class="text-muted small">
+                UHID: <strong>#HMS-2026-9041</strong> &bull; Male, 46 Yrs &bull; Blood: B+ &bull; Contact: +91 98765 43210
+              </span>
+            </div>
+          </div>
+          <div class="text-end">
+            <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 fw-semibold">
+              <i class="bi bi-circle-fill small me-1"></i> Active Consultation (Token A-14)
+            </span>
+          </div>
+        </div>
+
+        <!-- Vitals -->
+        <div class="row g-3 mb-4">
+          <div class="col">
+            <div class="p-3 bg-light rounded-3 border">
+              <span class="text-muted small fw-bold text-uppercase">BP (Blood Pressure)</span>
+              <div class="fs-5 fw-bold text-dark">138/88 <small class="text-muted fs-6">mmHg</small></div>
+              <span class="badge bg-warning-subtle text-warning" style="font-size:10px;">Pre-Hypertensive</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="p-3 bg-light rounded-3 border">
+              <span class="text-muted small fw-bold text-uppercase">Heart Rate</span>
+              <div class="fs-5 fw-bold text-dark">78 <small class="text-muted fs-6">bpm</small></div>
+              <span class="badge bg-success-subtle text-success" style="font-size:10px;">Normal Sinus</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="p-3 bg-light rounded-3 border">
+              <span class="text-muted small fw-bold text-uppercase">SpO2 Oxygen</span>
+              <div class="fs-5 fw-bold text-dark">98%</div>
+              <span class="badge bg-success-subtle text-success" style="font-size:10px;">Optimal</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="p-3 bg-light rounded-3 border">
+              <span class="text-muted small fw-bold text-uppercase">Random Sugar</span>
+              <div class="fs-5 fw-bold text-dark">142 <small class="text-muted fs-6">mg/dL</small></div>
+              <span class="badge bg-warning-subtle text-warning" style="font-size:10px;">Mild Elevation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Complaints & Diagnosis -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label small fw-bold text-uppercase text-muted">Chief Complaints</label>
+            <textarea class="form-control form-control-sm" rows="3">Patient presents with retrosternal chest tightness for 3 days, radiating to left arm on exertion. Relieved by resting. No dizziness.</textarea>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small fw-bold text-uppercase text-muted">Confirmed Diagnosis (ICD-10)</label>
+            <div class="p-2 border rounded-3 bg-light mb-2 d-flex justify-content-between align-items-center">
+              <span class="fw-semibold">I20.9 - Angina Pectoris (Unspecified)</span>
+              <span class="badge bg-primary">Primary</span>
+            </div>
+            <div class="p-2 border rounded-3 bg-light d-flex justify-content-between align-items-center">
+              <span class="fw-semibold">I10 - Essential Primary Hypertension</span>
+              <span class="badge bg-secondary">Secondary</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prescription Table -->
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h6 class="fw-bold text-dark m-0">E-Prescription Medications (Direct to Pharmacy POS)</h6>
+          <button class="btn btn-sm btn-outline-primary" onclick="alert('Medication row added')">
+            <i class="bi bi-plus"></i> Add Drug
+          </button>
+        </div>
+
+        <div class="table-responsive border rounded-3 mb-4">
+          <table class="table-clean">
+            <thead>
+              <tr>
+                <th>Drug Name</th>
+                <th>Dosage</th>
+                <th>Frequency</th>
+                <th>Duration</th>
+                <th>Instructions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Tab. Aspirin (Ecosprin)</strong></td>
+                <td>75 mg</td>
+                <td>1 - 0 - 0 (Morning)</td>
+                <td>30 Days</td>
+                <td>Take after food</td>
+              </tr>
+              <tr>
+                <td><strong>Tab. Atorvastatin (Atorva)</strong></td>
+                <td>20 mg</td>
+                <td>0 - 0 - 1 (Night)</td>
+                <td>30 Days</td>
+                <td>At bedtime with water</td>
+              </tr>
+              <tr>
+                <td><strong>Tab. Metoprolol Succinate</strong></td>
+                <td>25 mg</td>
+                <td>1 - 0 - 1</td>
+                <td>15 Days</td>
+                <td>Monitor resting pulse</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+          <button class="btn btn-light border btn-sm px-3" onclick="alert('Draft Saved')">
+            <i class="bi bi-save me-1"></i> Save Draft
+          </button>
+          <a href="ipd_beds.html" class="btn btn-outline-danger btn-sm px-3">
+            <i class="bi bi-hospital me-1"></i> Request IPD Bed Admission
+          </a>
+          <button class="btn btn-primary btn-sm px-4 fw-semibold" onclick="alert('Prescription Digitally Signed! Orders automatically sent to Lab, Pharmacy, and Billing.')">
+            <i class="bi bi-check2-circle me-1"></i> Finalize & Sign E-Prescription
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/mobile.js"></script>
+</body>
+</html>

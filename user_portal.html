@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse Patient Portal - My Health & Appointments</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* User Portal Specific Enhancements */
+    .user-hero-card {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.2);
+    }
+
+    .abha-badge {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .doc-picker-card {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      background: #ffffff;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .doc-picker-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .doc-picker-card.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .time-slot-btn {
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .time-slot-btn:hover, .time-slot-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .pill-tab-btn {
+      border: none;
+      background: transparent;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #64748b;
+      transition: all 0.2s;
+    }
+
+    .pill-tab-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    @media (max-width: 575.98px) {
+      .user-hero-card {
+        padding: 16px;
+      }
+      .user-hero-card h2 {
+        font-size: 20px;
+      }
+      .abha-badge {
+        font-size: 10px;
+        padding: 3px 8px;
+        display: inline-block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- ==============================================
+       SIDEBAR (PATIENT / USER VIEW)
+       ============================================== -->
+  <aside class="sidebar">
+    <a href="user_portal.html" class="sidebar-brand">
+      <div class="brand-logo-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+      <div>
+        <div class="brand-title">CarePulse</div>
+        <div class="brand-subtitle">Patient Health Portal</div>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">MY HEALTH DASHBOARD</div>
+      <a href="user_portal.html" class="nav-link-item active">
+        <i class="bi bi-person-circle"></i> My Health Overview
+      </a>
+      <a href="#bookAppointmentSection" class="nav-link-item">
+        <i class="bi bi-calendar2-plus"></i> Book Appointment
+      </a>
+      <a href="#myRecordsSection" class="nav-link-item">
+        <i class="bi bi-file-earmark-medical"></i> Prescriptions & E-Rx
+      </a>
+      <a href="#myLabReportsSection" class="nav-link-item">
+        <i class="bi bi-clipboard2-data"></i> Lab & Scan Reports
+      </a>
+      <a href="#myBillsSection" class="nav-link-item">
+        <i class="bi bi-credit-card"></i> Medical Bills & Insurance
+      </a>
+      <a href="#medicineTrackerSection" class="nav-link-item">
+        <i class="bi bi-capsule"></i> Daily Medicine Reminders
+      </a>
+
+      <div class="menu-header">SWITCH TO HOSPITAL STAFF</div>
+      <a href="dashboard.html" class="nav-link-item">
+        <i class="bi bi-speedometer2"></i> Admin Dashboard ➔
+      </a>
+      <a href="doctor_emr.html" class="nav-link-item">
+        <i class="bi bi-stethoscope"></i> Doctor EMR Desk ➔
+      </a>
+      <a href="reception.html" class="nav-link-item">
+        <i class="bi bi-person-badge"></i> Hospital Reception ➔
+      </a>
+
+      <div class="menu-header">PRESENTATION & FLOW</div>
+      <a href="index.html" class="nav-link-item"><i class="bi bi-diagram-3"></i> Figma Flow Canvas ↗</a>
+      <a href="slides.html" class="nav-link-item"><i class="bi bi-projector"></i> Slide Deck Pitch ↗</a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">RK</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Rajesh Kumar</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">UHID: #HMS-2026-9041</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==============================================
+       MAIN WORKSPACE: USER / PATIENT INTERFACE
+       ============================================== -->
+  <main class="main-content">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-2" style="min-width: 0; flex: 1 1 auto; overflow: hidden;">
+        <h5 class="m-0 fw-bold text-dark text-truncate">Rajesh Kumar 👋</h5>
+        <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 d-none d-md-inline" style="font-size: 11px;">
+          <i class="bi bi-shield-check me-1"></i> ABHA Verified
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2 flex-shrink-0">
+        <!-- Emergency SOS Button -->
+        <button class="btn btn-danger btn-sm fw-semibold d-flex align-items-center gap-1 shadow-sm px-2 py-1" onclick="alert('Emergency Ambulance 108 Dispatch Triggered to your GPS Location!')">
+          <i class="bi bi-telephone-fill"></i> <span class="d-none d-sm-inline">Emergency </span>SOS
+        </button>
+
+        <!-- Book Appointment Shortcut -->
+        <a href="#bookAppointmentSection" class="btn btn-primary btn-sm fw-semibold d-flex align-items-center gap-1 px-2 py-1">
+          <i class="bi bi-plus-lg"></i> <span class="d-none d-sm-inline">Book </span>Appointment
+        </a>
+      </div>
+    </header>
+
+    <div class="page-body">
+
+      <!-- Patient Header Banner -->
+      <div class="user-hero-card mb-4">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-8">
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+              <span class="abha-badge">ABHA ID: 91-8812-9014-9921</span>
+              <span class="abha-badge">Blood: B Positive (B+)</span>
+              <span class="badge bg-danger">⚠ Allergy: Penicillin</span>
+            </div>
+            <h2 class="fw-bold mb-1">Rajesh Kumar</h2>
+            <p class="mb-3 text-white-50" style="font-size: 13.5px;">
+              UHID: <strong>#HMS-2026-9041</strong> &bull; 46 Yrs, Male &bull; Contact: +91 98765 43210 &bull; Bandra, Mumbai
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-light btn-sm fw-semibold text-primary" onclick="alert('Digital ABHA QR Card Downloaded to device!')">
+                <i class="bi bi-qr-code me-1"></i> View ABHA Card
+              </button>
+              <button class="btn btn-outline-light btn-sm fw-semibold" onclick="alert('Star Health Cashless e-Card Downloaded!')">
+                <i class="bi bi-shield-shaded me-1"></i> Insurance Card
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+            <div class="bg-white text-dark p-3 rounded-3 shadow-sm text-start w-100 w-sm-auto d-inline-block">
+              <span class="text-muted small fw-bold text-uppercase d-block mb-1">Next Upcoming Visit</span>
+              <div class="fw-bold text-primary fs-6">Tomorrow, 10:30 AM</div>
+              <div class="small text-muted">Dr. Arvind Sharma (Cardiology)</div>
+              <span class="badge bg-success-subtle text-success mt-1">Confirmed Token #B-04</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Status Badges -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="stat-card-white d-flex align-items-center justify-content-between">
+            <div>
+              <span class="text-muted fw-bold small text-uppercase">Active Prescriptions</span>
+              <h3 class="fw-bold text-dark mt-1 mb-0">3 Drugs</h3>
+              <span class="text-primary small fw-semibold">Next dose: 9:00 PM</span>
+            </div>
+            <div class="stat-icon bg-primary-subtle text-primary"><i class="bi bi-capsule"></i></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card-white d-flex align-items-center justify-content-between">
+            <div>
+              <span class="text-muted fw-bold small text-uppercase">Diagnostic Reports</span>
+              <h3 class="fw-bold text-dark mt-1 mb-0">4 Ready</h3>
+              <span class="text-success small fw-semibold">ECG & Trop-I Signed</span>
+            </div>
+            <div class="stat-icon bg-success-subtle text-success"><i class="bi bi-file-earmark-medical"></i></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card-white d-flex align-items-center justify-content-between">
+            <div>
+              <span class="text-muted fw-bold small text-uppercase">Pending Hospital Bill</span>
+              <h3 class="fw-bold text-dark mt-1 mb-0">₹0.00</h3>
+              <span class="text-success small fw-semibold"><i class="bi bi-check-circle-fill"></i> 100% Settled</span>
+            </div>
+            <div class="stat-icon bg-warning-subtle text-warning"><i class="bi bi-wallet2"></i></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card-white d-flex align-items-center justify-content-between">
+            <div>
+              <span class="text-muted fw-bold small text-uppercase">Care Team Doctor</span>
+              <h4 class="fw-bold text-dark mt-1 mb-0" style="font-size:18px;">Dr. Sharma</h4>
+              <span class="text-muted small fw-semibold">HOD Cardiology</span>
+            </div>
+            <div class="stat-icon bg-info-subtle text-info"><i class="bi bi-person-badge"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           SECTION 1: BOOK NEW APPOINTMENT (OPD / VIDEO)
+           ============================================== -->
+      <div class="card-white p-4 mb-4" id="bookAppointmentSection">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
+          <div>
+            <h5 class="fw-bold text-dark m-0">Book Doctor Appointment / Teleconsultation</h5>
+            <span class="text-muted small">Choose your specialist and schedule a verified slot</span>
+          </div>
+          <span class="badge bg-primary-subtle text-primary px-3 py-2">Instant Token Issuance</span>
+        </div>
+
+        <form onsubmit="handleAppointmentBooking(event)">
+          <div class="row g-3 mb-4">
+            <!-- Specialty Picker -->
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-uppercase text-muted">1. Select Medical Department</label>
+              <select class="form-select form-select-sm" id="bookDept" onchange="updateDoctorList()">
+                <option value="Cardiology">Cardiology (Heart & Chest)</option>
+                <option value="Orthopedics">Orthopedics (Bones & Joints)</option>
+                <option value="Gynecology">Gynecology & Obstetrics</option>
+                <option value="Neurology">Neurology & Brain Care</option>
+              </select>
+            </div>
+
+            <!-- Consultation Type -->
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-uppercase text-muted">2. Visit Type</label>
+              <select class="form-select form-select-sm" id="bookType">
+                <option>Hospital In-Person Visit (OPD Room)</option>
+                <option>Video Teleconsultation (Online HD Call)</option>
+              </select>
+            </div>
+
+            <!-- Date -->
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-uppercase text-muted">3. Appointment Date</label>
+              <input type="date" class="form-control form-control-sm" value="2026-10-07" id="bookDate">
+            </div>
+          </div>
+
+          <!-- Doctor Selection Cards -->
+          <div class="mb-4">
+            <label class="form-label small fw-bold text-uppercase text-muted">4. Choose Specialist Doctor</label>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="doc-picker-card selected" onclick="selectDoctor(this, 'Dr. Arvind Sharma (MD, DM Cardiology)')">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="user-avatar bg-primary text-white fw-bold">AS</div>
+                    <div>
+                      <div class="fw-bold text-dark">Dr. Arvind Sharma</div>
+                      <div class="text-muted small">Senior Cardiologist &bull; 18 Yrs Exp</div>
+                      <span class="badge bg-success-subtle text-success mt-1">Available Today &bull; ₹800</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="doc-picker-card" onclick="selectDoctor(this, 'Dr. Priya Sengupta (MD Cardiology)')">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="user-avatar bg-info text-white fw-bold">PS</div>
+                    <div>
+                      <div class="fw-bold text-dark">Dr. Priya Sengupta</div>
+                      <div class="text-muted small">Interventional Cardiologist &bull; 12 Yrs</div>
+                      <span class="badge bg-success-subtle text-success mt-1">Available Tomorrow &bull; ₹700</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="doc-picker-card" onclick="selectDoctor(this, 'Dr. R. K. Goel (MS Orthopedics)')">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="user-avatar bg-warning text-white fw-bold">RG</div>
+                    <div>
+                      <div class="fw-bold text-dark">Dr. R. K. Goel</div>
+                      <div class="text-muted small">Joint Replacement Specialist &bull; 22 Yrs</div>
+                      <span class="badge bg-success-subtle text-success mt-1">Available Today &bull; ₹750</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slot Picker -->
+          <div class="mb-4">
+            <label class="form-label small fw-bold text-uppercase text-muted">5. Available Time Slots</label>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="time-slot-btn active" onclick="selectSlot(this)">10:00 AM</button>
+              <button type="button" class="time-slot-btn" onclick="selectSlot(this)">10:30 AM</button>
+              <button type="button" class="time-slot-btn" onclick="selectSlot(this)">11:15 AM</button>
+              <button type="button" class="time-slot-btn" onclick="selectSlot(this)">04:00 PM</button>
+              <button type="button" class="time-slot-btn" onclick="selectSlot(this)">04:45 PM</button>
+              <button type="button" class="time-slot-btn" onclick="selectSlot(this)">05:30 PM</button>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 pt-3 border-top">
+            <div class="text-muted small">
+              Instant appointment confirmation slip and SMS token sent to <strong>+91 98765 43210</strong>
+            </div>
+            <button type="submit" class="btn btn-primary px-4 fw-semibold w-100 w-md-auto">
+              <i class="bi bi-calendar-check me-1"></i> Confirm Appointment Booking
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ==============================================
+           SECTION 2: HEALTH LOCKER & LAB REPORTS
+           ============================================== -->
+      <div class="row g-4 mb-4" id="myRecordsSection">
+        <!-- Prescriptions -->
+        <div class="col-lg-6">
+          <div class="card-white p-4 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="fw-bold text-dark m-0"><i class="bi bi-file-earmark-medical text-primary me-2"></i>My Prescriptions (E-Rx)</h6>
+              <span class="badge bg-primary-subtle text-primary">3 Active Records</span>
+            </div>
+
+            <div class="list-group list-group-flush border rounded-3">
+              <div class="list-group-item p-3">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <div>
+                    <h6 class="fw-bold text-dark mb-0">Cardiology Consultation E-Prescription</h6>
+                    <span class="text-muted small">Date: 06-Oct-2026 &bull; Dr. Arvind Sharma</span>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary" onclick="alert('Official Doctor Prescription PDF Downloaded!')">
+                    <i class="bi bi-download me-1"></i> PDF Rx
+                  </button>
+                </div>
+                <div class="p-2 bg-light rounded small border">
+                  <div>&bull; Tab. Aspirin 75mg (1-0-0) After Food</div>
+                  <div>&bull; Tab. Atorvastatin 20mg (0-0-1) Night</div>
+                  <div>&bull; Tab. Metoprolol 25mg (1-0-1) Morning/Evening</div>
+                </div>
+              </div>
+
+              <div class="list-group-item p-3">
+                <div class="d-flex justify-content-between align-items-start mb-1">
+                  <div>
+                    <h6 class="fw-bold text-dark mb-0">General Medicine Follow-Up</h6>
+                    <span class="text-muted small">Date: 12-Aug-2026 &bull; Dr. S. N. Sen</span>
+                  </div>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="alert('Past Rx Downloaded!')">
+                    <i class="bi bi-download"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diagnostic Reports -->
+        <div class="col-lg-6" id="myLabReportsSection">
+          <div class="card-white p-4 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="fw-bold text-dark m-0"><i class="bi bi-clipboard2-pulse text-success me-2"></i>Diagnostic Laboratory & Scan Reports</h6>
+              <span class="badge bg-success-subtle text-success">NABL Verified</span>
+            </div>
+
+            <div class="list-group list-group-flush border rounded-3">
+              <div class="list-group-item p-3 d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fw-bold text-dark mb-0">12-Lead Electrocardiogram (ECG) Report</h6>
+                  <span class="text-muted small">06-Oct-2026 &bull; Status: Signed (Normal Sinus Rhythm)</span>
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="alert('ECG Waveform & Diagnostic Report PDF Downloaded!')">
+                  <i class="bi bi-file-earmark-pdf me-1"></i> View Report
+                </button>
+              </div>
+
+              <div class="list-group-item p-3 d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fw-bold text-dark mb-0">Serum Troponin-I Quantitative & Lipid Profile</h6>
+                  <span class="text-muted small">06-Oct-2026 &bull; Status: Normal Range (Trop-I &lt; 0.01 ng/mL)</span>
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="alert('Blood Pathology PDF Report Downloaded!')">
+                  <i class="bi bi-file-earmark-pdf me-1"></i> View Report
+                </button>
+              </div>
+
+              <div class="list-group-item p-3 d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fw-bold text-dark mb-0">Chest X-Ray PA View (Digital Radiology)</h6>
+                  <span class="text-muted small">04-Oct-2026 &bull; Bronchovascular markings normal</span>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" onclick="alert('DICOM X-Ray Film Viewer Opened!')">
+                  <i class="bi bi-eye me-1"></i> Scan Film
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           SECTION 3: DAILY MEDICATION REMINDER TRACKER
+           ============================================== -->
+      <div class="card-white p-4 mb-4" id="medicineTrackerSection">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+          <div>
+            <h5 class="fw-bold text-dark m-0">Daily Medication Schedule (Smart Pill Tracker)</h5>
+            <span class="text-muted small">Mark medicines taken today to synchronize with your doctor's EMR</span>
+          </div>
+          <button class="btn btn-sm btn-outline-primary" onclick="alert('Prescription medicines auto-reordered from hospital pharmacy for home delivery!')">
+            <i class="bi bi-bag-plus me-1"></i> Order Refill
+          </button>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="p-3 bg-light rounded-3 border d-flex justify-content-between align-items-center">
+              <div>
+                <strong class="text-dark">Tab. Aspirin 75mg</strong>
+                <div class="text-muted small">Morning &bull; After Breakfast</div>
+              </div>
+              <button class="btn btn-sm btn-success py-1 px-3" onclick="this.textContent = '✔ Taken'; this.classList.remove('btn-success'); this.classList.add('btn-light', 'text-success');">
+                Take Dose
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="p-3 bg-light rounded-3 border d-flex justify-content-between align-items-center">
+              <div>
+                <strong class="text-dark">Tab. Metoprolol 25mg</strong>
+                <div class="text-muted small">Evening &bull; 6:00 PM</div>
+              </div>
+              <button class="btn btn-sm btn-success py-1 px-3" onclick="this.textContent = '✔ Taken'; this.classList.remove('btn-success'); this.classList.add('btn-light', 'text-success');">
+                Take Dose
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="p-3 bg-light rounded-3 border d-flex justify-content-between align-items-center">
+              <div>
+                <strong class="text-dark">Tab. Atorvastatin 20mg</strong>
+                <div class="text-muted small">Night &bull; Bedtime with water</div>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary py-1 px-3" onclick="this.textContent = '✔ Taken'; this.classList.add('text-success');">
+                Take Dose
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           SECTION 4: BILLS & INSURANCE SETTLEMENT
+           ============================================== -->
+      <div class="card-white p-4" id="myBillsSection">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+          <div>
+            <h5 class="fw-bold text-dark m-0">Invoices & Insurance Cashless Claims</h5>
+            <span class="text-muted small">All payments and Star Health TPA settlements</span>
+          </div>
+          <span class="badge bg-success-subtle text-success px-3 py-2">Zero Pending Balance</span>
+        </div>
+
+        <div class="table-responsive border rounded-3">
+          <table class="table-clean">
+            <thead>
+              <tr>
+                <th>Invoice #</th>
+                <th>Service Summary</th>
+                <th>Bill Date</th>
+                <th>Total Charges</th>
+                <th>Insurance Settled</th>
+                <th>Paid Amount</th>
+                <th>Receipt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong class="text-primary font-monospace">#INV-2026-8891</strong></td>
+                <td>IPD Stay (ICU Bed 2 Days) + Lab + Pharmacy</td>
+                <td>06-Oct-2026</td>
+                <td>₹15,250.00</td>
+                <td><span class="badge bg-success">₹12,000.00 (Star Health)</span></td>
+                <td><strong class="text-dark">₹3,250.00 (UPI)</strong></td>
+                <td>
+                  <button class="btn btn-sm btn-outline-secondary py-1 px-2" onclick="alert('Official GST Tax Invoice Receipt Downloaded!')">
+                    <i class="bi bi-download"></i> Receipt
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong class="text-primary font-monospace">#INV-2026-7014</strong></td>
+                <td>OPD Cardiology Consultation (Dr. Sharma)</td>
+                <td>12-Aug-2026</td>
+                <td>₹800.00</td>
+                <td><span class="badge bg-secondary">Self-Pay</span></td>
+                <td><strong class="text-dark">₹800.00 (Card)</strong></td>
+                <td>
+                  <button class="btn btn-sm btn-outline-secondary py-1 px-2" onclick="alert('Receipt Downloaded!')">
+                    <i class="bi bi-download"></i> Receipt
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Bootstrap 5.3 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  let selectedDoctorName = "Dr. Arvind Sharma (MD, DM Cardiology)";
+
+  function selectDoctor(element, docName) {
+    document.querySelectorAll('.doc-picker-card').forEach(c => c.classList.remove('selected'));
+    element.classList.add('selected');
+    selectedDoctorName = docName;
+  }
+
+  function selectSlot(element) {
+    document.querySelectorAll('.time-slot-btn').forEach(b => b.classList.remove('active'));
+    element.classList.add('active');
+  }
+
+  function handleAppointmentBooking(e) {
+    e.preventDefault();
+    const dept = document.getElementById('bookDept').value;
+    const type = document.getElementById('bookType').value;
+    const date = document.getElementById('bookDate').value;
+    const activeSlot = document.querySelector('.time-slot-btn.active').textContent;
+
+    alert(`🎉 Appointment Successfully Confirmed!\n\nPatient: Rajesh Kumar (#HMS-2026-9041)\nDoctor: ${selectedDoctorName}\nDepartment: ${dept}\nDate & Time: ${date} at ${activeSlot}\nType: ${type}\n\nToken #A-22 generated! SMS with confirmation link sent to +91 98765 43210.`);
+  }
+
+  function updateDoctorList() {
+    // Dynamically updates based on department
+  }
+</script>
+<script src="js/mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - Team Presentation Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0f1d;
+      --bg-card: rgba(18, 26, 47, 0.75);
+      --bg-card-hover: rgba(26, 38, 68, 0.85);
+      --border-color: rgba(56, 189, 248, 0.15);
+      --primary: #0284c7;
+      --primary-glow: #38bdf8;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --shadow-glow: 0 0 30px rgba(56, 189, 248, 0.15);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      user-select: none;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(14, 165, 233, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+    }
+    .deck-container { display: flex; flex-direction: column; height: 100vh; width: 100vw; }
+    header.pres-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 28px; border-bottom: 1px solid var(--border-color);
+      background: rgba(10, 15, 29, 0.8); backdrop-filter: blur(12px); z-index: 50;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, #0284c7, #10b981);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .brand-icon svg { width: 20px; height: 20px; stroke: white; }
+    .brand-text h1 { font-size: 16px; font-weight: 700; color: #fff; }
+    .brand-text span { font-size: 11px; color: var(--accent-cyan); text-transform: uppercase; font-weight: 600; }
+    .header-controls { display: flex; align-items: center; gap: 10px; }
+    .pill-badge {
+      background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--primary-glow);
+    }
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main); padding: 6px 14px; border-radius: 8px; cursor: pointer;
+      font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 6px;
+      text-decoration: none;
+    }
+    .ctrl-btn:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--primary-glow); }
+    main.slide-stage { flex: 1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 24px 48px; }
+    .slide {
+      position: absolute; inset: 20px 40px; display: flex; flex-direction: column; justify-content: center;
+      opacity: 0; transform: scale(0.97) translateY(15px); pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .slide.active { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+    .slide-badge { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-cyan); margin-bottom: 8px; }
+    .slide-title { font-size: 34px; font-weight: 800; line-height: 1.2; margin-bottom: 8px; color: #fff; }
+    .slide-subtitle { font-size: 15px; color: var(--text-muted); margin-bottom: 24px; max-width: 800px; line-height: 1.5; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md);
+      padding: 20px; backdrop-filter: blur(14px); position: relative;
+    }
+    .card-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+    .flow-chain { display: flex; align-items: stretch; gap: 12px; }
+    .flow-node { flex: 1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; }
+    .flow-arrow { display: flex; align-items: center; justify-content: center; color: var(--primary-glow); font-size: 20px; }
+    .step-num { font-size: 11px; font-weight: 800; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace; }
+    .step-title { font-size: 14px; font-weight: 700; color: #fff; margin: 4px 0; }
+    .step-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    .matrix-table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color); }
+    .matrix-table th { background: rgba(255, 255, 255, 0.03); padding: 12px 18px; text-align: left; font-size: 12px; font-weight: 700; color: var(--accent-cyan); border-bottom: 1px solid var(--border-color); }
+    .matrix-table td { padding: 12px 18px; font-size: 13px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); color: var(--text-muted); }
+    .role-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 11px; }
+    .role-admin { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
+    .role-doctor { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+    .role-nurse { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    footer.pres-footer {
+      display: flex; justify-content: space-between; align-items: center; padding: 12px 28px;
+      background: rgba(10, 15, 29, 0.85); border-top: 1px solid var(--border-color); z-index: 50;
+    }
+    .slide-dots { display: flex; gap: 8px; align-items: center; }
+    .dot { width: 24px; height: 6px; border-radius: 4px; background: rgba(255, 255, 255, 0.15); cursor: pointer; transition: all 0.3s; }
+    .dot.active { width: 44px; background: var(--primary-glow); }
+    .nav-buttons { display: flex; gap: 10px; }
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff; padding: 8px 18px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600;
+    }
+    .nav-btn:hover { background: var(--primary); }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+<div class="deck-container">
+  <header class="pres-header">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M12 6v12M6 12h12M4 4h16v16H4z"/></svg>
+      </div>
+      <div class="brand-text">
+        <h1>CarePulse HMS</h1>
+        <span>Executive Slideshow</span>
+      </div>
+    </div>
+
+    <div class="header-controls">
+      <a href="index.html" class="ctrl-btn" style="background: rgba(13, 153, 255, 0.15); border-color: #0d99ff; color: #38bdf8;">
+        ← Back to Figma Canvas Flow
+      </a>
+      <span class="pill-badge" id="slideCounter">Slide 1 of 8</span>
+    </div>
+  </header>
+
+  <main class="slide-stage">
+    <!-- SLIDE 1 -->
+    <section class="slide active">
+      <div style="text-align: center; max-width: 850px; margin: 0 auto;">
+        <span class="slide-badge">Enterprise Health-Tech</span>
+        <h1 style="font-size: 52px; font-weight: 800; margin: 16px 0; color: #fff;">Next-Gen Hospital Management System</h1>
+        <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 28px;">
+          Unified architecture orchestrating Clinical Workflows, Patient Care (OPD/IPD), Diagnostics, Pharmacy, and Automated Billing.
+        </p>
+      </div>
+    </section>
+
+    <!-- SLIDE 2 -->
+    <section class="slide">
+      <span class="slide-badge">01 // Problem & Solution</span>
+      <h2 class="slide-title">Why Modern Digital HMS is Crucial</h2>
+      <p class="slide-subtitle">Solving fragmented hospital workflows with real-time synchronized data.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3 class="card-title" style="color: #f43f5e;">Current Pain Points</h3>
+          <p class="card-desc">Lost paperwork, hours-long OPD queues, no real-time bed visibility, and billing revenue leaks.</p>
+        </div>
+        <div class="card">
+          <h3 class="card-title" style="color: #38bdf8;">Our Solution</h3>
+          <p class="card-desc">Unified EMR, automated token counters, digital prescriptions, and instant insurance TPA settlements.</p>
+        </div>
+        <div class="card">
+          <h3 class="card-title" style="color: #10b981;">Target Impact</h3>
+          <p class="card-desc">60% reduction in patient waiting times, zero missing medication charges, and real-time bed turnover.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3 -->
+    <section class="slide">
+      <span class="slide-badge">02 // Patient Flow</span>
+      <h2 class="slide-title">End-to-End Operational Patient Journey</h2>
+      <p class="slide-subtitle">Lifecycle from arrival, doctor consultation, lab tests to discharge.</p>
+      <div class="flow-chain">
+        <div class="flow-node">
+          <span class="step-num">STEP 01</span>
+          <h4 class="step-title">Reception & UHID</h4>
+          <p class="step-desc">Registration, Unique Health ID (UHID), and token assignment.</p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-node">
+          <span class="step-num">STEP 02</span>
+          <h4 class="step-title">Doctor Consultation</h4>
+          <p class="step-desc">EMR history, vitals, ICD-10 diagnosis, and digital E-Rx generation.</p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-node">
+          <span class="step-num">STEP 03</span>
+          <h4 class="step-title">Diagnostics & Lab</h4>
+          <p class="step-desc">Sample barcodes, pathologist reports attached to patient record.</p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-node">
+          <span class="step-num">STEP 04</span>
+          <h4 class="step-title">Pharmacy / IPD</h4>
+          <p class="step-desc">Medicine dispensing or bed allocation in General/ICU ward.</p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-node">
+          <span class="step-num">STEP 05</span>
+          <h4 class="step-title">Consolidated Bill</h4>
+          <p class="step-desc">Single invoice for Doc + Lab + Pharmacy + Bed. TPA claim.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4 -->
+    <section class="slide">
+      <span class="slide-badge">03 // System Modules</span>
+      <h2 class="slide-title">The 8 Core Pillars of CarePulse HMS</h2>
+      <div class="grid-4">
+        <div class="card"><h4 class="card-title">1. Patient & EMR</h4><p class="card-desc">Unified medical records, history, documents.</p></div>
+        <div class="card"><h4 class="card-title">2. Appointments & OPD</h4><p class="card-desc">Token screens, doctor rosters, scheduling.</p></div>
+        <div class="card"><h4 class="card-title">3. IPD Bed Matrix</h4><p class="card-desc">ICU, Cabin, General wards live grid.</p></div>
+        <div class="card"><h4 class="card-title">4. Doctor Clinical E-Rx</h4><p class="card-desc">Prescriptions, ICD-10 diagnoses.</p></div>
+        <div class="card"><h4 class="card-title">5. Diagnostics (LIS)</h4><p class="card-desc">Pathology, radiology, PDF reports.</p></div>
+        <div class="card"><h4 class="card-title">6. Pharmacy POS</h4><p class="card-desc">Batch expiry, barcode dispensing.</p></div>
+        <div class="card"><h4 class="card-title">7. Billing & TPA</h4><p class="card-desc">Cashless insurance, consolidated ledger.</p></div>
+        <div class="card"><h4 class="card-title">8. Executive BI</h4><p class="card-desc">Bed occupancy, revenue and audit trails.</p></div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5 -->
+    <section class="slide">
+      <span class="slide-badge">04 // Security & RBAC</span>
+      <h2 class="slide-title">Role-Based Access Matrix</h2>
+      <table class="matrix-table">
+        <thead>
+          <tr><th>Role</th><th>Primary Access</th><th>Medical EMR</th><th>Billing</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="role-badge role-admin">Super Admin</span></td><td>Hospital Config, Staff Accounts</td><td>Audit Logs Only</td><td>Full Ledger Access</td></tr>
+          <tr><td><span class="role-badge role-doctor">Doctor</span></td><td>OPD Queue, Clinical Desk</td><td>Read / Write Diagnoses</td><td>No Billing Edit</td></tr>
+          <tr><td><span class="role-badge role-nurse">Staff Nurse</span></td><td>Ward Rounds, Vitals Entry</td><td>Read EMR, Write Vitals</td><td>No Access</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SLIDE 6 -->
+    <section class="slide">
+      <span class="slide-badge">05 // Architecture</span>
+      <h2 class="slide-title">Data Architecture & Tech Stack</h2>
+      <div class="grid-3">
+        <div class="card"><h4 class="card-title" style="color:#38bdf8;">Next.js / React UI</h4><p class="card-desc">High performance responsive interface for reception desks, doctors, and tablets.</p></div>
+        <div class="card"><h4 class="card-title" style="color:#10b981;">Node.js / FastAPI</h4><p class="card-desc">High-throughput REST APIs and WebSockets for real-time queue synchronization.</p></div>
+        <div class="card"><h4 class="card-title" style="color:#f59e0b;">PostgreSQL & Redis</h4><p class="card-desc">ACID transaction ledger for billing, and Redis memory cache for live tokens.</p></div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7 -->
+    <section class="slide">
+      <span class="slide-badge">06 // Roadmap</span>
+      <h2 class="slide-title">3-Phase Execution Plan</h2>
+      <div class="grid-3">
+        <div class="card"><h4 class="card-title" style="color:#38bdf8;">Phase 1: Core MVP (Weeks 1-4)</h4><p class="card-desc">Patient registration, Doctor consultation queue, E-Rx, Basic OPD billing.</p></div>
+        <div class="card"><h4 class="card-title" style="color:#10b981;">Phase 2: Inpatient (Weeks 5-8)</h4><p class="card-desc">IPD Bed matrix, Lab LIS sample tracking, Pharmacy inventory decrement.</p></div>
+        <div class="card"><h4 class="card-title" style="color:#8b5cf6;">Phase 3: Digital (Weeks 9-12)</h4><p class="card-desc">Patient mobile portal, WhatsApp report delivery, Executive analytics.</p></div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8 -->
+    <section class="slide">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+        <h2 style="font-size: 38px; color: #fff; margin-bottom: 14px;">Questions & Team Discussion</h2>
+        <p style="font-size: 16px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">
+          Review the complete interactive canvas flow in <strong>index.html</strong> to inspect specific API endpoints and database models.
+        </p>
+        <a href="index.html" class="ctrl-btn" style="display:inline-flex; background: var(--primary); padding: 10px 24px; font-size: 14px; font-weight: 700; color: #fff;">
+          Open Interactive Figma Canvas Flow ➔
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pres-footer">
+    <div class="slide-dots" id="dots"></div>
+    <div class="nav-buttons">
+      <button class="nav-btn" id="prevSlide" disabled>Prev</button>
+      <button class="nav-btn" id="nextSlide">Next</button>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  const prevBtn = document.getElementById('prevSlide');
+  const nextBtn = document.getElementById('nextSlide');
+  const counter = document.getElementById('slideCounter');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = `dot ${i === 0 ? 'active' : ''}`;
+    dot.addEventListener('click', () => showSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+  const dots = document.querySelectorAll('.dot');
+
+  function showSlide(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    counter.textContent = `Slide ${current + 1} of ${slides.length}`;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === slides.length - 1;
+  }
+
+  prevBtn.addEventListener('click', () => showSlide(current - 1));
+  nextBtn.addEventListener('click', () => showSlide(current + 1));
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') showSlide(Math.min(current + 1, slides.length - 1));
+    if (e.key === 'ArrowLeft') showSlide(Math.max(current - 1, 0));
+  });
+</script>
+<script src="js/navigator.js"></script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - Emergency & Trauma Triage (24x7)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <div class="brand-logo-icon"><i class="bi bi-hospital"></i></div>
+      <div>
+        <div class="brand-title">CarePulse</div>
+        <div class="brand-subtitle">Hospital ERP Suite</div>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">1. CORE & OPD</div>
+      <a href="dashboard.html" class="nav-link-item">
+        <i class="bi bi-speedometer2"></i> Executive Dashboard
+      </a>
+      <a href="reception.html" class="nav-link-item">
+        <i class="bi bi-person-badge"></i> Reception & Registration
+      </a>
+      <a href="emergency.html" class="nav-link-item active">
+        <i class="bi bi-lightning-charge-fill text-danger"></i> Emergency & Triage
+      </a>
+      <a href="doctor_emr.html" class="nav-link-item">
+        <i class="bi bi-clipboard2-pulse"></i> Doctor EMR Desk
+      </a>
+
+      <div class="menu-header">2. INPATIENT & SURGERY</div>
+      <a href="ipd_beds.html" class="nav-link-item">
+        <i class="bi bi-hospital-fill"></i> IPD Beds & Ward Matrix
+      </a>
+      <a href="operation_theatre.html" class="nav-link-item">
+        <i class="bi bi-heart-pulse"></i> Operation Theatre (OT)
+      </a>
+
+      <div class="menu-header">3. ANCILLARY & LAB</div>
+      <a href="laboratory.html" class="nav-link-item">
+        <i class="bi bi-droplet-half"></i> Pathology & Lab (LIS)
+      </a>
+      <a href="blood_bank.html" class="nav-link-item">
+        <i class="bi bi-virus"></i> Blood Bank Management
+      </a>
+      <a href="pharmacy.html" class="nav-link-item">
+        <i class="bi bi-capsule"></i> Pharmacy POS & Inventory
+      </a>
+
+      <div class="menu-header">4. FINANCE & CLEARANCE</div>
+      <a href="billing.html" class="nav-link-item">
+        <i class="bi bi-receipt-cutoff"></i> Central Billing & Invoicing
+      </a>
+      <a href="discharge.html" class="nav-link-item">
+        <i class="bi bi-door-open"></i> Discharge & Gate Pass
+      </a>
+
+      <div class="menu-header">5. PATIENT PORTAL</div>
+      <a href="patient_portal.html" class="nav-link-item">
+        <i class="bi bi-person-circle"></i> Patient Health Portal
+      </a>
+
+      <div class="menu-header">SYSTEM LINKS</div>
+      <a href="index.html" class="nav-link-item"><i class="bi bi-diagram-3"></i> Figma Flow Canvas ↗</a>
+      <a href="slides.html" class="nav-link-item"><i class="bi bi-projector"></i> Slide Deck Pitch ↗</a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">EM</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Emergency CMO</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">24x7 Trauma Desk</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="m-0 fw-bold text-danger"><i class="bi bi-lightning-charge-fill me-1"></i>Emergency & Trauma Triage (24x7)</h5>
+        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1" style="font-size: 11px;">
+          Manchester Triage Protocol Active
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-danger btn-sm fw-semibold" onclick="alert('Code Red Trauma Broadcast Triggered to all OT and ICU staff!')">
+          🚨 Trigger Code Red Broadcast
+        </button>
+      </div>
+    </header>
+
+    <div class="page-body">
+      <!-- MTS Triage Categories -->
+      <div class="row g-3 mb-4">
+        <!-- RED: Immediate -->
+        <div class="col-md-4">
+          <div class="card-white p-3 border-danger" style="border-width: 2px;">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="fw-bold text-danger m-0">🔴 RED: Immediate (0 Min Wait)</h6>
+              <span class="badge bg-danger">2 Active Bays</span>
+            </div>
+            <div class="p-3 bg-danger-subtle rounded mb-3 border border-danger-subtle">
+              <strong class="text-dark">Anil Kapoor (52 M)</strong>
+              <div class="small text-danger fw-semibold">Massive Polytrauma & Hypovolemic Shock</div>
+              <div class="small text-muted mt-1">SpO2: 86% &bull; BP: 78/48 &bull; Pulse: 132 bpm</div>
+              <div class="small text-dark mt-1">Crash Cart #01 Deployed &bull; Bay 1</div>
+              <button class="btn btn-sm btn-danger w-100 mt-2 py-1" onclick="alert('Transferred directly to OT Suite 1 for emergency exploratory laparotomy!')">
+                Transfer to OT Suite 1 ➔
+              </button>
+            </div>
+
+            <div class="p-3 bg-danger-subtle rounded border border-danger-subtle">
+              <strong class="text-dark">Girish Nambiar (64 M)</strong>
+              <div class="small text-danger fw-semibold">Acute STEMI (Heart Attack)</div>
+              <div class="small text-muted mt-1">Severe Chest Pain &bull; Defibrillator Ready &bull; Bay 2</div>
+              <button class="btn btn-sm btn-danger w-100 mt-2 py-1" onclick="alert('Cath Lab Activated for Primary Angioplasty!')">
+                Transfer to Cath Lab ➔
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- YELLOW: Urgent -->
+        <div class="col-md-4">
+          <div class="card-white p-3 border-warning" style="border-width: 2px;">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="fw-bold text-warning m-0">🟡 YELLOW: Urgent (&lt; 15 Mins)</h6>
+              <span class="badge bg-warning text-dark">3 Active Bays</span>
+            </div>
+            <div class="p-3 bg-warning-subtle rounded mb-3 border border-warning-subtle">
+              <strong class="text-dark">Kavita Jain (29 F)</strong>
+              <div class="small text-warning fw-semibold">Acute Appendicitis Suspected</div>
+              <div class="small text-muted mt-1">Severe Right Iliac Fossa Pain &bull; Bay 4</div>
+              <button class="btn btn-sm btn-outline-warning text-dark w-100 mt-2 py-1" onclick="alert('Ultrasound Scan Fast-Tracked')">
+                Order STAT Ultrasound
+              </button>
+            </div>
+
+            <div class="p-3 bg-warning-subtle rounded border border-warning-subtle">
+              <strong class="text-dark">Tarun Mathur (41 M)</strong>
+              <div class="small text-warning fw-semibold">Dislocated Shoulder &bull; High Pain Score</div>
+              <div class="small text-muted mt-1">Analgesia Administered &bull; Bay 5</div>
+              <button class="btn btn-sm btn-outline-warning text-dark w-100 mt-2 py-1" onclick="alert('Orthopedic Resident Assigned')">
+                Call Ortho Resident
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- GREEN: Non-Urgent -->
+        <div class="col-md-4">
+          <div class="card-white p-3 border-success" style="border-width: 2px;">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="fw-bold text-success m-0">🟢 GREEN: Standard</h6>
+              <span class="badge bg-success">4 Active Bays</span>
+            </div>
+            <div class="p-3 bg-success-subtle rounded mb-3 border border-success-subtle">
+              <strong class="text-dark">Raman Lal (35 M)</strong>
+              <div class="small text-success fw-semibold">Forearm Laceration & Suturing</div>
+              <div class="small text-muted mt-1">Vitals Normal &bull; Bay 7</div>
+              <button class="btn btn-sm btn-outline-success w-100 mt-2 py-1" onclick="alert('Suturing completed. Patient moved to Pharmacy.')">
+                Mark Treated & Discharge
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/mobile.js"></script>
+</body>
+</html>

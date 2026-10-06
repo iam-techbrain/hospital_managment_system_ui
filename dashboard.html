@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - Executive Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <div class="brand-logo-icon"><i class="bi bi-hospital"></i></div>
+      <div>
+        <div class="brand-title">CarePulse</div>
+        <div class="brand-subtitle">Hospital ERP Suite</div>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">1. CORE & OPD</div>
+      <a href="dashboard.html" class="nav-link-item active">
+        <i class="bi bi-speedometer2"></i> Executive Dashboard
+      </a>
+      <a href="reception.html" class="nav-link-item">
+        <i class="bi bi-person-badge"></i> Reception & Registration
+      </a>
+      <a href="emergency.html" class="nav-link-item">
+        <i class="bi bi-lightning-charge-fill text-danger"></i> Emergency & Triage
+      </a>
+      <a href="doctor_emr.html" class="nav-link-item">
+        <i class="bi bi-clipboard2-pulse"></i> Doctor EMR Desk
+      </a>
+
+      <div class="menu-header">2. INPATIENT & SURGERY</div>
+      <a href="ipd_beds.html" class="nav-link-item">
+        <i class="bi bi-hospital-fill"></i> IPD Beds & Ward Matrix
+      </a>
+      <a href="operation_theatre.html" class="nav-link-item">
+        <i class="bi bi-heart-pulse"></i> Operation Theatre (OT)
+      </a>
+
+      <div class="menu-header">3. ANCILLARY & LAB</div>
+      <a href="laboratory.html" class="nav-link-item">
+        <i class="bi bi-droplet-half"></i> Pathology & Lab (LIS)
+      </a>
+      <a href="blood_bank.html" class="nav-link-item">
+        <i class="bi bi-virus"></i> Blood Bank Management
+      </a>
+      <a href="pharmacy.html" class="nav-link-item">
+        <i class="bi bi-capsule"></i> Pharmacy POS & Inventory
+      </a>
+
+      <div class="menu-header">4. FINANCE & CLEARANCE</div>
+      <a href="billing.html" class="nav-link-item">
+        <i class="bi bi-receipt-cutoff"></i> Central Billing & Invoicing
+      </a>
+      <a href="discharge.html" class="nav-link-item">
+        <i class="bi bi-door-open"></i> Discharge & Gate Pass
+      </a>
+
+      <div class="menu-header">5. PATIENT PORTAL</div>
+      <a href="user_portal.html" class="nav-link-item">
+        <i class="bi bi-person-circle"></i> User & Patient Portal
+      </a>
+
+      <div class="menu-header">PUBLIC & ARCHITECTURE</div>
+      <a href="requirements.html" class="nav-link-item"><i class="bi bi-diagram-3-fill text-primary"></i> Requirements & Timeline UI</a>
+      <a href="landing.html" class="nav-link-item"><i class="bi bi-globe"></i> Customer Landing Page ↗</a>
+      <a href="index.html" class="nav-link-item"><i class="bi bi-diagram-3"></i> Figma Flow Canvas ↗</a>
+      <a href="slides.html" class="nav-link-item"><i class="bi bi-projector"></i> Slide Deck Pitch ↗</a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">AS</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Dr. Arvind Sharma</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">Chief Medical Officer</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="m-0 fw-bold text-dark">Executive Hospital Dashboard</h5>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size: 11px;">
+          <i class="bi bi-shield-check me-1"></i> Central Campus (500 Beds)
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <div class="search-input-box d-none d-lg-block">
+          <i class="bi bi-search"></i>
+          <input type="text" class="form-control form-control-sm" placeholder="Search patient, bed, doctor...">
+        </div>
+        <a href="reception.html" class="btn btn-primary btn-sm fw-semibold px-3 py-2 d-flex align-items-center gap-1 shadow-sm">
+          <i class="bi bi-plus-lg"></i> Register Patient
+        </a>
+      </div>
+    </header>
+
+    <div class="page-body">
+      <!-- 4 Top KPI Cards -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="stat-card-white d-flex align-items-center justify-content-between">
+            <div>
+              <span class="text-muted fw-bold small text-uppercase">Patients Registered Today</span>
+              <h3 class="fw-bold text-dark mt-1 mb-0">148</h3>
+              <span class="text-success small fw-semibold"><i class="bi bi-arrow-up-short"></i> +12% from yesterday</span>
+            </div>
+            <div class="stat-icon bg-primary-subtle text-primary"><i class="bi bi-people-fill"></i></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card-white d-flex align-items-center justify-content-between">
+            <div>
+              <span class="text-muted fw-bold small text-uppercase">Bed Occupancy Rate</span>
+              <h3 class="fw-bold text-dark mt-1 mb-0">82.4%</h3>
+              <span class="text-danger small fw-semibold">394 / 480 Beds Occupied</span>
+            </div>
+            <div class="stat-icon bg-danger-subtle text-danger"><i class="bi bi-hospital"></i></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card-white d-flex align-items-center justify-content-between">
+            <div>
+              <span class="text-muted fw-bold small text-uppercase">Active Doctors On-Duty</span>
+              <h3 class="fw-bold text-dark mt-1 mb-0">28</h3>
+              <span class="text-muted small fw-semibold">Across 14 Specialties</span>
+            </div>
+            <div class="stat-icon bg-success-subtle text-success"><i class="bi bi-heart-pulse-fill"></i></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card-white d-flex align-items-center justify-content-between">
+            <div>
+              <span class="text-muted fw-bold small text-uppercase">Today's Collections</span>
+              <h3 class="fw-bold text-dark mt-1 mb-0">₹4,82,500</h3>
+              <span class="text-success small fw-semibold"><i class="bi bi-check-circle-fill"></i> 94% Cashless Settled</span>
+            </div>
+            <div class="stat-icon bg-warning-subtle text-warning"><i class="bi bi-currency-rupee"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Admissions Table & Departments -->
+      <div class="row g-3 mb-4">
+        <div class="col-lg-8">
+          <div class="card-white p-0">
+            <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
+              <h6 class="m-0 fw-bold text-dark">Live Inpatient (IPD) Active Admissions</h6>
+              <a href="ipd_beds.html" class="btn btn-sm btn-outline-primary fw-semibold">View Bed Matrix ➔</a>
+            </div>
+            <div class="table-responsive">
+              <table class="table-clean">
+                <thead>
+                  <tr>
+                    <th>Patient Name & UHID</th>
+                    <th>Ward / Bed</th>
+                    <th>Attending Doctor</th>
+                    <th>Admission Date</th>
+                    <th>Condition</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Rajesh Kumar</strong>
+                      <div class="text-muted small">#HMS-2026-9041 &bull; 46 M</div>
+                    </td>
+                    <td><span class="badge bg-danger-subtle text-danger fw-bold">ICU-02</span></td>
+                    <td>Dr. Arvind Sharma (Cardiology)</td>
+                    <td>04-Oct-2026</td>
+                    <td><span class="badge badge-soft-warning">Under Observation</span></td>
+                    <td><a href="doctor_emr.html" class="btn btn-sm btn-light border py-1 px-2">EMR</a></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Pooja Deshmukh</strong>
+                      <div class="text-muted small">#HMS-2026-8812 &bull; 32 F</div>
+                    </td>
+                    <td><span class="badge bg-primary-subtle text-primary fw-bold">DLX-301</span></td>
+                    <td>Dr. Meera Iyer (Gynecology)</td>
+                    <td>05-Oct-2026</td>
+                    <td><span class="badge badge-soft-success">Stable Post-Op</span></td>
+                    <td><a href="billing.html" class="btn btn-sm btn-light border py-1 px-2">Bill</a></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Amit Verma</strong>
+                      <div class="text-muted small">#HMS-2026-7910 &bull; 58 M</div>
+                    </td>
+                    <td><span class="badge bg-secondary-subtle text-secondary fw-bold">GEN-W1</span></td>
+                    <td>Dr. R. K. Goel (Orthopedics)</td>
+                    <td>03-Oct-2026</td>
+                    <td><span class="badge badge-soft-info">Discharge Planned</span></td>
+                    <td><a href="discharge.html" class="btn btn-sm btn-light border py-1 px-2">Discharge</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card-white p-3">
+            <h6 class="fw-bold text-dark mb-3">Quick Department Jumps</h6>
+            <div class="d-flex flex-column gap-2">
+              <a href="emergency.html" class="text-decoration-none d-flex justify-content-between align-items-center p-2 rounded bg-light border">
+                <div>
+                  <span class="fw-bold text-dark" style="font-size:13px;">🚨 Emergency Trauma Triage</span>
+                  <div class="text-muted" style="font-size:11px;">4 Critical Ambulances Arriving</div>
+                </div>
+                <span class="badge bg-danger">View</span>
+              </a>
+              <a href="operation_theatre.html" class="text-decoration-none d-flex justify-content-between align-items-center p-2 rounded bg-light border">
+                <div>
+                  <span class="fw-bold text-dark" style="font-size:13px;">🔪 Operation Theatres (OT)</span>
+                  <div class="text-muted" style="font-size:11px;">3 Surgeries Ongoing, 1 Next</div>
+                </div>
+                <span class="badge bg-primary">Roster</span>
+              </a>
+              <a href="laboratory.html" class="text-decoration-none d-flex justify-content-between align-items-center p-2 rounded bg-light border">
+                <div>
+                  <span class="fw-bold text-dark" style="font-size:13px;">🔬 Diagnostic Pathology (LIS)</span>
+                  <div class="text-muted" style="font-size:11px;">18 Reports Awaiting Sign-off</div>
+                </div>
+                <span class="badge bg-secondary">Reports</span>
+              </a>
+              <a href="blood_bank.html" class="text-decoration-none d-flex justify-content-between align-items-center p-2 rounded bg-light border">
+                <div>
+                  <span class="fw-bold text-dark" style="font-size:13px;">🩸 Blood Bank Inventory</span>
+                  <div class="text-muted" style="font-size:11px;">O- Negative Stock Low (3 Units)</div>
+                </div>
+                <span class="badge bg-danger">Low Stock</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/mobile.js"></script>
+</body>
+</html>

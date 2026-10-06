@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - Central Billing & Invoicing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <div class="brand-logo-icon"><i class="bi bi-hospital"></i></div>
+      <div>
+        <div class="brand-title">CarePulse</div>
+        <div class="brand-subtitle">Hospital ERP Suite</div>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">1. CORE & OPD</div>
+      <a href="dashboard.html" class="nav-link-item">
+        <i class="bi bi-speedometer2"></i> Executive Dashboard
+      </a>
+      <a href="reception.html" class="nav-link-item">
+        <i class="bi bi-person-badge"></i> Reception & Registration
+      </a>
+      <a href="emergency.html" class="nav-link-item">
+        <i class="bi bi-lightning-charge-fill text-danger"></i> Emergency & Triage
+      </a>
+      <a href="doctor_emr.html" class="nav-link-item">
+        <i class="bi bi-clipboard2-pulse"></i> Doctor EMR Desk
+      </a>
+
+      <div class="menu-header">2. INPATIENT & SURGERY</div>
+      <a href="ipd_beds.html" class="nav-link-item">
+        <i class="bi bi-hospital-fill"></i> IPD Beds & Ward Matrix
+      </a>
+      <a href="operation_theatre.html" class="nav-link-item">
+        <i class="bi bi-heart-pulse"></i> Operation Theatre (OT)
+      </a>
+
+      <div class="menu-header">3. ANCILLARY & LAB</div>
+      <a href="laboratory.html" class="nav-link-item">
+        <i class="bi bi-droplet-half"></i> Pathology & Lab (LIS)
+      </a>
+      <a href="blood_bank.html" class="nav-link-item">
+        <i class="bi bi-virus"></i> Blood Bank Management
+      </a>
+      <a href="pharmacy.html" class="nav-link-item">
+        <i class="bi bi-capsule"></i> Pharmacy POS & Inventory
+      </a>
+
+      <div class="menu-header">4. FINANCE & CLEARANCE</div>
+      <a href="billing.html" class="nav-link-item active">
+        <i class="bi bi-receipt-cutoff"></i> Central Billing & Invoicing
+      </a>
+      <a href="discharge.html" class="nav-link-item">
+        <i class="bi bi-door-open"></i> Discharge & Gate Pass
+      </a>
+
+      <div class="menu-header">5. PATIENT PORTAL</div>
+      <a href="patient_portal.html" class="nav-link-item">
+        <i class="bi bi-person-circle"></i> Patient Health Portal
+      </a>
+
+      <div class="menu-header">SYSTEM LINKS</div>
+      <a href="index.html" class="nav-link-item"><i class="bi bi-diagram-3"></i> Figma Flow Canvas ↗</a>
+      <a href="slides.html" class="nav-link-item"><i class="bi bi-projector"></i> Slide Deck Pitch ↗</a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">FA</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Finance Accounts</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">Central Billing Desk</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="m-0 fw-bold text-dark">Centralized Invoicing & Cashless TPA Desk</h5>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size: 11px;">
+          GST Compliant Medical Invoicing
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-outline-secondary btn-sm px-3" onclick="window.print()">
+          <i class="bi bi-printer me-1"></i> Print Invoice
+        </button>
+        <a href="discharge.html" class="btn btn-success btn-sm px-3 fw-semibold">
+          Issue Discharge Gate Pass ➔
+        </a>
+      </div>
+    </header>
+
+    <div class="page-body">
+      <div class="card-white p-4">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-start pb-3 border-bottom mb-4">
+          <div>
+            <h4 class="fw-bold text-dark m-0">CarePulse Multi-Speciality Hospital</h4>
+            <div class="text-muted small">120 Healthcare Avenue, Bandra, Mumbai &bull; GSTIN: 27AABCC1234D1Z5</div>
+            <div class="text-muted small">NABH Accredited &bull; 24x7 Helpline: 1800-200-CARE</div>
+          </div>
+          <div class="text-end">
+            <span class="badge bg-primary px-3 py-2 fs-6">INVOICE #INV-2026-8891</span>
+            <div class="text-muted small mt-1">Date: 06-Oct-2026 &bull; Billing Type: IPD Final</div>
+          </div>
+        </div>
+
+        <!-- Patient & Insurance Detail Bar -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-7">
+            <div class="p-3 bg-light rounded-3 border">
+              <h6 class="fw-bold text-dark mb-1">Patient Stay Breakdown</h6>
+              <div class="text-dark"><strong>Rajesh Kumar</strong> (UHID: #HMS-2026-9041)</div>
+              <div class="text-muted small">Admitted: 04-Oct-2026 &bull; Discharge: 06-Oct-2026 (Bed ICU-02)</div>
+              <div class="text-muted small">Consultant: Dr. Arvind Sharma (MD, Cardiology)</div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="p-3 bg-success-subtle border border-success-subtle rounded-3">
+              <h6 class="fw-bold text-success mb-1">Cashless Insurance / TPA Pre-Auth</h6>
+              <div class="text-dark fw-bold">Star Health & Allied Insurance</div>
+              <div class="text-muted small">Policy #SH-88912-C &bull; TPA Claim #TPA-9011</div>
+              <div class="text-success fw-bold small mt-1">Pre-Approved Amount: ₹12,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Line Items Table -->
+        <div class="table-responsive border rounded-3 mb-4">
+          <table class="table-clean">
+            <thead>
+              <tr>
+                <th>Description of Service</th>
+                <th>Department</th>
+                <th>Quantity / Days</th>
+                <th>Rate</th>
+                <th class="text-end">Total Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ICU Bed Charges & Continuous Vitals Care</strong></td>
+                <td>Inpatient (IPD)</td>
+                <td>2 Days</td>
+                <td>₹4,500.00</td>
+                <td class="text-end fw-semibold">₹9,000.00</td>
+              </tr>
+              <tr>
+                <td><strong>Cardiology Senior Consultant Rounds</strong></td>
+                <td>Clinical</td>
+                <td>2 Visits</td>
+                <td>₹1,000.00</td>
+                <td class="text-end fw-semibold">₹2,000.00</td>
+              </tr>
+              <tr>
+                <td><strong>Diagnostics: 12-Lead ECG & Trop-I Panel</strong></td>
+                <td>Pathology / Lab</td>
+                <td>1 Package</td>
+                <td>₹1,800.00</td>
+                <td class="text-end fw-semibold">₹1,800.00</td>
+              </tr>
+              <tr>
+                <td><strong>Pharmacy Dispensed Cardiac Medications</strong></td>
+                <td>Pharmacy POS</td>
+                <td>Batch BX-902</td>
+                <td>Itemized</td>
+                <td class="text-end fw-semibold">₹2,450.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Net Calculation -->
+        <div class="row justify-content-end mb-4">
+          <div class="col-md-5">
+            <div class="p-3 bg-light rounded-3 border">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Gross Hospital Total:</span>
+                <strong class="text-dark">₹15,250.00</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2 text-success">
+                <span>Less: TPA Insurance Approved:</span>
+                <strong>- ₹12,000.00</strong>
+              </div>
+              <div class="d-flex justify-content-between pt-2 border-top fs-5 fw-bold text-dark">
+                <span>Net Patient Co-Pay:</span>
+                <span class="text-primary">₹3,250.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-end gap-2 border-top pt-3">
+          <button class="btn btn-outline-secondary btn-sm px-3" onclick="window.print()">
+            <i class="bi bi-printer me-1"></i> Print Tax Invoice
+          </button>
+          <a href="discharge.html" class="btn btn-success btn-sm px-4 fw-semibold" onclick="alert('Payment of ₹3,250 collected via UPI!')">
+            <i class="bi bi-credit-card me-1"></i> Collect ₹3,250 & Issue Discharge
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/mobile.js"></script>
+</body>
+</html>

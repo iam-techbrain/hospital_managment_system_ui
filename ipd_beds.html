@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - IPD Beds & Ward Matrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <div class="brand-logo-icon"><i class="bi bi-hospital"></i></div>
+      <div>
+        <div class="brand-title">CarePulse</div>
+        <div class="brand-subtitle">Hospital ERP Suite</div>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">1. CORE & OPD</div>
+      <a href="dashboard.html" class="nav-link-item">
+        <i class="bi bi-speedometer2"></i> Executive Dashboard
+      </a>
+      <a href="reception.html" class="nav-link-item">
+        <i class="bi bi-person-badge"></i> Reception & Registration
+      </a>
+      <a href="emergency.html" class="nav-link-item">
+        <i class="bi bi-lightning-charge-fill text-danger"></i> Emergency & Triage
+      </a>
+      <a href="doctor_emr.html" class="nav-link-item">
+        <i class="bi bi-clipboard2-pulse"></i> Doctor EMR Desk
+      </a>
+
+      <div class="menu-header">2. INPATIENT & SURGERY</div>
+      <a href="ipd_beds.html" class="nav-link-item active">
+        <i class="bi bi-hospital-fill"></i> IPD Beds & Ward Matrix
+      </a>
+      <a href="operation_theatre.html" class="nav-link-item">
+        <i class="bi bi-heart-pulse"></i> Operation Theatre (OT)
+      </a>
+
+      <div class="menu-header">3. ANCILLARY & LAB</div>
+      <a href="laboratory.html" class="nav-link-item">
+        <i class="bi bi-droplet-half"></i> Pathology & Lab (LIS)
+      </a>
+      <a href="blood_bank.html" class="nav-link-item">
+        <i class="bi bi-virus"></i> Blood Bank Management
+      </a>
+      <a href="pharmacy.html" class="nav-link-item">
+        <i class="bi bi-capsule"></i> Pharmacy POS & Inventory
+      </a>
+
+      <div class="menu-header">4. FINANCE & CLEARANCE</div>
+      <a href="billing.html" class="nav-link-item">
+        <i class="bi bi-receipt-cutoff"></i> Central Billing & Invoicing
+      </a>
+      <a href="discharge.html" class="nav-link-item">
+        <i class="bi bi-door-open"></i> Discharge & Gate Pass
+      </a>
+
+      <div class="menu-header">5. PATIENT PORTAL</div>
+      <a href="patient_portal.html" class="nav-link-item">
+        <i class="bi bi-person-circle"></i> Patient Health Portal
+      </a>
+
+      <div class="menu-header">SYSTEM LINKS</div>
+      <a href="index.html" class="nav-link-item"><i class="bi bi-diagram-3"></i> Figma Flow Canvas ↗</a>
+      <a href="slides.html" class="nav-link-item"><i class="bi bi-projector"></i> Slide Deck Pitch ↗</a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">AS</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Sister Incharge</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">Ward Nursing Station</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="m-0 fw-bold text-dark">Inpatient (IPD) Beds & Live Ward Matrix</h5>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size: 11px;">
+          Floor 3: Critical Care & Cardiac Wing
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <a href="billing.html" class="btn btn-outline-primary btn-sm fw-semibold">
+          Check Inpatient Billing ➔
+        </a>
+      </div>
+    </header>
+
+    <div class="page-body">
+      <div class="card-white p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h6 class="m-0 fw-bold text-dark fs-5">Live Bed Matrix (Floor 3)</h6>
+            <span class="text-muted small">Real-time Bed Occupancy & Room Status</span>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-secondary" onclick="filterBeds('all')">All Beds (8)</button>
+            <button class="btn btn-sm btn-outline-danger" onclick="filterBeds('occupied')">Occupied (4)</button>
+            <button class="btn btn-sm btn-outline-success" onclick="filterBeds('vacant')">Vacant Ready (3)</button>
+            <button class="btn btn-sm btn-outline-warning" onclick="filterBeds('cleaning')">Housekeeping (1)</button>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-3 bed-item-col" data-bed="occupied">
+            <div class="bed-box occupied">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong class="fs-6 text-dark">ICU-01</strong>
+                <span class="badge bg-danger-subtle text-danger">Occupied</span>
+              </div>
+              <div class="fw-bold text-dark">Anita Roy (62 F)</div>
+              <div class="text-muted small">Post-Angioplasty &bull; Dr. Sharma</div>
+              <div class="text-primary small mt-2">Vitals: SpO2 97% &bull; Stable</div>
+            </div>
+          </div>
+
+          <div class="col-md-3 bed-item-col" data-bed="occupied">
+            <div class="bed-box occupied">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong class="fs-6 text-dark">ICU-02</strong>
+                <span class="badge bg-danger-subtle text-danger">Occupied</span>
+              </div>
+              <div class="fw-bold text-dark">Vikram Patel (54 M)</div>
+              <div class="text-muted small">Acute MI &bull; Dr. Sengupta</div>
+              <div class="text-danger small mt-2">Continuous Monitoring</div>
+            </div>
+          </div>
+
+          <div class="col-md-3 bed-item-col" data-bed="vacant">
+            <div class="bed-box vacant">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong class="fs-6 text-dark">ICU-03</strong>
+                <span class="badge bg-success-subtle text-success">Vacant Ready</span>
+              </div>
+              <div class="fw-bold text-success">Sanitized & Checked</div>
+              <div class="text-muted small">Oxygen port inspected</div>
+              <button class="btn btn-sm btn-primary w-100 mt-2 py-1" onclick="allocateBed('ICU-03')">
+                + Allocate Patient
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-3 bed-item-col" data-bed="cleaning">
+            <div class="bed-box cleaning">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong class="fs-6 text-dark">ICU-04</strong>
+                <span class="badge bg-warning-subtle text-warning">Housekeeping</span>
+              </div>
+              <div class="fw-bold text-warning">Sanitizing In Progress</div>
+              <div class="text-muted small">Discharged at 16:30</div>
+              <div class="text-muted small mt-2">Est. Ready: 15 Mins</div>
+            </div>
+          </div>
+
+          <div class="col-md-3 bed-item-col" data-bed="occupied">
+            <div class="bed-box occupied">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong class="fs-6 text-dark">DLX-301</strong>
+                <span class="badge bg-danger-subtle text-danger">Occupied</span>
+              </div>
+              <div class="fw-bold text-dark">Pooja Deshmukh (32 F)</div>
+              <div class="text-muted small">Deluxe Cabin &bull; Dr. Iyer</div>
+              <div class="text-success small mt-2">Ready for discharge</div>
+            </div>
+          </div>
+
+          <div class="col-md-3 bed-item-col" data-bed="vacant">
+            <div class="bed-box vacant">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong class="fs-6 text-dark">DLX-302</strong>
+                <span class="badge bg-success-subtle text-success">Vacant Ready</span>
+              </div>
+              <div class="fw-bold text-success">VIP Deluxe Suite</div>
+              <div class="text-muted small">Attendant sofa ready</div>
+              <button class="btn btn-sm btn-primary w-100 mt-2 py-1" onclick="allocateBed('DLX-302')">
+                + Allocate Patient
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-3 bed-item-col" data-bed="occupied">
+            <div class="bed-box occupied">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong class="fs-6 text-dark">GEN-W1</strong>
+                <span class="badge bg-danger-subtle text-danger">Occupied</span>
+              </div>
+              <div class="fw-bold text-dark">Amit Verma (58 M)</div>
+              <div class="text-muted small">General Ward &bull; Dr. Goel</div>
+              <div class="text-muted small mt-2">Daily rounds completed</div>
+            </div>
+          </div>
+
+          <div class="col-md-3 bed-item-col" data-bed="vacant">
+            <div class="bed-box vacant">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong class="fs-6 text-dark">GEN-W2</strong>
+                <span class="badge bg-success-subtle text-success">Vacant Ready</span>
+              </div>
+              <div class="fw-bold text-success">General Ward Bed 2</div>
+              <div class="text-muted small">Fresh linen laid</div>
+              <button class="btn btn-sm btn-primary w-100 mt-2 py-1" onclick="allocateBed('GEN-W2')">
+                + Allocate Patient
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function filterBeds(status) {
+    document.querySelectorAll('.bed-item-col').forEach(col => {
+      if (status === 'all' || col.getAttribute('data-bed') === status) {
+        col.style.display = 'block';
+      } else {
+        col.style.display = 'none';
+      }
+    });
+  }
+
+  function allocateBed(bedNo) {
+    const pName = prompt(`Enter patient name to allocate to Bed ${bedNo}:`, 'Rajesh Kumar');
+    if (pName) {
+      alert(`Bed ${bedNo} successfully allocated to ${pName}!\nDaily room rate linked to Central Billing.`);
+    }
+  }
+</script>
+<script src="js/mobile.js"></script>
+</body>
+</html>

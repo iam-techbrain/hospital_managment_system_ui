@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - Patient Health Portal (User View)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <div class="brand-logo-icon"><i class="bi bi-hospital"></i></div>
+      <div>
+        <div class="brand-title">CarePulse</div>
+        <div class="brand-subtitle">Hospital ERP Suite</div>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">1. CORE & OPD</div>
+      <a href="dashboard.html" class="nav-link-item">
+        <i class="bi bi-speedometer2"></i> Executive Dashboard
+      </a>
+      <a href="reception.html" class="nav-link-item">
+        <i class="bi bi-person-badge"></i> Reception & Registration
+      </a>
+      <a href="emergency.html" class="nav-link-item">
+        <i class="bi bi-lightning-charge-fill text-danger"></i> Emergency & Triage
+      </a>
+      <a href="doctor_emr.html" class="nav-link-item">
+        <i class="bi bi-clipboard2-pulse"></i> Doctor EMR Desk
+      </a>
+
+      <div class="menu-header">2. INPATIENT & SURGERY</div>
+      <a href="ipd_beds.html" class="nav-link-item">
+        <i class="bi bi-hospital-fill"></i> IPD Beds & Ward Matrix
+      </a>
+      <a href="operation_theatre.html" class="nav-link-item">
+        <i class="bi bi-heart-pulse"></i> Operation Theatre (OT)
+      </a>
+
+      <div class="menu-header">3. ANCILLARY & LAB</div>
+      <a href="laboratory.html" class="nav-link-item">
+        <i class="bi bi-droplet-half"></i> Pathology & Lab (LIS)
+      </a>
+      <a href="blood_bank.html" class="nav-link-item">
+        <i class="bi bi-virus"></i> Blood Bank Management
+      </a>
+      <a href="pharmacy.html" class="nav-link-item">
+        <i class="bi bi-capsule"></i> Pharmacy POS & Inventory
+      </a>
+
+      <div class="menu-header">4. FINANCE & CLEARANCE</div>
+      <a href="billing.html" class="nav-link-item">
+        <i class="bi bi-receipt-cutoff"></i> Central Billing & Invoicing
+      </a>
+      <a href="discharge.html" class="nav-link-item">
+        <i class="bi bi-door-open"></i> Discharge & Gate Pass
+      </a>
+
+      <div class="menu-header">5. PATIENT PORTAL</div>
+      <a href="patient_portal.html" class="nav-link-item active">
+        <i class="bi bi-person-circle"></i> Patient Health Portal
+      </a>
+
+      <div class="menu-header">SYSTEM LINKS</div>
+      <a href="index.html" class="nav-link-item"><i class="bi bi-diagram-3"></i> Figma Flow Canvas ↗</a>
+      <a href="slides.html" class="nav-link-item"><i class="bi bi-projector"></i> Slide Deck Pitch ↗</a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">RK</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Rajesh Kumar</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">Patient #HMS-9041</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="m-0 fw-bold text-dark">Patient Self-Service Health Portal</h5>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size: 11px;">
+          ABHA / Ayushman Bharat Digital Mission (ABDM) Linked
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-outline-primary btn-sm" onclick="alert('Book Teleconsultation slot opened')">
+          <i class="bi bi-camera-video me-1"></i> Book Video Consult
+        </button>
+      </div>
+    </header>
+
+    <div class="page-body">
+      <div class="row g-4">
+        <!-- Patient Profile Card -->
+        <div class="col-lg-4">
+          <div class="card-white p-4 text-center">
+            <div class="rounded-circle bg-primary text-white fs-3 mx-auto mb-3 d-flex align-items-center justify-content-center" style="width:72px; height:72px;">
+              RK
+            </div>
+            <h5 class="fw-bold text-dark mb-1">Rajesh Kumar</h5>
+            <div class="text-muted small mb-3">UHID: #HMS-2026-9041</div>
+            <div class="p-3 bg-light rounded-3 text-start small mb-3 border">
+              <div><strong>Age / Gender:</strong> 46 / Male</div>
+              <div><strong>Blood Group:</strong> B Positive</div>
+              <div><strong>Known Allergies:</strong> Penicillin</div>
+              <div><strong>ABHA ID:</strong> 91-8812-9014-9921</div>
+            </div>
+            <button class="btn btn-outline-primary btn-sm w-100" onclick="alert('ABHA Digital Card Downloaded!')">
+              <i class="bi bi-download me-1"></i> Download ABHA Health Card
+            </button>
+          </div>
+        </div>
+
+        <!-- Health Records Locker -->
+        <div class="col-lg-8">
+          <div class="card-white p-4">
+            <h6 class="fw-bold text-dark mb-3">My Medical Records & Diagnostic Reports</h6>
+            <div class="p-3 border rounded-3 bg-light mb-3 d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="fw-bold text-dark mb-1">Cardiology Consultation & E-Prescription</h6>
+                <span class="text-muted small">06-Oct-2026 &bull; Dr. Arvind Sharma (MD, Cardiology)</span>
+              </div>
+              <button class="btn btn-sm btn-primary" onclick="alert('Prescription PDF Downloaded!')">
+                <i class="bi bi-file-earmark-pdf me-1"></i> Download Rx
+              </button>
+            </div>
+
+            <div class="p-3 border rounded-3 bg-light mb-3 d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="fw-bold text-dark mb-1">12-Lead ECG & Serum Troponin-I Test Report</h6>
+                <span class="text-muted small">06-Oct-2026 &bull; Pathology Dept</span>
+              </div>
+              <button class="btn btn-sm btn-outline-primary" onclick="alert('Lab Report PDF Downloaded!')">
+                <i class="bi bi-file-earmark-pdf me-1"></i> View Lab PDF
+              </button>
+            </div>
+
+            <div class="p-3 border rounded-3 bg-light d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="fw-bold text-dark mb-1">Discharge Summary & Medical Bill</h6>
+                <span class="text-muted small">Invoice #INV-2026-8891 &bull; Settled (Zero Balance)</span>
+              </div>
+              <button class="btn btn-sm btn-outline-success" onclick="alert('Discharge Paper Downloaded!')">
+                <i class="bi bi-receipt me-1"></i> View Bill
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/mobile.js"></script>
+<script src="js/navigator.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - Operation Theatre (OT)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <div class="brand-logo-icon"><i class="bi bi-hospital"></i></div>
+      <div>
+        <div class="brand-title">CarePulse</div>
+        <div class="brand-subtitle">Hospital ERP Suite</div>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">1. CORE & OPD</div>
+      <a href="dashboard.html" class="nav-link-item">
+        <i class="bi bi-speedometer2"></i> Executive Dashboard
+      </a>
+      <a href="reception.html" class="nav-link-item">
+        <i class="bi bi-person-badge"></i> Reception & Registration
+      </a>
+      <a href="emergency.html" class="nav-link-item">
+        <i class="bi bi-lightning-charge-fill text-danger"></i> Emergency & Triage
+      </a>
+      <a href="doctor_emr.html" class="nav-link-item">
+        <i class="bi bi-clipboard2-pulse"></i> Doctor EMR Desk
+      </a>
+
+      <div class="menu-header">2. INPATIENT & SURGERY</div>
+      <a href="ipd_beds.html" class="nav-link-item">
+        <i class="bi bi-hospital-fill"></i> IPD Beds & Ward Matrix
+      </a>
+      <a href="operation_theatre.html" class="nav-link-item active">
+        <i class="bi bi-heart-pulse"></i> Operation Theatre (OT)
+      </a>
+
+      <div class="menu-header">3. ANCILLARY & LAB</div>
+      <a href="laboratory.html" class="nav-link-item">
+        <i class="bi bi-droplet-half"></i> Pathology & Lab (LIS)
+      </a>
+      <a href="blood_bank.html" class="nav-link-item">
+        <i class="bi bi-virus"></i> Blood Bank Management
+      </a>
+      <a href="pharmacy.html" class="nav-link-item">
+        <i class="bi bi-capsule"></i> Pharmacy POS & Inventory
+      </a>
+
+      <div class="menu-header">4. FINANCE & CLEARANCE</div>
+      <a href="billing.html" class="nav-link-item">
+        <i class="bi bi-receipt-cutoff"></i> Central Billing & Invoicing
+      </a>
+      <a href="discharge.html" class="nav-link-item">
+        <i class="bi bi-door-open"></i> Discharge & Gate Pass
+      </a>
+
+      <div class="menu-header">5. PATIENT PORTAL</div>
+      <a href="patient_portal.html" class="nav-link-item">
+        <i class="bi bi-person-circle"></i> Patient Health Portal
+      </a>
+
+      <div class="menu-header">SYSTEM LINKS</div>
+      <a href="index.html" class="nav-link-item"><i class="bi bi-diagram-3"></i> Figma Flow Canvas ↗</a>
+      <a href="slides.html" class="nav-link-item"><i class="bi bi-projector"></i> Slide Deck Pitch ↗</a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">OT</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Surgical Coordinator</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">OT Complex 2nd Floor</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="m-0 fw-bold text-dark">Operation Theatre (OT) Surgical Roster</h5>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size: 11px;">
+          Laminar Air Flow Class 100 OT Suites
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-primary btn-sm fw-semibold" onclick="alert('Emergency Surgery Slot Booked in OT Suite 4!')">
+          + Book Emergency Surgery Slot
+        </button>
+      </div>
+    </header>
+
+    <div class="page-body">
+      <div class="card-white p-4">
+        <h5 class="fw-bold text-dark mb-3">Live Operation Theatre Schedule (Today)</h5>
+        <div class="table-responsive border rounded-3">
+          <table class="table-clean">
+            <thead>
+              <tr>
+                <th>OT Suite</th>
+                <th>Patient & UHID</th>
+                <th>Surgery Procedure</th>
+                <th>Lead Surgeon</th>
+                <th>Anesthetist</th>
+                <th>Anesthesia Type</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong class="text-primary">OT Suite 1 (Cardio-Thoracic)</strong></td>
+                <td>Sunita Roy (#HMS-8812)</td>
+                <td>Coronary Artery Bypass Graft (CABG)</td>
+                <td>Dr. K. N. Rao</td>
+                <td>Dr. P. Sen</td>
+                <td>General Endotracheal</td>
+                <td><span class="badge bg-danger">In Progress (2h 10m)</span></td>
+              </tr>
+              <tr>
+                <td><strong class="text-primary">OT Suite 2 (Orthopedics)</strong></td>
+                <td>Ramesh Patil (#HMS-7721)</td>
+                <td>Total Knee Replacement (Right)</td>
+                <td>Dr. R. K. Goel</td>
+                <td>Dr. M. Roy</td>
+                <td>Spinal + Epidural</td>
+                <td><span class="badge bg-warning text-dark">Pre-Op Scrubbing</span></td>
+              </tr>
+              <tr>
+                <td><strong class="text-primary">OT Suite 3 (Laparoscopic)</strong></td>
+                <td>Devendra Shah (#HMS-6610)</td>
+                <td>Laparoscopic Cholecystectomy</td>
+                <td>Dr. V. Singhal</td>
+                <td>Dr. P. Sen</td>
+                <td>General Anesthesia</td>
+                <td><span class="badge bg-success">Scheduled (18:00)</span></td>
+              </tr>
+              <tr>
+                <td><strong class="text-primary">OT Suite 4 (Trauma / Emergency)</strong></td>
+                <td>Anil Kapoor (#HMS-9099)</td>
+                <td>Exploratory Laparotomy</td>
+                <td>Dr. S. K. Gupta</td>
+                <td>Dr. R. Das</td>
+                <td>Rapid Sequence Induction</td>
+                <td><span class="badge bg-info text-dark">Patient Being Wheeled In</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/mobile.js"></script>
+</body>
+</html>

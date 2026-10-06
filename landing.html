@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse Hospital - Compassionate Care & Advanced Medicine</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --bg-light: #f8fafc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: clip;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-dark);
+      background-color: #ffffff;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: clip;
+      position: relative;
+    }
+
+    /* Top Emergency Alert Bar */
+    .top-emergency-strip {
+      background: #0f172a;
+      color: #cbd5e1;
+      font-size: 12.5px;
+      padding: 8px 0;
+    }
+
+    /* Navbar */
+    .landing-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 1px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .brand-logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0284c7, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    }
+
+    /* Hero Banner */
+    .hero-section {
+      background: radial-gradient(circle at 80% 20%, rgba(2, 132, 199, 0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 10% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+                  #ffffff;
+      padding: 70px 0 60px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-headline {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text-dark);
+    }
+
+    .hero-highlight {
+      background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Booking Fast Widget */
+    .booking-widget-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 20px 40px -15px rgba(2, 132, 199, 0.12);
+    }
+
+    /* Stats Strip */
+    .stats-strip {
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+      padding: 36px 0;
+    }
+
+    /* Specialty Cards */
+    .dept-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.25s ease;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .dept-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(2, 132, 199, 0.1);
+    }
+
+    .dept-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    /* Doctor Profile Cards */
+    .doctor-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      height: 100%;
+    }
+
+    .doctor-card:hover {
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+
+    .doc-avatar-box {
+      height: 150px;
+      background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .doc-avatar-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 800;
+      border: 4px solid #ffffff;
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.3);
+    }
+
+    /* Feature Banner */
+    .cashless-banner {
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.2);
+    }
+
+    /* Footer */
+    footer.site-footer {
+      background: #0b1120;
+      color: #94a3b8;
+      padding: 60px 0 30px;
+      border-top: 1px solid #1e293b;
+    }
+
+    footer a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer a:hover {
+      color: #38bdf8;
+    }
+
+    /* Mobile Responsive Enhancements */
+    @media (max-width: 991.98px) {
+      .hero-section {
+        padding: 40px 0 30px;
+      }
+      .hero-headline {
+        font-size: 34px;
+      }
+      .top-emergency-strip {
+        font-size: 11.5px;
+      }
+      .booking-widget-card {
+        padding: 20px;
+        margin-top: 10px;
+      }
+      .cashless-banner {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .hero-headline {
+        font-size: 26px;
+      }
+      .btn-lg {
+        padding: 12px 18px;
+        font-size: 14.5px;
+        width: 100%;
+      }
+      .top-emergency-strip .container {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+      }
+      .stats-strip {
+        padding: 24px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Emergency Strip -->
+<div class="top-emergency-strip">
+  <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <span class="text-truncate" style="max-width: 250px;"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Bandra West, Mumbai</span>
+      <span class="d-none d-md-inline">&bull;</span>
+      <span class="d-none d-md-inline"><i class="bi bi-clock-fill text-warning me-1"></i> OPD: 8:00 AM - 9:00 PM</span>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <span class="fw-bold text-white small"><i class="bi bi-telephone-fill text-danger me-1"></i> 24x7: 108</span>
+      <a href="dashboard.html" class="badge bg-secondary text-white text-decoration-none px-2 py-1">Staff Login ➔</a>
+    </div>
+  </div>
+</div>
+
+<!-- Main Header / Navbar -->
+<nav class="navbar navbar-expand-lg landing-nav py-2 py-lg-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 text-dark text-decoration-none" href="landing.html">
+      <div class="brand-logo-icon" style="width:36px; height:36px; font-size:18px;">
+        <i class="bi bi-hospital"></i>
+      </div>
+      <div>
+        <div class="fw-bold fs-6 lh-1 text-dark">CarePulse Hospital</div>
+        <small class="text-primary fw-semibold text-uppercase d-none d-sm-block" style="font-size: 10.5px; letter-spacing: 0.05em;">Multi-Speciality & Research</small>
+      </div>
+    </a>
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-semibold" style="font-size: 14px;">
+        <li class="nav-item"><a class="nav-link active text-primary" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="#specialties">Specialties</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="#doctors">Specialist Doctors</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="#cashless">Cashless Insurance</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="#contact">Emergency & Contact</a></li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-2">
+        <!-- Patient Portal Access Button -->
+        <a href="user_portal.html" class="btn btn-outline-primary btn-sm fw-bold px-3 py-2">
+          <i class="bi bi-person-circle me-1"></i> Patient Portal
+        </a>
+        <!-- Book Appointment -->
+        <a href="#bookingWidget" class="btn btn-primary btn-sm fw-bold px-3 py-2 shadow-sm">
+          <i class="bi bi-calendar2-plus me-1"></i> Book Appointment
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ==============================================
+     HERO SECTION
+     ============================================== -->
+<section class="hero-section" id="home">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-bold mb-3">
+          <i class="bi bi-shield-check me-1"></i> NABH & JCI Accredited Super Speciality
+        </span>
+        <h1 class="hero-headline mb-3">
+          World-Class Care, <br>
+          <span class="hero-highlight">Because Every Life Matters.</span>
+        </h1>
+        <p class="lead text-muted mb-4" style="font-size: 16.5px; line-height: 1.6;">
+          CarePulse Hospital brings together over 120+ leading medical specialists, modern robotic surgery, 24/7 cardiac trauma care, and zero-wait digital OPD consultations for you and your family.
+        </p>
+
+        <div class="d-flex flex-wrap gap-3 mb-4">
+          <a href="#bookingWidget" class="btn btn-primary btn-lg fw-bold px-4 py-3 shadow">
+            <i class="bi bi-calendar-check me-2"></i> Book Doctor Consultation
+          </a>
+          <a href="user_portal.html" class="btn btn-outline-secondary btn-lg fw-bold px-4 py-3">
+            <i class="bi bi-file-earmark-medical me-2"></i> Download Lab Reports
+          </a>
+        </div>
+
+        <div class="d-flex align-items-center gap-4 pt-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-check-circle-fill text-success fs-5"></i>
+            <span class="small fw-semibold text-dark">Zero Registration Queues</span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-check-circle-fill text-success fs-5"></i>
+            <span class="small fw-semibold text-dark">Cashless TPA Available</span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-check-circle-fill text-success fs-5"></i>
+            <span class="small fw-semibold text-dark">Ayushman ABHA Linked</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Fast Booking Card -->
+      <div class="col-lg-5" id="bookingWidget">
+        <div class="booking-widget-card">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-dark m-0"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Quick Appointment Slot</h5>
+            <span class="badge bg-success-subtle text-success">Live Available</span>
+          </div>
+          <form onsubmit="handleQuickLandingBook(event)">
+            <div class="mb-3">
+              <label class="form-label small fw-semibold text-muted text-uppercase">1. Patient Name</label>
+              <input type="text" class="form-control" required placeholder="e.g. Rahul Sharma" id="landName">
+            </div>
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-semibold text-muted text-uppercase">2. Phone</label>
+                <input type="tel" class="form-control" required placeholder="+91 98765 00000" id="landPhone">
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-semibold text-muted text-uppercase">3. Department</label>
+                <select class="form-select" id="landDept">
+                  <option>Cardiology (Heart)</option>
+                  <option>Orthopedics (Joints)</option>
+                  <option>Neurology (Brain)</option>
+                  <option>Pediatrics (Child)</option>
+                  <option>Gynecology (Women)</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold text-muted text-uppercase">4. Preferred Date</label>
+              <input type="date" class="form-control" value="2026-10-07" id="landDate">
+            </div>
+            <button type="submit" class="btn btn-primary w-100 fw-bold py-2 shadow-sm">
+              <i class="bi bi-calendar-check me-1"></i> Confirm Booking & Get Token
+            </button>
+            <div class="text-center mt-2">
+              <small class="text-muted" style="font-size: 11px;">Instant WhatsApp token notification sent immediately</small>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     HOSPITAL STATS STRIP
+     ============================================== -->
+<section class="stats-strip">
+  <div class="container">
+    <div class="row g-4 text-center">
+      <div class="col-6 col-md-3">
+        <h2 class="fw-bold text-primary mb-1">500+</h2>
+        <span class="text-muted fw-semibold small text-uppercase">Inpatient Hospital Beds</span>
+      </div>
+      <div class="col-6 col-md-3">
+        <h2 class="fw-bold text-primary mb-1">120+</h2>
+        <span class="text-muted fw-semibold small text-uppercase">Senior Specialist Doctors</span>
+      </div>
+      <div class="col-6 col-md-3">
+        <h2 class="fw-bold text-primary mb-1">24/7</h2>
+        <span class="text-muted fw-semibold small text-uppercase">Emergency, Cath Lab & Trauma</span>
+      </div>
+      <div class="col-6 col-md-3">
+        <h2 class="fw-bold text-primary mb-1">99.4%</h2>
+        <span class="text-muted fw-semibold small text-uppercase">Patient Satisfaction Rate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     SPECIALTIES & CLINICAL DEPARTMENTS
+     ============================================== -->
+<section class="py-5" id="specialties">
+  <div class="container py-4">
+    <div class="text-center max-w-700 mx-auto mb-5">
+      <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-bold text-uppercase">
+        Clinical Centers of Excellence
+      </span>
+      <h2 class="fw-bold text-dark mt-2 mb-2">Our Specialized Medical Departments</h2>
+      <p class="text-muted">Comprehensive, interdisciplinary treatments backed by modern medical technology.</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- 1. Cardiology -->
+      <div class="col-md-6 col-lg-3">
+        <a href="user_portal.html#bookAppointmentSection" class="dept-card">
+          <div class="dept-icon bg-danger-subtle text-danger"><i class="bi bi-heart-pulse-fill"></i></div>
+          <h5 class="fw-bold text-dark mb-1">Cardiology & CCU</h5>
+          <p class="text-muted small mb-3">Angioplasty, 24x7 Cath Lab, bypass surgery, electrophysiology & pacemaker clinic.</p>
+          <span class="text-primary fw-semibold small">Book Specialist ➔</span>
+        </a>
+      </div>
+
+      <!-- 2. Orthopedics -->
+      <div class="col-md-6 col-lg-3">
+        <a href="user_portal.html#bookAppointmentSection" class="dept-card">
+          <div class="dept-icon bg-warning-subtle text-warning"><i class="bi bi-bandaid-fill"></i></div>
+          <h5 class="fw-bold text-dark mb-1">Orthopedics & Joint</h5>
+          <p class="text-muted small mb-3">Robotic knee replacement, hip reconstruction, arthroscopy, and trauma surgery.</p>
+          <span class="text-primary fw-semibold small">Book Specialist ➔</span>
+        </a>
+      </div>
+
+      <!-- 3. Neurology -->
+      <div class="col-md-6 col-lg-3">
+        <a href="user_portal.html#bookAppointmentSection" class="dept-card">
+          <div class="dept-icon bg-primary-subtle text-primary"><i class="bi bi-node-plus-fill"></i></div>
+          <h5 class="fw-bold text-dark mb-1">Neurology & Spine</h5>
+          <p class="text-muted small mb-3">Acute stroke thrombolysis, epilepsy, complex brain & spinal cord microsurgery.</p>
+          <span class="text-primary fw-semibold small">Book Specialist ➔</span>
+        </a>
+      </div>
+
+      <!-- 4. Oncology -->
+      <div class="col-md-6 col-lg-3">
+        <a href="user_portal.html#bookAppointmentSection" class="dept-card">
+          <div class="dept-icon bg-purple-subtle text-purple"><i class="bi bi-shield-plus"></i></div>
+          <h5 class="fw-bold text-dark mb-1">Cancer Care (Oncology)</h5>
+          <p class="text-muted small mb-3">Targeted immunotherapy, surgical oncology, linear accelerator radiation & chemo.</p>
+          <span class="text-primary fw-semibold small">Book Specialist ➔</span>
+        </a>
+      </div>
+
+      <!-- 5. Pediatrics -->
+      <div class="col-md-6 col-lg-3">
+        <a href="user_portal.html#bookAppointmentSection" class="dept-card">
+          <div class="dept-icon bg-info-subtle text-info"><i class="bi bi-balloon-fill"></i></div>
+          <h5 class="fw-bold text-dark mb-1">Pediatrics & NICU</h5>
+          <p class="text-muted small mb-3">Level III Neonatal ICU, pediatric cardiology, immunization & newborn care.</p>
+          <span class="text-primary fw-semibold small">Book Specialist ➔</span>
+        </a>
+      </div>
+
+      <!-- 6. Gynecology -->
+      <div class="col-md-6 col-lg-3">
+        <a href="user_portal.html#bookAppointmentSection" class="dept-card">
+          <div class="dept-icon bg-danger-subtle text-danger"><i class="bi bi-gender-female"></i></div>
+          <h5 class="fw-bold text-dark mb-1">Women's Health & L&D</h5>
+          <p class="text-muted small mb-3">High-risk obstetrics, painless labor suites, IVF fertility, and laparoscopic surgery.</p>
+          <span class="text-primary fw-semibold small">Book Specialist ➔</span>
+        </a>
+      </div>
+
+      <!-- 7. Nephrology -->
+      <div class="col-md-6 col-lg-3">
+        <a href="user_portal.html#bookAppointmentSection" class="dept-card">
+          <div class="dept-icon bg-success-subtle text-success"><i class="bi bi-droplet-half"></i></div>
+          <h5 class="fw-bold text-dark mb-1">Nephrology & Dialysis</h5>
+          <p class="text-muted small mb-3">24-station hemodialysis unit, kidney transplant program, and hypertension clinic.</p>
+          <span class="text-primary fw-semibold small">Book Specialist ➔</span>
+        </a>
+      </div>
+
+      <!-- 8. Emergency -->
+      <div class="col-md-6 col-lg-3">
+        <a href="emergency.html" class="dept-card border-danger">
+          <div class="dept-icon bg-danger text-white"><i class="bi bi-truck-front-fill"></i></div>
+          <h5 class="fw-bold text-danger mb-1">24x7 Trauma & Ambulance</h5>
+          <p class="text-muted small mb-3">Advanced Cardiac Life Support (ACLS) ambulances with doctor onboard.</p>
+          <span class="text-danger fw-bold small">Call 108 Immediately ➔</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     FEATURED SPECIALIST DOCTORS
+     ============================================== -->
+<section class="py-5 bg-light" id="doctors">
+  <div class="container py-4">
+    <div class="text-center max-w-700 mx-auto mb-5">
+      <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-bold text-uppercase">
+        Meet Our Leaders in Healthcare
+      </span>
+      <h2 class="fw-bold text-dark mt-2 mb-2">Renowned Medical Specialists</h2>
+      <p class="text-muted">Board-certified doctors with decades of clinical excellence.</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Doctor 1 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="doctor-card">
+          <div class="doc-avatar-box">
+            <div class="doc-avatar-circle">AS</div>
+          </div>
+          <div class="p-4 text-center">
+            <span class="badge bg-primary-subtle text-primary mb-2">HOD &bull; Cardiology</span>
+            <h5 class="fw-bold text-dark mb-1">Dr. Arvind Sharma</h5>
+            <div class="text-muted small mb-2">MBBS, MD, DM (Cardiology), FACC (USA)</div>
+            <p class="text-muted small mb-3">18+ years experience in complex angioplasties and structural heart disease.</p>
+            <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+              <span class="fw-bold text-dark">OPD Fee: ₹800</span>
+              <a href="user_portal.html#bookAppointmentSection" class="btn btn-sm btn-primary fw-semibold">
+                Book Visit
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Doctor 2 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="doctor-card">
+          <div class="doc-avatar-box">
+            <div class="doc-avatar-circle" style="background:#10b981;">MI</div>
+          </div>
+          <div class="p-4 text-center">
+            <span class="badge bg-success-subtle text-success mb-2">Senior Consultant &bull; Gynecology</span>
+            <h5 class="fw-bold text-dark mb-1">Dr. Meera Iyer</h5>
+            <div class="text-muted small mb-2">MBBS, MS, DNB, MRCOG (UK)</div>
+            <p class="text-muted small mb-3">15+ years experience in high-risk pregnancies, fetal medicine, and robotics.</p>
+            <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+              <span class="fw-bold text-dark">OPD Fee: ₹700</span>
+              <a href="user_portal.html#bookAppointmentSection" class="btn btn-sm btn-primary fw-semibold">
+                Book Visit
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Doctor 3 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="doctor-card">
+          <div class="doc-avatar-box">
+            <div class="doc-avatar-circle" style="background:#f59e0b;">RG</div>
+          </div>
+          <div class="p-4 text-center">
+            <span class="badge bg-warning-subtle text-warning mb-2">Chief Surgeon &bull; Orthopedics</span>
+            <h5 class="fw-bold text-dark mb-1">Dr. R. K. Goel</h5>
+            <div class="text-muted small mb-2">MBBS, MS (Ortho), M.Ch (UK)</div>
+            <p class="text-muted small mb-3">22+ years experience in robotic joint replacements and sports medicine.</p>
+            <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+              <span class="fw-bold text-dark">OPD Fee: ₹750</span>
+              <a href="user_portal.html#bookAppointmentSection" class="btn btn-sm btn-primary fw-semibold">
+                Book Visit
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     CASHLESS INSURANCE & TPA DESK
+     ============================================== -->
+<section class="py-5" id="cashless">
+  <div class="container py-2">
+    <div class="cashless-banner">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <span class="badge bg-success px-3 py-2 fw-bold text-uppercase mb-3">
+            <i class="bi bi-shield-check me-1"></i> Cashless Hospitalization Desk
+          </span>
+          <h3 class="fw-bold mb-2">100% Cashless Medical Insurance Claims</h3>
+          <p class="text-slate-300 mb-4" style="color: #cbd5e1; font-size: 14.5px;">
+            We are empanelled with all major insurance companies and TPAs. Our dedicated 24x7 TPA desk ensures seamless pre-authorization within 60 minutes of admission.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-white text-dark py-2 px-3 fw-bold">Star Health</span>
+            <span class="badge bg-white text-dark py-2 px-3 fw-bold">HDFC ERGO</span>
+            <span class="badge bg-white text-dark py-2 px-3 fw-bold">ICICI Lombard</span>
+            <span class="badge bg-white text-dark py-2 px-3 fw-bold">Bajaj Allianz</span>
+            <span class="badge bg-white text-dark py-2 px-3 fw-bold">Medi Assist TPA</span>
+            <span class="badge bg-white text-dark py-2 px-3 fw-bold">Vidal Health</span>
+            <span class="badge bg-white text-dark py-2 px-3 fw-bold">Ayushman Bharat (PM-JAY)</span>
+          </div>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="user_portal.html#myBillsSection" class="btn btn-light btn-lg fw-bold text-primary px-4 py-3 shadow">
+            <i class="bi bi-wallet2 me-2"></i> Check My Insurance Claim
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     PATIENT TESTIMONIALS
+     ============================================== -->
+<section class="py-5 bg-light">
+  <div class="container py-4">
+    <div class="text-center max-w-700 mx-auto mb-5">
+      <h2 class="fw-bold text-dark mb-2">What Our Patients Say</h2>
+      <p class="text-muted">Real stories of healing, compassion, and successful recovery.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card-white p-4 h-100">
+          <div class="text-warning mb-2">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="text-muted small mb-3">
+            "My father was admitted with severe chest pain. Dr. Arvind Sharma and the ICU team handled the emergency with lightning speed. The digital reports and discharge process were completely paperless!"
+          </p>
+          <div class="fw-bold text-dark">Sunita Sen</div>
+          <div class="text-muted small">Daughter of Angioplasty Patient</div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card-white p-4 h-100">
+          <div class="text-warning mb-2">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="text-muted small mb-3">
+            "Underwent robotic knee replacement with Dr. Goel. I was on my feet by Day 2. The nursing staff and Deluxe room amenities felt like a 5-star hotel, not a hospital."
+          </p>
+          <div class="fw-bold text-dark">Harish Mehra</div>
+          <div class="text-muted small">Joint Replacement Patient</div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card-white p-4 h-100">
+          <div class="text-warning mb-2">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="text-muted small mb-3">
+            "Online appointment booking is super fast. No standing in lines at the reception desk. Token popped on the screen right on time, and lab reports were on my phone in 2 hours."
+          </p>
+          <div class="fw-bold text-dark">Ananya Deshpande</div>
+          <div class="text-muted small">OPD Consultation Patient</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     FOOTER & LOCATION
+     ============================================== -->
+<footer class="site-footer" id="contact">
+  <div class="container">
+    <div class="row g-4 mb-5">
+      <div class="col-lg-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <div class="brand-logo-icon" style="width:36px; height:36px; font-size:18px;">
+            <i class="bi bi-hospital"></i>
+          </div>
+          <h5 class="fw-bold text-white m-0">CarePulse Hospital</h5>
+        </div>
+        <p class="small text-slate-400 mb-3" style="color: #94a3b8;">
+          120 Healthcare Avenue, Bandra West, Mumbai - 400050.<br>
+          Accredited by NABH & JCI. Approved center for Organ Transplants and Comprehensive Cancer Care.
+        </p>
+        <div class="text-white fw-bold small">
+          <i class="bi bi-telephone-fill text-danger me-2"></i> 24/7 Helpline: 1800-200-CARE
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-6">
+        <h6 class="text-white fw-bold mb-3">Specialties</h6>
+        <ul class="list-unstyled small d-flex flex-column gap-2">
+          <li><a href="#specialties">Cardiology</a></li>
+          <li><a href="#specialties">Neurology</a></li>
+          <li><a href="#specialties">Orthopedics</a></li>
+          <li><a href="#specialties">Oncology</a></li>
+          <li><a href="#specialties">Pediatrics</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-6">
+        <h6 class="text-white fw-bold mb-3">Patient Resources</h6>
+        <ul class="list-unstyled small d-flex flex-column gap-2">
+          <li><a href="user_portal.html">Patient Self-Service Portal</a></li>
+          <li><a href="user_portal.html#bookAppointmentSection">Book Appointment</a></li>
+          <li><a href="user_portal.html#myLabReportsSection">Download Lab Reports</a></li>
+          <li><a href="user_portal.html#myBillsSection">Cashless TPA Desk</a></li>
+          <li><a href="emergency.html">Emergency 24x7 Triage</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h6 class="text-white fw-bold mb-3">Hospital Management Suite</h6>
+        <ul class="list-unstyled small d-flex flex-column gap-2">
+          <li><a href="dashboard.html">Admin Executive Dashboard ➔</a></li>
+          <li><a href="reception.html">Hospital Reception Desk ➔</a></li>
+          <li><a href="doctor_emr.html">Doctor Clinical EMR ➔</a></li>
+          <li><a href="ipd_beds.html">IPD Bed Matrix ➔</a></li>
+          <li><a href="index.html">Figma Flow Architecture ↗</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-4 border-top border-secondary text-center small text-slate-500" style="color: #64748b;">
+      &copy; 2026 CarePulse Multi-Speciality Hospital & Research Institute. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap 5.3 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  function handleQuickLandingBook(e) {
+    e.preventDefault();
+    const name = document.getElementById('landName').value;
+    const phone = document.getElementById('landPhone').value;
+    const dept = document.getElementById('landDept').value;
+    const date = document.getElementById('landDate').value;
+
+    alert(`🎉 Booking Confirmed for ${name}!\n\nDepartment: ${dept}\nDate: ${date}\nContact: ${phone}\n\nDigital Token #A-24 Generated. SMS confirmation sent!`);
+    e.target.reset();
+  }
+</script>
+<script src="js/navigator.js"></script>
+</body>
+</html>

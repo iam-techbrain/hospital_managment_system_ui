@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - Reception & Patient Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-wrapper">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="sidebar-brand">
+      <div class="brand-logo-icon"><i class="bi bi-hospital"></i></div>
+      <div>
+        <div class="brand-title">CarePulse</div>
+        <div class="brand-subtitle">Hospital ERP Suite</div>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">1. CORE & OPD</div>
+      <a href="dashboard.html" class="nav-link-item">
+        <i class="bi bi-speedometer2"></i> Executive Dashboard
+      </a>
+      <a href="reception.html" class="nav-link-item active">
+        <i class="bi bi-person-badge"></i> Reception & Registration
+      </a>
+      <a href="emergency.html" class="nav-link-item">
+        <i class="bi bi-lightning-charge-fill text-danger"></i> Emergency & Triage
+      </a>
+      <a href="doctor_emr.html" class="nav-link-item">
+        <i class="bi bi-clipboard2-pulse"></i> Doctor EMR Desk
+      </a>
+
+      <div class="menu-header">2. INPATIENT & SURGERY</div>
+      <a href="ipd_beds.html" class="nav-link-item">
+        <i class="bi bi-hospital-fill"></i> IPD Beds & Ward Matrix
+      </a>
+      <a href="operation_theatre.html" class="nav-link-item">
+        <i class="bi bi-heart-pulse"></i> Operation Theatre (OT)
+      </a>
+
+      <div class="menu-header">3. ANCILLARY & LAB</div>
+      <a href="laboratory.html" class="nav-link-item">
+        <i class="bi bi-droplet-half"></i> Pathology & Lab (LIS)
+      </a>
+      <a href="blood_bank.html" class="nav-link-item">
+        <i class="bi bi-virus"></i> Blood Bank Management
+      </a>
+      <a href="pharmacy.html" class="nav-link-item">
+        <i class="bi bi-capsule"></i> Pharmacy POS & Inventory
+      </a>
+
+      <div class="menu-header">4. FINANCE & CLEARANCE</div>
+      <a href="billing.html" class="nav-link-item">
+        <i class="bi bi-receipt-cutoff"></i> Central Billing & Invoicing
+      </a>
+      <a href="discharge.html" class="nav-link-item">
+        <i class="bi bi-door-open"></i> Discharge & Gate Pass
+      </a>
+
+      <div class="menu-header">5. PATIENT PORTAL</div>
+      <a href="patient_portal.html" class="nav-link-item">
+        <i class="bi bi-person-circle"></i> Patient Health Portal
+      </a>
+
+      <div class="menu-header">SYSTEM LINKS</div>
+      <a href="index.html" class="nav-link-item"><i class="bi bi-diagram-3"></i> Figma Flow Canvas ↗</a>
+      <a href="slides.html" class="nav-link-item"><i class="bi bi-projector"></i> Slide Deck Pitch ↗</a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">AS</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Dr. Arvind Sharma</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">Chief Medical Officer</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="m-0 fw-bold text-dark">Reception & Patient Registration</h5>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size: 11px;">
+          <i class="bi bi-person-vcard me-1"></i> Front Desk Counter #01
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <a href="doctor_emr.html" class="btn btn-outline-primary btn-sm fw-semibold">
+          Go to Doctor EMR Desk ➔
+        </a>
+      </div>
+    </header>
+
+    <div class="page-body">
+      <div class="row g-4">
+        <!-- Patient Registration Form -->
+        <div class="col-lg-6">
+          <div class="card-white p-4">
+            <h6 class="fw-bold text-dark mb-3"><i class="bi bi-person-plus text-primary me-2"></i>Patient Walk-In Registration & Token</h6>
+            <form onsubmit="handleRegistration(event)">
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">Patient Full Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-sm" required placeholder="e.g. Suman Gupta" id="patientName">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-semibold">Mobile Number <span class="text-danger">*</span></label>
+                  <input type="tel" class="form-control form-control-sm" required placeholder="+91 98765 00000" id="patientPhone">
+                </div>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-md-4">
+                  <label class="form-label small fw-semibold">Age</label>
+                  <input type="number" class="form-control form-control-sm" placeholder="42" id="patientAge">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-semibold">Gender</label>
+                  <select class="form-select form-select-sm" id="patientGender">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label small fw-semibold">Blood Group</label>
+                  <select class="form-select form-select-sm" id="patientBlood">
+                    <option>B+</option>
+                    <option>O+</option>
+                    <option>A+</option>
+                    <option>AB+</option>
+                    <option>Unknown</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label small fw-semibold">Consulting Department & Doctor <span class="text-danger">*</span></label>
+                <select class="form-select form-select-sm" id="patientDoctor">
+                  <option>Cardiology - Dr. Arvind Sharma (Fee: ₹800)</option>
+                  <option>Gynecology - Dr. Meera Iyer (Fee: ₹700)</option>
+                  <option>Orthopedics - Dr. R. K. Goel (Fee: ₹750)</option>
+                  <option>Neurology - Dr. Sneha Rao (Fee: ₹900)</option>
+                </select>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                <span class="text-muted small">Auto-generates UHID & prints token slip</span>
+                <button type="submit" class="btn btn-primary btn-sm px-4 fw-semibold">
+                  <i class="bi bi-printer me-1"></i> Issue Token & Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Live Waiting Hall Token Board -->
+        <div class="col-lg-6">
+          <div class="card-white p-4 text-center">
+            <div class="p-4 bg-light rounded-3 border mb-3">
+              <div class="text-muted small text-uppercase fw-bold">Live OPD Waiting Hall Token Board</div>
+              <div class="display-3 fw-bold text-primary font-monospace my-2" id="liveTokenNum">
+                TOKEN A-14
+              </div>
+              <div class="fw-semibold text-dark fs-5">Rajesh Kumar (UHID: #HMS-2026-9041)</div>
+              <div class="text-muted small">Now Calling: Room 102 &bull; Dr. Arvind Sharma</div>
+            </div>
+
+            <div class="text-start">
+              <h6 class="fw-bold small text-muted text-uppercase mb-2">Upcoming Queue</h6>
+              <div class="list-group list-group-flush border rounded-3" id="queueList">
+                <div class="list-group-item d-flex justify-content-between align-items-center py-2">
+                  <div>
+                    <strong>Token A-15: Sunita Gupta</strong>
+                    <div class="text-muted small">Cardiology &bull; General Checkup</div>
+                  </div>
+                  <span class="badge badge-soft-warning">Estimated: 5 Mins</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center py-2">
+                  <div>
+                    <strong>Token A-16: Devendra Rao</strong>
+                    <div class="text-muted small">Cardiology &bull; Follow-Up</div>
+                  </div>
+                  <span class="badge badge-soft-info">Estimated: 12 Mins</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function handleRegistration(e) {
+    e.preventDefault();
+    const name = document.getElementById('patientName').value;
+    const doc = document.getElementById('patientDoctor').value;
+    alert(`Patient ${name} Registered Successfully!\nUHID: #HMS-2026-9042\nToken #A-17 Issued for ${doc}.`);
+
+    const q = document.getElementById('queueList');
+    const item = document.createElement('div');
+    item.className = 'list-group-item d-flex justify-content-between align-items-center py-2 bg-success-subtle';
+    item.innerHTML = `<div><strong>Token A-17: ${name}</strong><div class="text-muted small">${doc.split(' - ')[0]} &bull; Just Registered</div></div><span class="badge badge-soft-success">Waiting (Now)</span>`;
+    q.prepend(item);
+    e.target.reset();
+  }
+</script>
+<script src="js/mobile.js"></script>
+</body>
+</html>

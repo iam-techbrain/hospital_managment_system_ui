@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePulse HMS - Complete A to Z Hospital Management System</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    :root {
+      --primary-color: #0284c7;
+      --primary-light: #e0f2fe;
+      --primary-dark: #0369a1;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --bg-body: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --sidebar-width: 270px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    /* Clean White Layout */
+    .app-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: #ffffff;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .sidebar-brand {
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand-logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0284c7, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sidebar-menu {
+      padding: 14px 10px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .menu-header {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #94a3b8;
+      padding: 12px 14px 4px;
+    }
+
+    .nav-item-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item-btn i {
+      font-size: 16px;
+      color: #64748b;
+      width: 20px;
+      text-align: center;
+    }
+
+    .nav-item-btn:hover {
+      background: #f1f5f9;
+      color: var(--primary-color);
+    }
+
+    .nav-item-btn:hover i { color: var(--primary-color); }
+
+    .nav-item-btn.active {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .nav-item-btn.active i { color: var(--primary-color); }
+
+    .sidebar-footer {
+      padding: 14px 18px;
+      border-top: 1px solid var(--border-color);
+      background: #fafafa;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* Topbar */
+    .topbar {
+      height: 64px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .search-input-box {
+      position: relative;
+      width: 320px;
+    }
+
+    .search-input-box i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+    }
+
+    .search-input-box input {
+      padding-left: 36px;
+      border-radius: 20px;
+      font-size: 13px;
+      background: #f8fafc;
+      border-color: #e2e8f0;
+    }
+
+    /* Page Sections */
+    .page-body {
+      padding: 24px 28px;
+      flex: 1;
+    }
+
+    .page-section {
+      display: none;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Clean Card Designs */
+    .card-white {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+    }
+
+    .card-white:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-card-white {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      height: 100%;
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    /* Clean Tables */
+    .table-clean {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .table-clean th {
+      background: #f8fafc;
+      padding: 11px 16px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .table-clean td {
+      padding: 13px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border-color);
+      color: #334155;
+      vertical-align: middle;
+    }
+
+    .table-clean tr:hover td {
+      background: #fbfcfe;
+    }
+
+    /* Soft Badges */
+    .badge-soft-success { background: #dcfce7; color: #15803d; }
+    .badge-soft-danger { background: #fee2e2; color: #b91c1c; }
+    .badge-soft-warning { background: #fef3c7; color: #b45309; }
+    .badge-soft-info { background: #e0f2fe; color: #0369a1; }
+    .badge-soft-purple { background: #f3e8ff; color: #7e22ce; }
+
+    /* Bed Matrix Box */
+    .bed-box {
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px;
+      background: #ffffff;
+      transition: all 0.2s;
+    }
+
+    .bed-box.occupied { border-left: 4px solid #ef4444; background: #fffdfd; }
+    .bed-box.vacant { border-left: 4px solid #10b981; background: #fcfdfd; }
+    .bed-box.cleaning { border-left: 4px solid #f59e0b; background: #fffdfa; }
+
+    /* Print styling */
+    @media print {
+      .sidebar, .topbar, .btn, .no-print { display: none !important; }
+      .main-content { margin-left: 0 !important; }
+      .page-body { padding: 0 !important; }
+      .card-white { border: none !important; box-shadow: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- ==============================================
+       SIDEBAR: FULL A TO Z HOSPITAL MODULES
+       ============================================== -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo-icon">
+        <i class="bi bi-hospital"></i>
+      </div>
+      <div>
+        <div class="brand-title">CarePulse</div>
+        <div class="brand-subtitle">Hospital ERP Suite</div>
+      </div>
+    </div>
+
+    <div class="sidebar-menu">
+      <div class="menu-header">1. CORE & OUTPATIENT (OPD)</div>
+      <button class="nav-item-btn active" onclick="navigateTo('page-admin', this)">
+        <i class="bi bi-speedometer2"></i> Executive Dashboard
+      </button>
+      <button class="nav-item-btn" onclick="navigateTo('page-reception', this)">
+        <i class="bi bi-person-badge"></i> Reception & Registration
+      </button>
+      <button class="nav-item-btn" onclick="navigateTo('page-emergency', this)">
+        <i class="bi bi-lightning-charge-fill text-danger"></i> Emergency & Triage (Trauma)
+      </button>
+      <button class="nav-item-btn" onclick="navigateTo('page-doctor', this)">
+        <i class="bi bi-clipboard2-pulse"></i> Doctor EMR & Clinical Desk
+      </button>
+
+      <div class="menu-header">2. INPATIENT & SURGERY (IPD)</div>
+      <button class="nav-item-btn" onclick="navigateTo('page-ipd', this)">
+        <i class="bi bi-hospital-fill"></i> IPD Beds & Ward Matrix
+      </button>
+      <button class="nav-item-btn" onclick="navigateTo('page-ot', this)">
+        <i class="bi bi-heart-pulse"></i> Operation Theatre (OT)
+      </button>
+
+      <div class="menu-header">3. ANCILLARY & DIAGNOSTICS</div>
+      <button class="nav-item-btn" onclick="navigateTo('page-lab', this)">
+        <i class="bi bi-droplet-half"></i> Pathology & Lab (LIS)
+      </button>
+      <button class="nav-item-btn" onclick="navigateTo('page-blood', this)">
+        <i class="bi bi-virus"></i> Blood Bank Management
+      </button>
+      <button class="nav-item-btn" onclick="navigateTo('page-pharmacy', this)">
+        <i class="bi bi-capsule"></i> Pharmacy POS & Inventory
+      </button>
+
+      <div class="menu-header">4. FINANCE & CLEARANCE</div>
+      <button class="nav-item-btn" onclick="navigateTo('page-billing', this)">
+        <i class="bi bi-receipt-cutoff"></i> Central Billing & Invoicing
+      </button>
+      <button class="nav-item-btn" onclick="navigateTo('page-discharge', this)">
+        <i class="bi bi-door-open"></i> Discharge Summary & Gate Pass
+      </button>
+
+      <div class="menu-header">5. PATIENT & MANAGEMENT</div>
+      <button class="nav-item-btn" onclick="navigateTo('page-patient', this)">
+        <i class="bi bi-person-circle"></i> Patient Self-Service Portal
+      </button>
+      <button class="nav-item-btn" onclick="navigateTo('page-staff', this)">
+        <i class="bi bi-people"></i> Staff & Doctor Rosters
+      </button>
+      <button class="nav-item-btn" onclick="navigateTo('page-reports', this)">
+        <i class="bi bi-graph-up-arrow"></i> NABH Analytics & Reports
+      </button>
+
+      <div class="menu-header">FLOW & SLIDES</div>
+      <a href="index.html" class="nav-item-btn text-decoration-none">
+        <i class="bi bi-diagram-3"></i> Figma Flow Canvas ↗
+      </a>
+      <a href="slides.html" class="nav-item-btn text-decoration-none">
+        <i class="bi bi-projector"></i> Slide Deck Pitch ↗
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="d-flex align-items-center gap-2">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:34px; height:34px; font-size:12px;">
+          AS
+        </div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="fw-bold text-dark text-truncate" style="font-size:12.5px;">Dr. Arvind Sharma</div>
+          <div class="text-muted text-truncate" style="font-size:11px;">Chief Medical Officer</div>
+        </div>
+        <span class="badge bg-success-subtle text-success p-1 rounded-circle"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==============================================
+       MAIN WORKSPACE
+       ============================================== -->
+  <main class="main-content">
+    
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="m-0 fw-bold text-dark" id="topbarTitle">Executive Hospital Dashboard</h5>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1" style="font-size: 11px;">
+          <i class="bi bi-shield-check me-1"></i> NABH & ISO Accredited Campus (500 Beds)
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <!-- Global Search -->
+        <div class="search-input-box d-none d-lg-block">
+          <i class="bi bi-search"></i>
+          <input type="text" class="form-control form-control-sm" placeholder="Search Patient UHID, Bed, Doctor, Medicine..." onkeyup="handleGlobalSearch(this.value)">
+        </div>
+
+        <!-- Role Quick Switcher -->
+        <div class="d-flex align-items-center gap-1 bg-light p-1 rounded-3 border">
+          <button class="btn btn-sm btn-white bg-white shadow-sm fw-semibold text-primary py-1 px-2" style="font-size: 11.5px;" onclick="navigateTo('page-admin', getNavBtn(0))">
+            Admin
+          </button>
+          <button class="btn btn-sm btn-transparent text-secondary py-1 px-2 fw-semibold" style="font-size: 11.5px;" onclick="navigateTo('page-doctor', getNavBtn(3))">
+            Doctor
+          </button>
+          <button class="btn btn-sm btn-transparent text-secondary py-1 px-2 fw-semibold" style="font-size: 11.5px;" onclick="navigateTo('page-reception', getNavBtn(1))">
+            Reception
+          </button>
+          <button class="btn btn-sm btn-transparent text-secondary py-1 px-2 fw-semibold" style="font-size: 11.5px;" onclick="navigateTo('page-patient', getNavBtn(11))">
+            Patient
+          </button>
+        </div>
+
+        <!-- Quick Register Modal Button -->
+        <button class="btn btn-primary btn-sm fw-semibold px-3 py-2 d-flex align-items-center gap-1 shadow-sm" data-bs-toggle="modal" data-bs-target="#quickPatientModal">
+          <i class="bi bi-plus-lg"></i> Register Patient
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Body (All A to Z Screens) -->
+    <div class="page-body">
+
+      <!-- ==============================================
+           SCREEN 1: EXECUTIVE DASHBOARD
+           ============================================== -->
+      <section id="page-admin" class="page-section active">
+        <!-- 4 Top KPI Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <div class="stat-card-white d-flex align-items-center justify-content-between">
+              <div>
+                <span class="text-muted fw-bold small text-uppercase">Patients Registered Today</span>
+                <h3 class="fw-bold text-dark mt-1 mb-0">148</h3>
+                <span class="text-success small fw-semibold"><i class="bi bi-arrow-up-short"></i> +12% from yesterday</span>
+              </div>
+              <div class="stat-icon bg-primary-subtle text-primary"><i class="bi bi-people-fill"></i></div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card-white d-flex align-items-center justify-content-between">
+              <div>
+                <span class="text-muted fw-bold small text-uppercase">Bed Occupancy Rate</span>
+                <h3 class="fw-bold text-dark mt-1 mb-0">82.4%</h3>
+                <span class="text-danger small fw-semibold">394 / 480 Beds Active</span>
+              </div>
+              <div class="stat-icon bg-danger-subtle text-danger"><i class="bi bi-hospital"></i></div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card-white d-flex align-items-center justify-content-between">
+              <div>
+                <span class="text-muted fw-bold small text-uppercase">Active Doctors On-Duty</span>
+                <h3 class="fw-bold text-dark mt-1 mb-0">28</h3>
+                <span class="text-muted small fw-semibold">Across 14 Departments</span>
+              </div>
+              <div class="stat-icon bg-success-subtle text-success"><i class="bi bi-heart-pulse-fill"></i></div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card-white d-flex align-items-center justify-content-between">
+              <div>
+                <span class="text-muted fw-bold small text-uppercase">Today's Collections</span>
+                <h3 class="fw-bold text-dark mt-1 mb-0">₹4,82,500</h3>
+                <span class="text-success small fw-semibold"><i class="bi bi-check-circle-fill"></i> 94% Cashless Settled</span>
+              </div>
+              <div class="stat-icon bg-warning-subtle text-warning"><i class="bi bi-currency-rupee"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Inpatient Admissions & OT Surgery Today -->
+        <div class="row g-3 mb-4">
+          <div class="col-lg-8">
+            <div class="card-white p-0">
+              <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
+                <h6 class="m-0 fw-bold text-dark">Live Inpatient (IPD) Active Admissions</h6>
+                <button class="btn btn-sm btn-outline-primary fw-semibold" onclick="navigateTo('page-ipd', getNavBtn(4))">
+                  View Bed Matrix ➔
+                </button>
+              </div>
+              <div class="table-responsive">
+                <table class="table-clean">
+                  <thead>
+                    <tr>
+                      <th>Patient Name & UHID</th>
+                      <th>Ward / Bed</th>
+                      <th>Attending Doctor</th>
+                      <th>Admission Date</th>
+                      <th>Condition</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>Rajesh Kumar</strong>
+                        <div class="text-muted small">#HMS-2026-9041 &bull; 46 M</div>
+                      </td>
+                      <td><span class="badge bg-danger-subtle text-danger fw-bold">ICU-02</span></td>
+                      <td>Dr. Arvind Sharma (Cardiology)</td>
+                      <td>04-Oct-2026</td>
+                      <td><span class="badge badge-soft-warning">Under Observation</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-light border py-1 px-2" onclick="navigateTo('page-doctor', getNavBtn(3))">
+                          EMR
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Pooja Deshmukh</strong>
+                        <div class="text-muted small">#HMS-2026-8812 &bull; 32 F</div>
+                      </td>
+                      <td><span class="badge bg-primary-subtle text-primary fw-bold">DLX-301</span></td>
+                      <td>Dr. Meera Iyer (Gynecology)</td>
+                      <td>05-Oct-2026</td>
+                      <td><span class="badge badge-soft-success">Stable Post-Op</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-light border py-1 px-2" onclick="navigateTo('page-billing', getNavBtn(9))">
+                          Bill
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Amit Verma</strong>
+                        <div class="text-muted small">#HMS-2026-7910 &bull; 58 M</div>
+                      </td>
+                      <td><span class="badge bg-secondary-subtle text-secondary fw-bold">GEN-W1</span></td>
+                      <td>Dr. R. K. Goel (Orthopedics)</td>
+                      <td>03-Oct-2026</td>
+                      <td><span class="badge badge-soft-info">Discharge Planned</span></td>
+                      <td>
+                        <button class="btn btn-sm btn-light border py-1 px-2" onclick="navigateTo('page-discharge', getNavBtn(10))">
+                          Discharge
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Department Shortcuts -->
+          <div class="col-lg-4">
+            <div class="card-white p-3">
+              <h6 class="fw-bold text-dark mb-3">Hospital Departments Overview</h6>
+              <div class="d-flex flex-column gap-2">
+                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border">
+                  <div>
+                    <span class="fw-bold text-dark" style="font-size:13px;">🚨 Emergency / Trauma</span>
+                    <div class="text-muted" style="font-size:11px;">4 Critical Ambulances Arriving</div>
+                  </div>
+                  <button class="btn btn-sm btn-danger py-1 px-2" onclick="navigateTo('page-emergency', getNavBtn(2))">Triage</button>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border">
+                  <div>
+                    <span class="fw-bold text-dark" style="font-size:13px;">🔪 Operation Theatres (OT)</span>
+                    <div class="text-muted" style="font-size:11px;">3 Surgeries Ongoing, 1 Next</div>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary py-1 px-2" onclick="navigateTo('page-ot', getNavBtn(5))">OT Roster</button>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border">
+                  <div>
+                    <span class="fw-bold text-dark" style="font-size:13px;">🔬 Diagnostic Pathology</span>
+                    <div class="text-muted" style="font-size:11px;">18 Reports Awaiting Sign-off</div>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary py-1 px-2" onclick="navigateTo('page-lab', getNavBtn(6))">LIS Desk</button>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center p-2 rounded bg-light border">
+                  <div>
+                    <span class="fw-bold text-dark" style="font-size:13px;">🩸 Blood Bank Inventory</span>
+                    <div class="text-muted" style="font-size:11px;">O- Negative Stock Low (3 Units)</div>
+                  </div>
+                  <button class="btn btn-sm btn-outline-danger py-1 px-2" onclick="navigateTo('page-blood', getNavBtn(7))">Inventory</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 2: RECEPTION & REGISTRATION
+           ============================================== -->
+      <section id="page-reception" class="page-section">
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="card-white p-4">
+              <h6 class="fw-bold text-dark mb-3"><i class="bi bi-person-plus text-primary me-2"></i>Patient Walk-In Registration & Token</h6>
+              <form id="receptionWalkinForm" onsubmit="handleWalkinSubmit(event)">
+                <div class="row g-3 mb-3">
+                  <div class="col-md-6">
+                    <label class="form-label small fw-semibold">Patient Full Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control form-control-sm" required placeholder="e.g. Suman Gupta" id="recName">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label small fw-semibold">Mobile Number <span class="text-danger">*</span></label>
+                    <input type="tel" class="form-control form-control-sm" required placeholder="+91 98765 00000" id="recPhone">
+                  </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                  <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Age</label>
+                    <input type="number" class="form-control form-control-sm" placeholder="42" id="recAge">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Gender</label>
+                    <select class="form-select form-select-sm" id="recGender">
+                      <option>Male</option>
+                      <option>Female</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label small fw-semibold">Blood Group</label>
+                    <select class="form-select form-select-sm" id="recBlood">
+                      <option>B+</option>
+                      <option>O+</option>
+                      <option>A+</option>
+                      <option>AB+</option>
+                      <option>Unknown</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label small fw-semibold">Consulting Department & Doctor <span class="text-danger">*</span></label>
+                  <select class="form-select form-select-sm" id="recDoctor">
+                    <option>Cardiology - Dr. Arvind Sharma (Fee: ₹800)</option>
+                    <option>Gynecology - Dr. Meera Iyer (Fee: ₹700)</option>
+                    <option>Orthopedics - Dr. R. K. Goel (Fee: ₹750)</option>
+                    <option>Neurology - Dr. Sneha Rao (Fee: ₹900)</option>
+                  </select>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                  <span class="text-muted small">Auto-generates UHID & prints slip</span>
+                  <button type="submit" class="btn btn-primary btn-sm px-4 fw-semibold">
+                    <i class="bi bi-printer me-1"></i> Issue Token & Register
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card-white p-4 text-center">
+              <div class="p-4 bg-light rounded-3 border mb-3">
+                <div class="text-muted small text-uppercase fw-bold">Live OPD Waiting Hall Token Board</div>
+                <div class="display-3 fw-bold text-primary font-monospace my-2" id="receptionTokenScreen">
+                  TOKEN A-14
+                </div>
+                <div class="fw-semibold text-dark fs-5">Rajesh Kumar (UHID: #HMS-2026-9041)</div>
+                <div class="text-muted small">Now Calling: Room 102 &bull; Dr. Arvind Sharma</div>
+              </div>
+
+              <div class="text-start">
+                <h6 class="fw-bold small text-muted text-uppercase mb-2">Upcoming Queue</h6>
+                <div class="list-group list-group-flush border rounded-3" id="receptionQueueList">
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2">
+                    <div>
+                      <strong>Token A-15: Sunita Gupta</strong>
+                      <div class="text-muted small">Cardiology &bull; General Checkup</div>
+                    </div>
+                    <span class="badge badge-soft-warning">Estimated: 5 Mins</span>
+                  </div>
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2">
+                    <div>
+                      <strong>Token A-16: Devendra Rao</strong>
+                      <div class="text-muted small">Cardiology &bull; Follow-Up</div>
+                    </div>
+                    <span class="badge badge-soft-info">Estimated: 12 Mins</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 3: EMERGENCY & TRIAGE (TRAUMA)
+           ============================================== -->
+      <section id="page-emergency" class="page-section">
+        <div class="alert alert-danger d-flex align-items-center gap-2 py-2 mb-3">
+          <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+          <div><strong>Emergency / Trauma Center:</strong> Real-time patient triage according to Manchester Triage System (MTS).</div>
+        </div>
+
+        <div class="row g-3">
+          <!-- RED CODE: Critical -->
+          <div class="col-md-4">
+            <div class="card-white p-3 border-danger" style="border-width: 2px;">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="fw-bold text-danger m-0">🔴 RED: Immediate (0 Min)</h6>
+                <span class="badge bg-danger">2 Patients</span>
+              </div>
+              <div class="p-2 bg-danger-subtle rounded mb-2 border border-danger-subtle">
+                <strong>Anil Kapoor (52 M)</strong>
+                <div class="small text-danger fw-semibold">Massive Polytrauma &bull; Crash Cart Active</div>
+                <div class="small text-muted">SpO2: 88% &bull; BP: 80/50 &bull; Bay 1</div>
+                <button class="btn btn-sm btn-danger w-100 mt-2 py-1" onclick="alert('Emergency Resuscitation Team Alerted!')">
+                  Trigger Trauma Alert
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- YELLOW CODE: Urgent -->
+          <div class="col-md-4">
+            <div class="card-white p-3 border-warning" style="border-width: 2px;">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="fw-bold text-warning m-0">🟡 YELLOW: Urgent (&lt; 15 Mins)</h6>
+                <span class="badge bg-warning text-dark">3 Patients</span>
+              </div>
+              <div class="p-2 bg-warning-subtle rounded mb-2 border border-warning-subtle">
+                <strong>Kavita Jain (29 F)</strong>
+                <div class="small text-warning fw-semibold">Acute Appendicitis Suspected</div>
+                <div class="small text-muted">Severe Abdominal Pain &bull; Bay 4</div>
+                <button class="btn btn-sm btn-outline-warning text-dark w-100 mt-2 py-1" onclick="alert('Ultrasound Fast-Tracked')">
+                  Fast-Track Ultrasound
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- GREEN CODE: Standard -->
+          <div class="col-md-4">
+            <div class="card-white p-3 border-success" style="border-width: 2px;">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="fw-bold text-success m-0">🟢 GREEN: Non-Urgent</h6>
+                <span class="badge bg-success">5 Patients</span>
+              </div>
+              <div class="p-2 bg-success-subtle rounded mb-2 border border-success-subtle">
+                <strong>Raman Lal (35 M)</strong>
+                <div class="small text-success fw-semibold">Superficial Forearm Laceration</div>
+                <div class="small text-muted">Dressing & Tetanus Toxoid &bull; Bay 7</div>
+                <button class="btn btn-sm btn-outline-success w-100 mt-2 py-1" onclick="alert('Dressing Done. Moved to OPD.')">
+                  Clear & Transfer
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 4: DOCTOR EMR & CLINICAL DESK
+           ============================================== -->
+      <section id="page-doctor" class="page-section">
+        <div class="card-white p-4 mb-4">
+          <!-- Patient Banner -->
+          <div class="d-flex justify-content-between align-items-center pb-3 border-bottom mb-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fs-5 fw-bold" style="width:48px; height:48px;">
+                RK
+              </div>
+              <div>
+                <h5 class="fw-bold text-dark m-0">
+                  Rajesh Kumar
+                  <span class="badge bg-danger-subtle text-danger border border-danger-subtle ms-2" style="font-size:11px;">
+                    ⚠ ALLERGIC: Penicillin
+                  </span>
+                </h5>
+                <span class="text-muted small">
+                  UHID: <strong>#HMS-2026-9041</strong> &bull; Male, 46 Yrs &bull; Blood: B+ &bull; Contact: +91 98765 43210
+                </span>
+              </div>
+            </div>
+            <div class="text-end">
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 fw-semibold">
+                <i class="bi bi-circle-fill small me-1"></i> In Consultation (Token A-14)
+              </span>
+            </div>
+          </div>
+
+          <!-- Vitals Strip -->
+          <div class="row g-3 mb-4">
+            <div class="col">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="text-muted small fw-bold text-uppercase">BP (Blood Pressure)</span>
+                <div class="fs-5 fw-bold text-dark">138/88 <small class="text-muted fs-6">mmHg</small></div>
+                <span class="badge bg-warning-subtle text-warning" style="font-size:10px;">Pre-Hypertensive</span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="text-muted small fw-bold text-uppercase">Heart Rate</span>
+                <div class="fs-5 fw-bold text-dark">78 <small class="text-muted fs-6">bpm</small></div>
+                <span class="badge bg-success-subtle text-success" style="font-size:10px;">Normal Sinus</span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="text-muted small fw-bold text-uppercase">SpO2 Oxygen</span>
+                <div class="fs-5 fw-bold text-dark">98%</div>
+                <span class="badge bg-success-subtle text-success" style="font-size:10px;">Optimal</span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="text-muted small fw-bold text-uppercase">Random Sugar</span>
+                <div class="fs-5 fw-bold text-dark">142 <small class="text-muted fs-6">mg/dL</small></div>
+                <span class="badge bg-warning-subtle text-warning" style="font-size:10px;">Mild Elevation</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diagnosis & Complaints -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-muted">Chief Complaints</label>
+              <textarea class="form-control form-control-sm" rows="3">Patient presents with retrosternal chest tightness for 3 days, radiating to left arm on exertion. Relieved by resting. No dizziness.</textarea>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-muted">Confirmed Diagnosis (ICD-10)</label>
+              <div class="p-2 border rounded-3 bg-light mb-2 d-flex justify-content-between align-items-center">
+                <span class="fw-semibold">I20.9 - Angina Pectoris (Unspecified)</span>
+                <span class="badge bg-primary">Primary</span>
+              </div>
+              <div class="p-2 border rounded-3 bg-light d-flex justify-content-between align-items-center">
+                <span class="fw-semibold">I10 - Essential Primary Hypertension</span>
+                <span class="badge bg-secondary">Secondary</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prescription Table -->
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="fw-bold text-dark m-0">E-Prescription Medications (Direct to Pharmacy POS)</h6>
+            <button class="btn btn-sm btn-outline-primary" onclick="alert('Medication row added')">
+              <i class="bi bi-plus"></i> Add Drug
+            </button>
+          </div>
+
+          <div class="table-responsive border rounded-3 mb-4">
+            <table class="table-clean">
+              <thead>
+                <tr>
+                  <th>Drug Name</th>
+                  <th>Dosage</th>
+                  <th>Frequency</th>
+                  <th>Duration</th>
+                  <th>Instructions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Tab. Aspirin (Ecosprin)</strong></td>
+                  <td>75 mg</td>
+                  <td>1 - 0 - 0 (Morning)</td>
+                  <td>30 Days</td>
+                  <td>Take after food</td>
+                </tr>
+                <tr>
+                  <td><strong>Tab. Atorvastatin (Atorva)</strong></td>
+                  <td>20 mg</td>
+                  <td>0 - 0 - 1 (Night)</td>
+                  <td>30 Days</td>
+                  <td>At bedtime with water</td>
+                </tr>
+                <tr>
+                  <td><strong>Tab. Metoprolol Succinate</strong></td>
+                  <td>25 mg</td>
+                  <td>1 - 0 - 1</td>
+                  <td>15 Days</td>
+                  <td>Monitor resting pulse</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Doctor Actions -->
+          <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+            <button class="btn btn-light border btn-sm px-3" onclick="alert('Consultation Draft Saved')">
+              <i class="bi bi-save me-1"></i> Save Draft
+            </button>
+            <button class="btn btn-outline-danger btn-sm px-3" onclick="navigateTo('page-ipd', getNavBtn(4))">
+              <i class="bi bi-hospital me-1"></i> Request IPD Bed Admission
+            </button>
+            <button class="btn btn-primary btn-sm px-4 fw-semibold" onclick="alert('Prescription Digitally Signed! Orders automatically routed to Lab, Pharmacy, and Billing.')">
+              <i class="bi bi-check2-circle me-1"></i> Finalize & Sign E-Prescription
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 5: IPD BED & WARD MANAGEMENT
+           ============================================== -->
+      <section id="page-ipd" class="page-section">
+        <div class="card-white p-4 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h6 class="m-0 fw-bold text-dark fs-5">Floor 3: Critical Care & Cardiac ICU Ward</h6>
+              <span class="text-muted small">Real-time Visual Bed Allocation Matrix</span>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-secondary" onclick="filterBeds('all')">All Beds (8)</button>
+              <button class="btn btn-sm btn-outline-danger" onclick="filterBeds('occupied')">Occupied (4)</button>
+              <button class="btn btn-sm btn-outline-success" onclick="filterBeds('vacant')">Vacant Ready (3)</button>
+              <button class="btn btn-sm btn-outline-warning" onclick="filterBeds('cleaning')">Housekeeping (1)</button>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-3 bed-card-col" data-bed="occupied">
+              <div class="bed-box occupied">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="fs-6 text-dark">ICU-01</strong>
+                  <span class="badge bg-danger-subtle text-danger">Occupied</span>
+                </div>
+                <div class="fw-bold text-dark">Anita Roy (62 F)</div>
+                <div class="text-muted small">Post-Angioplasty &bull; Dr. Sharma</div>
+                <div class="text-primary small mt-2">Vitals: SpO2 97% &bull; Stable</div>
+              </div>
+            </div>
+
+            <div class="col-md-3 bed-card-col" data-bed="occupied">
+              <div class="bed-box occupied">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="fs-6 text-dark">ICU-02</strong>
+                  <span class="badge bg-danger-subtle text-danger">Occupied</span>
+                </div>
+                <div class="fw-bold text-dark">Vikram Patel (54 M)</div>
+                <div class="text-muted small">Acute MI &bull; Dr. Sengupta</div>
+                <div class="text-danger small mt-2">Continuous Monitoring</div>
+              </div>
+            </div>
+
+            <div class="col-md-3 bed-card-col" data-bed="vacant">
+              <div class="bed-box vacant">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="fs-6 text-dark">ICU-03</strong>
+                  <span class="badge bg-success-subtle text-success">Vacant Ready</span>
+                </div>
+                <div class="fw-bold text-success">Sanitized & Checked</div>
+                <div class="text-muted small">Oxygen line inspected</div>
+                <button class="btn btn-sm btn-primary w-100 mt-2 py-1" onclick="handleBedAllocation('ICU-03')">
+                  + Allocate Patient
+                </button>
+              </div>
+            </div>
+
+            <div class="col-md-3 bed-card-col" data-bed="cleaning">
+              <div class="bed-box cleaning">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="fs-6 text-dark">ICU-04</strong>
+                  <span class="badge bg-warning-subtle text-warning">Housekeeping</span>
+                </div>
+                <div class="fw-bold text-warning">Sanitizing In Progress</div>
+                <div class="text-muted small">Discharged at 16:30</div>
+                <div class="text-muted small mt-2">Est. Ready: 15 Mins</div>
+              </div>
+            </div>
+
+            <div class="col-md-3 bed-card-col" data-bed="occupied">
+              <div class="bed-box occupied">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="fs-6 text-dark">DLX-301</strong>
+                  <span class="badge bg-danger-subtle text-danger">Occupied</span>
+                </div>
+                <div class="fw-bold text-dark">Pooja Deshmukh (32 F)</div>
+                <div class="text-muted small">Deluxe Cabin &bull; Dr. Iyer</div>
+                <div class="text-success small mt-2">Ready for discharge</div>
+              </div>
+            </div>
+
+            <div class="col-md-3 bed-card-col" data-bed="vacant">
+              <div class="bed-box vacant">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="fs-6 text-dark">DLX-302</strong>
+                  <span class="badge bg-success-subtle text-success">Vacant Ready</span>
+                </div>
+                <div class="fw-bold text-success">VIP Deluxe Suite</div>
+                <div class="text-muted small">Attendant sofa ready</div>
+                <button class="btn btn-sm btn-primary w-100 mt-2 py-1" onclick="handleBedAllocation('DLX-302')">
+                  + Allocate Patient
+                </button>
+              </div>
+            </div>
+
+            <div class="col-md-3 bed-card-col" data-bed="occupied">
+              <div class="bed-box occupied">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="fs-6 text-dark">GEN-W1</strong>
+                  <span class="badge bg-danger-subtle text-danger">Occupied</span>
+                </div>
+                <div class="fw-bold text-dark">Amit Verma (58 M)</div>
+                <div class="text-muted small">General Ward &bull; Dr. Goel</div>
+                <div class="text-muted small mt-2">Daily rounds completed</div>
+              </div>
+            </div>
+
+            <div class="col-md-3 bed-card-col" data-bed="vacant">
+              <div class="bed-box vacant">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="fs-6 text-dark">GEN-W2</strong>
+                  <span class="badge bg-success-subtle text-success">Vacant Ready</span>
+                </div>
+                <div class="fw-bold text-success">General Ward Bed 2</div>
+                <div class="text-muted small">Fresh linen laid</div>
+                <button class="btn btn-sm btn-primary w-100 mt-2 py-1" onclick="handleBedAllocation('GEN-W2')">
+                  + Allocate Patient
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 6: OPERATION THEATRE (OT)
+           ============================================== -->
+      <section id="page-ot" class="page-section">
+        <div class="card-white p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h5 class="fw-bold text-dark m-0">Operation Theatre (OT) Surgical Roster</h5>
+              <span class="text-muted small">Scheduling & Pre-Op Clearance</span>
+            </div>
+            <button class="btn btn-primary btn-sm fw-semibold" onclick="alert('Book OT Surgery Modal Opened')">
+              + Schedule Emergency Surgery
+            </button>
+          </div>
+
+          <div class="table-responsive border rounded-3">
+            <table class="table-clean">
+              <thead>
+                <tr>
+                  <th>OT Suite</th>
+                  <th>Patient & UHID</th>
+                  <th>Procedure / Surgery</th>
+                  <th>Lead Surgeon</th>
+                  <th>Anesthetist</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong class="text-primary">OT Suite 1 (Cardiac)</strong></td>
+                  <td>Sunita Roy (#HMS-8812)</td>
+                  <td>Coronary Artery Bypass (CABG)</td>
+                  <td>Dr. K. N. Rao</td>
+                  <td>Dr. P. Sen</td>
+                  <td><span class="badge bg-danger">In Progress (2h 10m)</span></td>
+                </tr>
+                <tr>
+                  <td><strong class="text-primary">OT Suite 2 (Ortho)</strong></td>
+                  <td>Ramesh Patil (#HMS-7721)</td>
+                  <td>Total Knee Replacement</td>
+                  <td>Dr. R. K. Goel</td>
+                  <td>Dr. M. Roy</td>
+                  <td><span class="badge bg-warning text-dark">Pre-Op Scrubbing</span></td>
+                </tr>
+                <tr>
+                  <td><strong class="text-primary">OT Suite 3 (General)</strong></td>
+                  <td>Devendra Shah (#HMS-6610)</td>
+                  <td>Laparoscopic Cholecystectomy</td>
+                  <td>Dr. V. Singhal</td>
+                  <td>Dr. P. Sen</td>
+                  <td><span class="badge bg-success">Scheduled (18:00)</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 7: PATHOLOGY & LAB (LIS)
+           ============================================== -->
+      <section id="page-lab" class="page-section">
+        <div class="card-white p-4">
+          <h5 class="fw-bold text-dark mb-3">Laboratory Information System (LIS Desk)</h5>
+          <div class="table-responsive border rounded-3 mb-4">
+            <table class="table-clean">
+              <thead>
+                <tr>
+                  <th>Sample Barcode</th>
+                  <th>Patient Name</th>
+                  <th>Investigation Ordered</th>
+                  <th>Sample Type</th>
+                  <th>Turnaround Time</th>
+                  <th>Status / Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="font-monospace text-primary">BC-99014-EDTA</span></td>
+                  <td>Rajesh Kumar (#HMS-9041)</td>
+                  <td>Complete Blood Count (CBC) & Trop-I</td>
+                  <td>Whole Blood (EDTA)</td>
+                  <td>45 Mins</td>
+                  <td>
+                    <button class="btn btn-sm btn-success py-1 px-3" onclick="alert('Lab Results Uploaded & Doctor Auto-Notified!')">
+                      Upload PDF Report
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="font-monospace text-primary">BC-99015-SER</span></td>
+                  <td>Pooja Deshmukh (#HMS-8812)</td>
+                  <td>Lipid Profile & Liver Function (LFT)</td>
+                  <td>Serum</td>
+                  <td>1.5 Hours</td>
+                  <td><span class="badge bg-warning text-dark">Analyzing in Sysmex</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 8: BLOOD BANK MANAGEMENT
+           ============================================== -->
+      <section id="page-blood" class="page-section">
+        <div class="card-white p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h5 class="fw-bold text-dark m-0">Blood Bank Unit Inventory & Cross-Match</h5>
+              <span class="text-muted small">Central Blood Component Storage (4°C & -30°C)</span>
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="alert('Blood Donation Camp Donor Logged')">
+              + Register Donor Unit
+            </button>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-3">
+              <div class="p-3 bg-light rounded-3 border text-center">
+                <span class="badge bg-danger fs-5 px-3 py-1 mb-2">A Positive (A+)</span>
+                <div class="fs-4 fw-bold text-dark">18 Units</div>
+                <span class="text-success small fw-semibold">Adequate Stock</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 bg-light rounded-3 border text-center">
+                <span class="badge bg-danger fs-5 px-3 py-1 mb-2">B Positive (B+)</span>
+                <div class="fs-4 fw-bold text-dark">24 Units</div>
+                <span class="text-success small fw-semibold">Adequate Stock</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 bg-light rounded-3 border text-center">
+                <span class="badge bg-danger fs-5 px-3 py-1 mb-2">O Positive (O+)</span>
+                <div class="fs-4 fw-bold text-dark">32 Units</div>
+                <span class="text-success small fw-semibold">Optimal Supply</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 bg-danger-subtle rounded-3 border border-danger-subtle text-center">
+                <span class="badge bg-dark fs-5 px-3 py-1 mb-2">O Negative (O-)</span>
+                <div class="fs-4 fw-bold text-danger">3 Units</div>
+                <span class="text-danger small fw-bold">CRITICAL DEFICIT</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 9: PHARMACY POS & INVENTORY
+           ============================================== -->
+      <section id="page-pharmacy" class="page-section">
+        <div class="card-white p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-dark m-0">Pharmacy POS Dispensing Queue</h5>
+            <span class="badge bg-danger-subtle text-danger px-3 py-2 fw-semibold">
+              Prescription: Rajesh Kumar (#HMS-2026-9041)
+            </span>
+          </div>
+
+          <div class="table-responsive border rounded-3 mb-4">
+            <table class="table-clean">
+              <thead>
+                <tr>
+                  <th>Prescribed Medicine</th>
+                  <th>Matched Batch No</th>
+                  <th>Expiry Date</th>
+                  <th>Stock Available</th>
+                  <th>Dispense Qty</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Tab. Ecosprin 75mg</strong></td>
+                  <td><span class="font-monospace text-primary">BATCH-EC-904</span></td>
+                  <td>12/2028</td>
+                  <td><span class="badge badge-soft-success">480 Strips</span></td>
+                  <td>30 Tablets</td>
+                  <td>₹45.00</td>
+                </tr>
+                <tr>
+                  <td><strong>Tab. Atorva 20mg</strong></td>
+                  <td><span class="font-monospace text-primary">BATCH-AT-218</span></td>
+                  <td>08/2027</td>
+                  <td><span class="badge badge-soft-success">210 Strips</span></td>
+                  <td>30 Tablets</td>
+                  <td>₹180.00</td>
+                </tr>
+                <tr>
+                  <td><strong>Tab. Metoprolol 25mg</strong></td>
+                  <td><span class="font-monospace text-primary">BATCH-MT-550</span></td>
+                  <td>03/2028</td>
+                  <td><span class="badge badge-soft-success">140 Strips</span></td>
+                  <td>15 Tablets</td>
+                  <td>₹95.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded-3 border">
+            <div>
+              <span class="text-muted small">Total Medicine Value: <strong>₹320.00</strong></span>
+              <div class="text-success small fw-semibold"><i class="bi bi-shield-check"></i> Zero Drug Interactions</div>
+            </div>
+            <button class="btn btn-primary fw-semibold" onclick="alert('Dispensed! Inventory stock decremented and charges added to Billing.')">
+              <i class="bi bi-check-lg me-1"></i> Dispense & Forward to Final Bill
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 10: CENTRAL BILLING & TPA DESK
+           ============================================== -->
+      <section id="page-billing" class="page-section">
+        <div class="card-white p-4">
+          <!-- Header -->
+          <div class="d-flex justify-content-between align-items-start pb-3 border-bottom mb-4">
+            <div>
+              <h4 class="fw-bold text-dark m-0">CarePulse Multi-Speciality Hospital</h4>
+              <div class="text-muted small">120 Healthcare Avenue, Bandra, Mumbai &bull; GSTIN: 27AABCC1234D1Z5</div>
+              <div class="text-muted small">NABH Accredited &bull; 24x7 Helpline: 1800-200-CARE</div>
+            </div>
+            <div class="text-end">
+              <span class="badge bg-primary px-3 py-2 fs-6">INVOICE #INV-2026-8891</span>
+              <div class="text-muted small mt-1">Date: 06-Oct-2026 &bull; Billing Type: IPD Final</div>
+            </div>
+          </div>
+
+          <!-- Patient & Insurance Detail Bar -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-7">
+              <div class="p-3 bg-light rounded-3 border">
+                <h6 class="fw-bold text-dark mb-1">Patient Stay Breakdown</h6>
+                <div class="text-dark"><strong>Rajesh Kumar</strong> (UHID: #HMS-2026-9041)</div>
+                <div class="text-muted small">Admitted: 04-Oct-2026 &bull; Discharge: 06-Oct-2026 (Bed ICU-02)</div>
+                <div class="text-muted small">Consultant: Dr. Arvind Sharma (MD, Cardiology)</div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="p-3 bg-success-subtle border border-success-subtle rounded-3">
+                <h6 class="fw-bold text-success mb-1">Cashless Insurance / TPA Pre-Auth</h6>
+                <div class="text-dark fw-bold">Star Health & Allied Insurance</div>
+                <div class="text-muted small">Policy #SH-88912-C &bull; TPA Claim #TPA-9011</div>
+                <div class="text-success fw-bold small mt-1">Pre-Approved Amount: ₹12,000.00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Line Items Table -->
+          <div class="table-responsive border rounded-3 mb-4">
+            <table class="table-clean">
+              <thead>
+                <tr>
+                  <th>Description of Service</th>
+                  <th>Department</th>
+                  <th>Quantity / Days</th>
+                  <th>Rate</th>
+                  <th class="text-end">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ICU Bed Charges & Continuous Vitals Care</strong></td>
+                  <td>Inpatient (IPD)</td>
+                  <td>2 Days</td>
+                  <td>₹4,500.00</td>
+                  <td class="text-end fw-semibold">₹9,000.00</td>
+                </tr>
+                <tr>
+                  <td><strong>Cardiology Senior Consultant Rounds</strong></td>
+                  <td>Clinical</td>
+                  <td>2 Visits</td>
+                  <td>₹1,000.00</td>
+                  <td class="text-end fw-semibold">₹2,000.00</td>
+                </tr>
+                <tr>
+                  <td><strong>Diagnostics: 12-Lead ECG & Trop-I Panel</strong></td>
+                  <td>Pathology / Lab</td>
+                  <td>1 Package</td>
+                  <td>₹1,800.00</td>
+                  <td class="text-end fw-semibold">₹1,800.00</td>
+                </tr>
+                <tr>
+                  <td><strong>Pharmacy Dispensed Cardiac Medications</strong></td>
+                  <td>Pharmacy POS</td>
+                  <td>Batch BX-902</td>
+                  <td>Itemized</td>
+                  <td class="text-end fw-semibold">₹2,450.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Net Calculation -->
+          <div class="row justify-content-end mb-4">
+            <div class="col-md-5">
+              <div class="p-3 bg-light rounded-3 border">
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="text-muted">Gross Hospital Total:</span>
+                  <strong class="text-dark">₹15,250.00</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-2 text-success">
+                  <span>Less: TPA Insurance Approved:</span>
+                  <strong>- ₹12,000.00</strong>
+                </div>
+                <div class="d-flex justify-content-between pt-2 border-top fs-5 fw-bold text-dark">
+                  <span>Net Patient Co-Pay:</span>
+                  <span class="text-primary">₹3,250.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="d-flex justify-content-end gap-2 border-top pt-3">
+            <button class="btn btn-outline-secondary btn-sm px-3" onclick="window.print()">
+              <i class="bi bi-printer me-1"></i> Print Tax Invoice
+            </button>
+            <button class="btn btn-success btn-sm px-4 fw-semibold" onclick="navigateTo('page-discharge', getNavBtn(10))">
+              <i class="bi bi-credit-card me-1"></i> Collect ₹3,250 & Issue Discharge
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 11: DISCHARGE MANAGEMENT
+           ============================================== -->
+      <section id="page-discharge" class="page-section">
+        <div class="card-white p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <h5 class="fw-bold text-dark m-0">Patient Discharge Clearance & Gate Pass</h5>
+              <span class="text-muted small">Pre-requisite departmental sign-offs</span>
+            </div>
+            <span class="badge bg-success px-3 py-2">All Clearances Verified</span>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-3">
+              <div class="p-3 bg-success-subtle border border-success-subtle rounded-3 text-center">
+                <i class="bi bi-check-circle-fill text-success fs-3"></i>
+                <div class="fw-bold text-dark mt-2">1. Doctor Clearance</div>
+                <div class="small text-muted">Fit for Discharge</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 bg-success-subtle border border-success-subtle rounded-3 text-center">
+                <i class="bi bi-check-circle-fill text-success fs-3"></i>
+                <div class="fw-bold text-dark mt-2">2. Nursing Vitals</div>
+                <div class="small text-muted">Vitals Stable & Charted</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 bg-success-subtle border border-success-subtle rounded-3 text-center">
+                <i class="bi bi-check-circle-fill text-success fs-3"></i>
+                <div class="fw-bold text-dark mt-2">3. Pharmacy Return</div>
+                <div class="small text-muted">Zero Pending Drugs</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 bg-success-subtle border border-success-subtle rounded-3 text-center">
+                <i class="bi bi-check-circle-fill text-success fs-3"></i>
+                <div class="fw-bold text-dark mt-2">4. Finance Ledger</div>
+                <div class="small text-muted">Zero Balance Paid</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-light rounded-3 border text-center">
+            <h4 class="fw-bold text-dark">Official Discharge Gate Pass Issued</h4>
+            <p class="text-muted small mb-3">
+              Patient <strong>Rajesh Kumar (UHID: #HMS-2026-9041)</strong> is authorized to leave Central Campus.
+              Discharge summary sent via WhatsApp to +91 98765 43210.
+            </p>
+            <button class="btn btn-primary" onclick="alert('Discharge Summary PDF Downloaded')">
+              <i class="bi bi-download me-1"></i> Download Discharge Summary (PDF)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 12: PATIENT SELF-SERVICE PORTAL
+           ============================================== -->
+      <section id="page-patient" class="page-section">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="card-white p-4 text-center">
+              <div class="rounded-circle bg-primary text-white fs-3 mx-auto mb-3 d-flex align-items-center justify-content-center" style="width:72px; height:72px;">
+                RK
+              </div>
+              <h5 class="fw-bold text-dark mb-1">Rajesh Kumar</h5>
+              <div class="text-muted small mb-3">UHID: #HMS-2026-9041</div>
+              <div class="p-2 bg-light rounded-3 text-start small mb-3 border">
+                <div><strong>Age / Gender:</strong> 46 / Male</div>
+                <div><strong>Blood Group:</strong> B Positive</div>
+                <div><strong>Known Allergies:</strong> Penicillin</div>
+              </div>
+              <button class="btn btn-outline-primary btn-sm w-100" onclick="alert('ABHA Digital Health Card Downloaded')">
+                <i class="bi bi-download me-1"></i> Download ABHA Health Card
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="card-white p-3">
+              <h6 class="fw-bold text-dark mb-3">My Medical History & Diagnostic Reports</h6>
+              <div class="p-3 border rounded-3 bg-light mb-3 d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fw-bold text-dark mb-1">Cardiology Consultation & E-Prescription</h6>
+                  <span class="text-muted small">06-Oct-2026 &bull; Dr. Arvind Sharma</span>
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="alert('Prescription PDF Downloaded')">
+                  <i class="bi bi-file-earmark-pdf me-1"></i> Download Rx
+                </button>
+              </div>
+
+              <div class="p-3 border rounded-3 bg-light mb-3 d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fw-bold text-dark mb-1">12-Lead ECG & Serum Troponin-I Test Report</h6>
+                  <span class="text-muted small">06-Oct-2026 &bull; Pathology Dept</span>
+                </div>
+                <button class="btn btn-sm btn-outline-primary" onclick="alert('Lab Report PDF Downloaded')">
+                  <i class="bi bi-file-earmark-pdf me-1"></i> View Lab PDF
+                </button>
+              </div>
+
+              <div class="p-3 border rounded-3 bg-light d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fw-bold text-dark mb-1">Discharge Summary & Medical Bill</h6>
+                  <span class="text-muted small">Invoice #INV-2026-8891 &bull; Settled</span>
+                </div>
+                <button class="btn btn-sm btn-outline-success" onclick="alert('Discharge Paper Downloaded')">
+                  <i class="bi bi-receipt me-1"></i> View Bill
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 13: STAFF & DOCTOR ROSTERS
+           ============================================== -->
+      <section id="page-staff" class="page-section">
+        <div class="card-white p-4">
+          <h5 class="fw-bold text-dark mb-3">Hospital Medical Staff & Shift Rosters</h5>
+          <div class="table-responsive border rounded-3">
+            <table class="table-clean">
+              <thead>
+                <tr>
+                  <th>Staff Member</th>
+                  <th>Department / Role</th>
+                  <th>Shift Timing</th>
+                  <th>Assigned Station</th>
+                  <th>Duty Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Dr. Arvind Sharma</strong></td>
+                  <td>Cardiology (HOD)</td>
+                  <td>Morning (09:00 - 17:00)</td>
+                  <td>OPD Room 102</td>
+                  <td><span class="badge bg-success">On Duty</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Sister Mariam Khan</strong></td>
+                  <td>ICU Nursing Incharge</td>
+                  <td>Day Shift (08:00 - 20:00)</td>
+                  <td>Floor 3 ICU Bay</td>
+                  <td><span class="badge bg-success">On Duty</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Dr. R. K. Goel</strong></td>
+                  <td>Orthopedics</td>
+                  <td>OT Shift (11:00 - 19:00)</td>
+                  <td>OT Suite 2</td>
+                  <td><span class="badge bg-warning text-dark">In Surgery</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SCREEN 14: NABH ANALYTICS & REPORTS
+           ============================================== -->
+      <section id="page-reports" class="page-section">
+        <div class="card-white p-4">
+          <h5 class="fw-bold text-dark mb-3">NABH Clinical Quality & Operational KPIs</h5>
+          <div class="row g-3 mb-4">
+            <div class="col-md-3">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="text-muted small fw-bold">Average Length of Stay (ALOS)</span>
+                <div class="fs-4 fw-bold text-dark">3.8 Days</div>
+                <span class="text-success small">Target: &lt; 4.5 Days</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="text-muted small fw-bold">Bed Turnover Rate</span>
+                <div class="fs-4 fw-bold text-dark">4.2 / Month</div>
+                <span class="text-success small">Optimal Utilization</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="text-muted small fw-bold">Hospital Acquired Infection (HAI)</span>
+                <div class="fs-4 fw-bold text-dark">0.2%</div>
+                <span class="text-success small">NABH Gold Standard</span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="p-3 bg-light rounded-3 border">
+                <span class="text-muted small fw-bold">OPD Wait Turnaround Time</span>
+                <div class="fs-4 fw-bold text-dark">18.4 Mins</div>
+                <span class="text-success small">62% Faster than 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- Quick Register Modal -->
+<div class="modal fade" id="quickPatientModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-bottom py-3">
+        <h6 class="modal-title fw-bold">Quick Patient Registration</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form onsubmit="handleQuickRegister(event)">
+          <div class="mb-3">
+            <label class="form-label small fw-semibold">Patient Name</label>
+            <input type="text" class="form-control form-control-sm" required placeholder="e.g. Ramesh Patel" id="quickName">
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col">
+              <label class="form-label small fw-semibold">Phone</label>
+              <input type="tel" class="form-control form-control-sm" required placeholder="+91 98765 00000" id="quickPhone">
+            </div>
+            <div class="col">
+              <label class="form-label small fw-semibold">Gender</label>
+              <select class="form-select form-select-sm" id="quickGender">
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small fw-semibold">Department</label>
+            <select class="form-select form-select-sm" id="quickDept">
+              <option>Cardiology</option>
+              <option>Gynecology</option>
+              <option>Orthopedics</option>
+              <option>Neurology</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm w-100 fw-semibold py-2">
+            Confirm & Issue UHID
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap 5.3 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const titles = {
+    'page-admin': 'Executive Hospital Dashboard',
+    'page-reception': 'Reception, OPD Registration & Token Screen',
+    'page-emergency': 'Emergency / Trauma Triage (24x7)',
+    'page-doctor': 'Doctor Clinical Desk & E-Prescription (EMR)',
+    'page-ipd': 'Inpatient (IPD) Ward & Bed Matrix',
+    'page-ot': 'Operation Theatre (OT) Surgical Roster',
+    'page-lab': 'Pathology & Diagnostic Laboratory (LIS)',
+    'page-blood': 'Blood Bank Management & Inventory',
+    'page-pharmacy': 'Pharmacy Inventory & POS Dispensing',
+    'page-billing': 'Centralized Invoicing & TPA Insurance Desk',
+    'page-discharge': 'Discharge Summary & Security Gate Pass',
+    'page-patient': 'Patient Health Portal & Medical Records',
+    'page-staff': 'Medical Staff & Doctor Shift Rosters',
+    'page-reports': 'NABH Clinical Analytics & Quality Reports'
+  };
+
+  function getNavBtn(index) {
+    const btns = document.querySelectorAll('.sidebar-menu .nav-item-btn');
+    return btns[index];
+  }
+
+  function navigateTo(pageId, navButton) {
+    document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById(pageId);
+    if (target) target.classList.add('active');
+
+    document.querySelectorAll('.sidebar-menu .nav-item-btn').forEach(btn => btn.classList.remove('active'));
+    if (navButton) navButton.classList.add('active');
+
+    const titleEl = document.getElementById('topbarTitle');
+    if (titleEl && titles[pageId]) titleEl.textContent = titles[pageId];
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function handleWalkinSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('recName').value;
+    const doctor = document.getElementById('recDoctor').value;
+    alert(`Registration Confirmed!\nPatient: ${name}\nUHID: #HMS-2026-9042\nToken #A-17 generated for ${doctor}.`);
+
+    const queue = document.getElementById('receptionQueueList');
+    const item = document.createElement('div');
+    item.className = 'list-group-item d-flex justify-content-between align-items-center py-2 bg-success-subtle';
+    item.innerHTML = `<div><strong>Token A-17: ${name}</strong><div class="text-muted small">${doctor.split(' - ')[0]} &bull; Just Registered</div></div><span class="badge badge-soft-success">Waiting (Now)</span>`;
+    queue.prepend(item);
+    document.getElementById('receptionWalkinForm').reset();
+  }
+
+  function handleQuickRegister(e) {
+    e.preventDefault();
+    const name = document.getElementById('quickName').value;
+    alert(`Patient ${name} registered!\nUHID: #HMS-2026-9043 generated.`);
+    const modal = bootstrap.Modal.getInstance(document.getElementById('quickPatientModal'));
+    if (modal) modal.hide();
+  }
+
+  function handleBedAllocation(bedNo) {
+    const pName = prompt(`Enter patient name to admit into Bed ${bedNo}:`, 'Rajesh Kumar');
+    if (pName) {
+      alert(`Bed ${bedNo} successfully allocated to ${pName}!\nDaily IPD charges linked to Central Billing.`);
+    }
+  }
+
+  function filterBeds(status) {
+    document.querySelectorAll('.bed-card-col').forEach(col => {
+      if (status === 'all' || col.getAttribute('data-bed') === status) {
+        col.style.display = 'block';
+      } else {
+        col.style.display = 'none';
+      }
+    });
+  }
+
+  function handleGlobalSearch(query) {
+    if (!query) return;
+    const q = query.toLowerCase();
+    if (q.includes('icu') || q.includes('bed')) navigateTo('page-ipd', getNavBtn(4));
+    else if (q.includes('rx') || q.includes('doc') || q.includes('rajesh')) navigateTo('page-doctor', getNavBtn(3));
+    else if (q.includes('bill') || q.includes('invoice') || q.includes('tpa')) navigateTo('page-billing', getNavBtn(9));
+    else if (q.includes('lab') || q.includes('blood') || q.includes('ecg')) navigateTo('page-lab', getNavBtn(6));
+    else if (q.includes('pharm') || q.includes('drug') || q.includes('aspirin')) navigateTo('page-pharmacy', getNavBtn(8));
+  }
+</script>
+<script src="js/mobile.js"></script>
+</body>
+</html>
